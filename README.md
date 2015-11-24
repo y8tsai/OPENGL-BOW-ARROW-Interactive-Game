@@ -1,5 +1,7 @@
 SDL2/OpenGL 2.1 Test Bench
 -------------------------
+SDL2/OpenGL 2.1 Test Bench
+-------------------------
 Boilerplate code for quick prototyping  
 Sets up OpenGL 2.1 context and uses OpenGL's renderer.  
   
@@ -12,7 +14,17 @@ http://lazyfoo.net/tutorials/SDL/01_hello_SDL/windows/msvsnet2010u/index.php
 if you're going the system files route:  
 (1) Put lib/x64/SDL2.dll into C:\Windows\System32\  
     Put lib/x86/SDL2.dll into C:\Windows\SysWOW64\  
-  
-  
-(2) Make sure glu32.lib; opengl32.lib; is specified in  
+    Put SDL2_ttf-2.0.12/lib/x86/SDL2_ttf.dll, libfreetype-6.dll, zlib1.dll 
+        in C:\Windows\System32\  or  C:\Windows\SysWOW64\ 
+     
+(2) Make sure glu32.lib; opengl32.lib; SDL2_ttf.lib; SDL2.lib; SDL2main.lib;
+    are specified in  
     Configuration Properties -> Linker -> Input -> Additional Dependencies  
+
+Additional Notes: 
+
+1) If you are using Microsoft Visual Studio 2015, you need a newer version of SDL2.lib so there won't be unresolved external symbol error for the definitions of stin, sterr, stout.   
+
+The newer version is located in SDL2015 folder of this repository
+
+2.) Antivirus such as AVAST may prevent the project from running, turn it off temporarily if you cannot compile&run the code.
