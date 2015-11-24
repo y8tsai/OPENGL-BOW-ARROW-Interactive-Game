@@ -11,3 +11,6 @@ Window Globals::window = Window();
 // takes. Will also be used for collisions and making it refresh rate independent. 
 // Future reference, we're aiming for 60fps or 16.66ms per frame, or 33.33ms for 30 fps
 Timer Globals::hiresTime = Timer();
+
+
+Core Globals::core = Core();

@@ -113,3 +113,11 @@ void Window::shutdown() {
 	SDL_DestroyWindow(winHandle);
 	SDL_Quit();
 }
+
+void Window::OnEvent(SDL_Event* evt) {
+	Event::OnEvent(evt);
+}
+
+void Window::OnResize(int w, int h) {
+	reshape(w, h);
+}
