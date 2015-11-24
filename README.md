@@ -1,7 +1,5 @@
 SDL2/OpenGL 2.1 Test Bench
 -------------------------
-SDL2/OpenGL 2.1 Test Bench
--------------------------
 Boilerplate code for quick prototyping  
 Sets up OpenGL 2.1 context and uses OpenGL's renderer.  
   
