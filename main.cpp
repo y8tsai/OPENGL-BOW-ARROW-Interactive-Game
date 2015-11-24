@@ -16,5 +16,6 @@ int main(int argc, char* argv[]) {
 
 	Globals::core.shutdown();
 	Globals::window.shutdown();
+
 	return 0;
 }
