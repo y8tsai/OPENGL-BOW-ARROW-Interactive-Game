@@ -18,7 +18,8 @@ void Window::initialize() {
 	SDL_GL_SetAttribute( SDL_GL_CONTEXT_MAJOR_VERSION, 2);
 	SDL_GL_SetAttribute( SDL_GL_CONTEXT_MAJOR_VERSION, 1);
 
-	// Setting up color depth, instead of [0, 1] with 8 bits it's [0, 255]
+	// Setting up color depth, instead of [0, 1] with 8 bits it's [0, 255], for SDL Color
+	// OpenGL's system is still [0, 1]
 	SDL_GL_SetAttribute( SDL_GL_RED_SIZE, 8 );
     SDL_GL_SetAttribute( SDL_GL_GREEN_SIZE, 8 );
     SDL_GL_SetAttribute( SDL_GL_BLUE_SIZE, 8);
@@ -31,7 +32,7 @@ void Window::initialize() {
 	// SDL_WINDOW_OPENGL :: let opengl render window
 	// SDL_WINDOW_SHOWN :: Makes the window visible
 	Uint32 windowFlags = (SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
-	winHandle = SDL_CreateWindow( "OpenGLTestBench", 200, 200, Window::WIDTH, Window::HEIGHT,  windowFlags);
+	winHandle = SDL_CreateWindow( "OpenGLTestBench", 500, 500, Window::WIDTH, Window::HEIGHT,  windowFlags);
 
 	if( !winHandle || !(glContext = SDL_GL_CreateContext(winHandle)) ) {
 		printf( "SDL Error: %s\n", SDL_GetError());
@@ -43,14 +44,6 @@ void Window::initialize() {
 	glConfiguration(); // Set OpenGL specific options
 	reshape(Window::WIDTH, Window::HEIGHT);
 	Globals::hiresTime.start();
-
-	//Texture objects for skybox
-	Globals::front = Texture(Globals::Front);
-	Globals::back = Texture(Globals::Back);
-	Globals::left = Texture(Globals::Left);
-	Globals::right = Texture(Globals::Right);
-	Globals::up = Texture(Globals::Up);
-	Globals::down = Texture(Globals::Down);
 }
 
 void Window::glConfiguration() {
@@ -78,47 +71,45 @@ void Window::reshape(GLsizei w, GLsizei h) {
 	glViewport(0, 0, w, h);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(60.0, GLdouble(w)/h, 1.0, 1000.0);
+	gluPerspective(60.0, GLdouble(w)/h, 0.1, 500.0);
+}
+
+
+void drawCoordinateAxes() {
+	glLineWidth(1.0f);
+	glBegin(GL_LINES);
+	glColor3f(1.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(3.0f, 0.0f, 0.0f);
+
+	glColor3f(0.0f, 1.0f, 0.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, 3.0f, 0.0f);
+
+	glColor3f(0.0f, 0.0f, 1.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, 0.0f, 3.0f);
+	glEnd();
 }
 
 void Window::display() {
-	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	gluLookAt(0.0, 0.0, 5.0, 
-			  0.0, 0.0, 0.0, 
-			  0.0, 1.0, 0.0);
-
-
-	glPushMatrix();
-
 	
-	mat4 m2w = mat4({
-		{1,0,0,0},
-		{0,1,0,0},
-		{0,0,1,0},
-		{0,0,0,1}
-	});
-	m2w.makeTranspose();
-	glMultMatrixf(m2w.ptr()); 
+	Globals::camera.update();
+	glLoadMatrixf(Globals::camera.ci.ptr());
 
-	glPointSize(3.0f);
-	glColor3f(1.0, 0.0, 1.0);
+	/*glLoadIdentity();
+	gluLookAt(-2.0, 2.0, 5.0, 
+			  0.0, 0.0, 0.0, 
+			  0.0, 1.0, 0.0);*/
 
 
-	glBegin(GL_QUADS);
-	glVertex3f(-1, -1, 0);
-	glVertex3f(1, -1, 0);
-	glVertex3f(1, 1, 0);
-	glVertex3f(-1, 1, 0);  
-	glEnd(); 
-
-	glPopMatrix(); 
-
-
-	//Draw the skybox
+	/* Commit 1949f48 */
 	Globals::skybox.draw(Globals::drawData);
+	/* End 1949f48 */
+
+	drawCoordinateAxes();
 
 	// This will swap the buffers
 	SDL_GL_SwapWindow( winHandle );

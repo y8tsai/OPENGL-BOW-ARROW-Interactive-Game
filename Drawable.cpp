@@ -3,7 +3,7 @@
 
 Drawable::Drawable()
 {
-    this->toWorld.identity();
+    this->toWorld.makeIdentity();
 	this->center = vec3(0, 0, 0);
 	this->maxValues = new float[0];
 	this->minValues = new float[0];

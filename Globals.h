@@ -4,16 +4,18 @@
 #include "Window.h"
 #include "Core.h"
 #include "Timer.h"
+#include "Camera.h"
 
-//custom objects
 #include "Skybox.h"
 
 class Globals {
 public:
 	static Timer hiresTime;
+	static Camera camera;
 	static Window window;
 	static Core core;
 
+	/* Commit 1949f48 */
 	//Custom objects
 	static DrawData drawData;
 	static UpdateData updateData;
@@ -31,6 +33,7 @@ public:
 	static char* Down;
 	static char* Left;
 	static char* Right;
+	/* End 1949f48 */
 };
 
 
