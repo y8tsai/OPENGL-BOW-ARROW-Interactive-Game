@@ -43,6 +43,14 @@ void Window::initialize() {
 	glConfiguration(); // Set OpenGL specific options
 	reshape(Window::WIDTH, Window::HEIGHT);
 	Globals::hiresTime.start();
+
+	//Texture objects for skybox
+	Globals::front = Texture(Globals::Front);
+	Globals::back = Texture(Globals::Back);
+	Globals::left = Texture(Globals::Left);
+	Globals::right = Texture(Globals::Right);
+	Globals::up = Texture(Globals::Up);
+	Globals::down = Texture(Globals::Down);
 }
 
 void Window::glConfiguration() {
@@ -74,6 +82,7 @@ void Window::reshape(GLsizei w, GLsizei h) {
 }
 
 void Window::display() {
+	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -83,6 +92,8 @@ void Window::display() {
 
 
 	glPushMatrix();
+
+	
 	mat4 m2w = mat4({
 		{1,0,0,0},
 		{0,1,0,0},
@@ -90,18 +101,24 @@ void Window::display() {
 		{0,0,0,1}
 	});
 	m2w.makeTranspose();
-	glMultMatrixf(m2w.ptr());
+	glMultMatrixf(m2w.ptr()); 
 
 	glPointSize(3.0f);
 	glColor3f(1.0, 0.0, 1.0);
+
+
 	glBegin(GL_QUADS);
 	glVertex3f(-1, -1, 0);
 	glVertex3f(1, -1, 0);
 	glVertex3f(1, 1, 0);
-	glVertex3f(-1, 1, 0);
-	glEnd();
+	glVertex3f(-1, 1, 0);  
+	glEnd(); 
 
-	glPopMatrix();
+	glPopMatrix(); 
+
+
+	//Draw the skybox
+	Globals::skybox.draw(Globals::drawData);
 
 	// This will swap the buffers
 	SDL_GL_SwapWindow( winHandle );

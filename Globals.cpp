@@ -14,3 +14,26 @@ Timer Globals::hiresTime = Timer();
 
 
 Core Globals::core = Core();
+
+
+//Update/Draw objects
+DrawData Globals::drawData;
+UpdateData Globals::updateData;
+
+//Skybox object
+Skybox Globals::skybox(10.0);
+
+//Texture objects
+Texture Globals::front;
+Texture Globals::back;
+Texture Globals::left;
+Texture Globals::right;
+Texture Globals::up;
+Texture Globals::down;
+
+char* Globals::Front = "mnight_ft.ppm";
+char* Globals::Back = "mnight_bk.ppm";
+char* Globals::Up = "mnight_up.ppm";
+char* Globals::Down = "mnight_dn.ppm";
+char* Globals::Left = "mnight_lf.ppm"; 
+char* Globals::Right = "mnight_rt.ppm"; 
