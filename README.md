@@ -29,13 +29,14 @@ The newer version is located in SDL2015 folder of this repository
 
 
 ###Setting up GLEW
-http://glew.sourceforge.net/
-(1) Download `Binaries Windows 32-bit and 64-bit`
-(2) Unpack it somewhere that's easily found. Extracted folder should be glew-1.13.0
-(3) Just put it in your Project solution's directory where all the other dll files are
-
-VC++ Directories 
-    Include Directories -> \glew-1.13.0\include
-    Library Directories -> \glew-1.13.0\lib\Release\Win32
-Linker
-    Additional Dependencies -> Add `glew32.lib`
+http://glew.sourceforge.net/  
+(1) Download `Binaries Windows 32-bit and 64-bit`  
+(2) Unpack it somewhere that's easily found. Extracted folder should be glew-1.13.0  
+(3) Just put `bin\Release\Win32\glew32.dll` in your Project's directory where all the other dll files are  
+  
+VC++ Directories  
+    Include Directories -> \glew-1.13.0\include  
+    Library Directories -> \glew-1.13.0\lib\Release\Win32  
+Linker  
+    Additional Dependencies -> Add `glew32.lib`  
+  
