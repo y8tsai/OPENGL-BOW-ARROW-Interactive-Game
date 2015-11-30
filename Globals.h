@@ -7,6 +7,7 @@
 #include "Camera.h"
 
 #include "Skybox.h"
+#include "Scene.h"
 
 class Globals {
 public:
@@ -34,6 +35,8 @@ public:
 	static char* Left;
 	static char* Right;
 	/* End 1949f48 */
+
+	static Scene scene;
 };
 
 

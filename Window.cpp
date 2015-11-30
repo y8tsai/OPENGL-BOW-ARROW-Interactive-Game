@@ -109,6 +109,13 @@ void Window::display() {
 	Globals::skybox.draw(Globals::drawData);
 	/* End 1949f48 */
 
+	/* Scene generation*/
+	mat4 identity;
+	identity.makeIdentity();
+	Globals::scene.draw(identity); 
+	/*End scene generation */
+
+
 	drawCoordinateAxes();
 
 	// This will swap the buffers

@@ -43,3 +43,5 @@ char* Globals::Down = "mnight_dn.ppm";
 char* Globals::Left = "mnight_lf.ppm"; 
 char* Globals::Right = "mnight_rt.ppm";
 /* End 1949f48 */
+
+Scene Globals::scene;
