@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Systems">
+      <UniqueIdentifier>{e5e4a11d-3d87-41a1-8b30-1925404778c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Resources\Fonts">
+      <UniqueIdentifier>{1656a13a-3dd5-4ab0-a51e-e268b6ba1a21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Textures">
+      <UniqueIdentifier>{1a266bab-f3aa-4a5a-80a9-874a6e0b6586}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{91a4d844-c328-4241-a647-84ae45e3419a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Models">
+      <UniqueIdentifier>{47f16d09-67f5-442c-9128-9c4d24c5b62c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Models\Support">
+      <UniqueIdentifier>{2f00ba3f-af49-4756-9636-ac490978ed2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Models\LSystem">
+      <UniqueIdentifier>{2fab3e5a-1e55-4ece-8895-88faf6bdfa05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Models\Shaders">
+      <UniqueIdentifier>{4133bf37-1fa5-44f5-9897-6f7e41f1d353}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SceneGraph">
+      <UniqueIdentifier>{03ef880b-bd86-4f5e-93ca-64882bed0992}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Utils\math3d.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\Camera.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\Core.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\Event.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\Window.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Models\Skybox.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Models\Support\Drawable.cpp">
+      <Filter>Models\Support</Filter>
+    </ClCompile>
+    <ClCompile Include="Models\Support\DrawData.cpp">
+      <Filter>Models\Support</Filter>
+    </ClCompile>
+    <ClCompile Include="Models\Support\Program.cpp">
+      <Filter>Models\Support</Filter>
+    </ClCompile>
+    <ClCompile Include="Models\Support\Shader.cpp">
+      <Filter>Models\Support</Filter>
+    </ClCompile>
+    <ClCompile Include="Models\Support\Texture.cpp">
+      <Filter>Models\Support</Filter>
+    </ClCompile>
+    <ClCompile Include="Models\Support\UpdateData.cpp">
+      <Filter>Models\Support</Filter>
+    </ClCompile>
+    <ClCompile Include="Models\LSystem\LSysParam.cpp">
+      <Filter>Models\LSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Models\LSystem\LTree.cpp">
+      <Filter>Models\LSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Globals.cpp" />
+    <ClCompile Include="SceneGraph\Enemy.cpp">
+      <Filter>SceneGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraph\FogMT.cpp">
+      <Filter>SceneGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraph\Forest.cpp">
+      <Filter>SceneGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraph\Geode.cpp">
+      <Filter>SceneGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraph\LightMT.cpp">
+      <Filter>SceneGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraph\MatrixTransform.cpp">
+      <Filter>SceneGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraph\Node.cpp">
+      <Filter>SceneGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraph\Player.cpp">
+      <Filter>SceneGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraph\Scene.cpp">
+      <Filter>SceneGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraph\Sphere.cpp">
+      <Filter>SceneGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraph\Terrain.cpp">
+      <Filter>SceneGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraph\Group.cpp">
+      <Filter>SceneGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraph\Cube.cpp">
+      <Filter>SceneGraph</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
+    <None Include="Models\Shaders\debug.fs">
+      <Filter>Models\Shaders</Filter>
+    </None>
+    <None Include="Models\Shaders\debug.vs">
+      <Filter>Models\Shaders</Filter>
+    </None>
+    <None Include="Models\Shaders\Skybox.frag">
+      <Filter>Models\Shaders</Filter>
+    </None>
+    <None Include="Models\Shaders\Skybox.vert">
+      <Filter>Models\Shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\Textures\mnight_bk.png">
+      <Filter>Resources\Textures</Filter>
+    </Image>
+    <Image Include="Resources\Textures\mnight_dn.png">
+      <Filter>Resources\Textures</Filter>
+    </Image>
+    <Image Include="Resources\Textures\mnight_ft.png">
+      <Filter>Resources\Textures</Filter>
+    </Image>
+    <Image Include="Resources\Textures\mnight_lf.png">
+      <Filter>Resources\Textures</Filter>
+    </Image>
+    <Image Include="Resources\Textures\mnight_rt.png">
+      <Filter>Resources\Textures</Filter>
+    </Image>
+    <Image Include="Resources\Textures\mnight_up.png">
+      <Filter>Resources\Textures</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Resources\Fonts\arial.ttf">
+      <Filter>Resources\Fonts</Filter>
+    </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Utils\math3d.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\Camera.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\Core.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\Event.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\Window.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\Skybox.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\Support\Drawable.h">
+      <Filter>Models\Support</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\Support\DrawData.h">
+      <Filter>Models\Support</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\Support\Program.h">
+      <Filter>Models\Support</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\Support\Shader.h">
+      <Filter>Models\Support</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\Support\Texture.h">
+      <Filter>Models\Support</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\Support\UpdateData.h">
+      <Filter>Models\Support</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\LSystem\LSysParam.h">
+      <Filter>Models\LSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\LSystem\LTree.h">
+      <Filter>Models\LSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Globals.h" />
+    <ClInclude Include="SceneGraph\Enemy.h">
+      <Filter>SceneGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGraph\FogMT.h">
+      <Filter>SceneGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGraph\Forest.h">
+      <Filter>SceneGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGraph\Geode.h">
+      <Filter>SceneGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGraph\LightMT.h">
+      <Filter>SceneGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGraph\MatrixTransform.h">
+      <Filter>SceneGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGraph\Node.h">
+      <Filter>SceneGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGraph\Player.h">
+      <Filter>SceneGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGraph\Scene.h">
+      <Filter>SceneGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGraph\Sphere.h">
+      <Filter>SceneGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGraph\Terrain.h">
+      <Filter>SceneGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGraph\Group.h">
+      <Filter>SceneGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGraph\Cube.h">
+      <Filter>SceneGraph</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
