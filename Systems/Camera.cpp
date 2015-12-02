@@ -30,7 +30,7 @@ void Camera::update() {
 }
 
 void Camera::reset() {
-	eye = vec3(0.0f, 20.0f, 20.0f);
+	eye = vec3(50.0f, 40.0f, 20.0f);
 	dir = vec3(0.0f, 0.0f, 0.0f);
 	up = vec3(0.0f, 1.0f, 0.0f);
 	update();

@@ -116,7 +116,7 @@ void Window::display() {
 	Globals::camera.update();
 	glLoadMatrixf(Globals::camera.ci.ptr());
 
-	//skybox->draw(DrawData());
+	skybox->draw(DrawData());
 
 
 	//drawCoordinateAxes();
