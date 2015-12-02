@@ -184,10 +184,10 @@
     <ClCompile Include="Utils\tga.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Models\Shaders\debug.fs" />
-    <None Include="Models\Shaders\debug.vs" />
     <None Include="Models\Shaders\Skybox.frag" />
     <None Include="Models\Shaders\Skybox.vert" />
+    <None Include="Models\Shaders\tree.fs" />
+    <None Include="Models\Shaders\tree.vs" />
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>

@@ -14,7 +14,7 @@ class LTree {
 public:
 	LTree(unsigned int randseed, LSysParam properties);
 	void reset(unsigned int randseed);
-	DrawData* generate();
+	std::vector<DrawData*>* generate();
 	
 
 private:
@@ -23,18 +23,14 @@ private:
 	std::string evalRule(std::string &rule, int iterations);
 
 	// Takes final sequence to draw cylinders to represent model
-	DrawData* draw(std::string tape);
+	std::vector<DrawData*>* draw(std::string tape);
 
 	// Helper functions for drawing model
-	void drawForward(GLfloat *vertices, int &vert_idx);
+	DrawData* drawForward();
 	void yawLeft(GLfloat turnRadian);
 	void yawRight(GLfloat turnRadian);
 
-	GLfloat* cylinderMesh(vec3 &position, GLfloat radius, GLfloat length);
-
-
-
-
+	DrawData* parametricCylinder(GLfloat height, GLfloat radius, GLint slices, GLint stacks);
 
 	unsigned int seed;
 	LSysParam prop;

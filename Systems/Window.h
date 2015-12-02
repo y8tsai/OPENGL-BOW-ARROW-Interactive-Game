@@ -32,7 +32,7 @@ private:
 	SDL_Window* winHandle;
 	SDL_GLContext glContext;
 	Skybox* skybox;
-	DrawData* tree;
+	std::vector<DrawData*>* tree;
 };
 
 #endif

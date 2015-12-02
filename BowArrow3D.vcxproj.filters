@@ -123,16 +123,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
-    <None Include="Models\Shaders\debug.fs">
-      <Filter>Models\Shaders</Filter>
-    </None>
-    <None Include="Models\Shaders\debug.vs">
-      <Filter>Models\Shaders</Filter>
-    </None>
     <None Include="Models\Shaders\Skybox.frag">
       <Filter>Models\Shaders</Filter>
     </None>
     <None Include="Models\Shaders\Skybox.vert">
+      <Filter>Models\Shaders</Filter>
+    </None>
+    <None Include="Models\Shaders\tree.fs">
+      <Filter>Models\Shaders</Filter>
+    </None>
+    <None Include="Models\Shaders\tree.vs">
       <Filter>Models\Shaders</Filter>
     </None>
   </ItemGroup>

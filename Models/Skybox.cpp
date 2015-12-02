@@ -97,12 +97,12 @@ void Skybox::draw(DrawData& dd) {
 	 *
 	 */
 	model.shaders->enable();
+	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, model.texture->getID());
 	glBindVertexArray(model.vao);
 	glDrawArrays(model.type, model.indexStart, model.indexCount);
-	
 	glBindVertexArray(0);
-	glBindTexture(GL_TEXTURE_2D, 0);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 	model.shaders->disable();
 
 	

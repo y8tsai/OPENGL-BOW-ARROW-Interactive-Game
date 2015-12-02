@@ -123,14 +123,26 @@ void Window::display() {
 
 	mat4 identity;
 	identity.makeIdentity();
-	Globals::scene.draw(identity);
+	//Globals::scene.draw(identity);
 
-	glPushMatrix();
-	glBindVertexArray(tree->vao);
 	glColor3f(1.0f, 0.0f, 0.0f);
 	glPointSize(5.0f);
-	glDrawArrays(tree->type, tree->indexStart, tree->indexCount);
-	glBindVertexArray(0);
+	glPushMatrix();
+
+	std::vector<DrawData*>::iterator iter = tree->begin();
+	while(iter != tree->end()) {
+		(*iter)->shaders->enable();
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, (*iter)->texture->getID());
+		glBindVertexArray((*iter)->vao);
+		glDrawElements(GL_TRIANGLE_STRIP, (*iter)->indexCount, GL_UNSIGNED_INT, (GLvoid*)0);
+		glBindVertexArray(0);
+		glBindTexture(GL_TEXTURE_2D, 0);
+		(*iter)->shaders->disable();
+		++iter;
+	}
+
+
 	glPopMatrix();
 
 	// This will swap the buffers
