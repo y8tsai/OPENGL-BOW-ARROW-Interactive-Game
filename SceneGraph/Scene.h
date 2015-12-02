@@ -1,6 +1,7 @@
 #pragma once
 #ifndef __SCENE_H__
 #define __SCENE_H__
+
 #include "Node.h"
 #include "MatrixTransform.h"
 #include "math3d.h"

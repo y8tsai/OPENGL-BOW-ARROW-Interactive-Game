@@ -181,6 +181,7 @@
     <ClCompile Include="Systems\Event.cpp" />
     <ClCompile Include="Systems\Window.cpp" />
     <ClCompile Include="Utils\math3d.cpp" />
+    <ClCompile Include="Utils\tga.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Models\Shaders\debug.fs" />
@@ -196,6 +197,7 @@
     <Image Include="Resources\Textures\mnight_lf.png" />
     <Image Include="Resources\Textures\mnight_rt.png" />
     <Image Include="Resources\Textures\mnight_up.png" />
+    <Image Include="Resources\TGA\3dtech.tga" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\Fonts\arial.ttf" />
@@ -229,6 +231,7 @@
     <ClInclude Include="Systems\Event.h" />
     <ClInclude Include="Systems\Window.h" />
     <ClInclude Include="Utils\math3d.h" />
+    <ClInclude Include="Utils\tga.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
