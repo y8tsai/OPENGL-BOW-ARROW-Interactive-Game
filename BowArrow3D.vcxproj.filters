@@ -126,6 +126,7 @@
     <ClCompile Include="Models\Tree.cpp">
       <Filter>Models</Filter>
     </ClCompile>
+    <ClCompile Include="Arrow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
@@ -262,5 +263,6 @@
     <ClInclude Include="Models\Tree.h">
       <Filter>Models</Filter>
     </ClInclude>
+    <ClInclude Include="Arrow.h" />
   </ItemGroup>
 </Project>

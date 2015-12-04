@@ -152,6 +152,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Arrow.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Models\LSystem\LSysParam.cpp" />
@@ -205,6 +206,7 @@
     <Font Include="Resources\Fonts\arial.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Arrow.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Models\LSystem\LSysParam.h" />
     <ClInclude Include="Models\LSystem\LTree.h" />

@@ -1,6 +1,7 @@
 #include "Window.h"
 #include "Globals.h"
 #include "math3d.h"
+#include <GL/glut.h>
 
 GLint Window::WIDTH = 1024;
 GLint Window::HEIGHT = 1024;
@@ -115,20 +116,17 @@ void Window::display() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
 	
+
 	Globals::camera.update();
 	glLoadMatrixf(Globals::camera.ci.ptr());
 
 	skybox->draw(DrawData());
 
+	for(int i = 0; i < Globals::fired.size(); ++i) {
+		Globals::fired[i]->draw(DrawData());
+	}
 
 	drawCoordinateAxes();
-
-	mat4 identity;
-	identity.makeIdentity();
-	//Globals::scene.draw(identity);
-
-	//sampleTree->draw(treeData);
-	
 
 	this->DisplayHUD();
 	// This will swap the buffers

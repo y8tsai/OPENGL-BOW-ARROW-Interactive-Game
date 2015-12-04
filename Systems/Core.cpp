@@ -1,5 +1,9 @@
 #include "Core.h"
 #include "Globals.h"
+#include "Arrow.h"
+#include "UpdateData.h"
+#include <iostream>
+#include <vector>
 
 Core::Core() : running(false) {
 	glewInit();
@@ -19,7 +23,15 @@ void Core::startup() {
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 
 	while( running ) {
-		
+		//Update Physics
+		while( (Globals::fired.begin() != Globals::fired.end()) && (*Globals::fired.begin())->markDelete ) {
+			Globals::fired.erase(Globals::fired.begin());
+		}
+
+		for(int i = 0; i < Globals::fired.size(); ++i) {
+			Globals::fired[i]->update(UpdateData());
+		}
+
 		while(SDL_PollEvent(&evee)) {
 			OnEvent(&evee);
 			Globals::window.OnEvent(&evee);
@@ -136,6 +148,8 @@ void Core::OnLButtonDown(int mX, int mY) {
 
 void Core::OnLButtonUp(int mX, int mY) {
 	Globals::fireDown = false;
+	Arrow *bullet = new Arrow();
+	Globals::fired.push_back(bullet);
 }
 
 void Core::OnExit() {

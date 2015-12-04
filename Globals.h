@@ -7,6 +7,8 @@
 #include "LSystem/LTree.h"
 #include "SceneGraph/Scene.h"
 
+#include "Arrow.h"
+
 
 class Globals {
 public:
@@ -17,6 +19,7 @@ public:
 
 	static Scene scene;
 
+	static std::vector<Arrow*> fired;
 	static bool fireDown;
 };
 
