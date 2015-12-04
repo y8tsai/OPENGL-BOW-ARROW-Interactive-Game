@@ -156,6 +156,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Models\LSystem\LSysParam.cpp" />
     <ClCompile Include="Models\LSystem\LTree.cpp" />
+    <ClCompile Include="Models\LSystem\ProcMesh.cpp" />
     <ClCompile Include="Models\Skybox.cpp" />
     <ClCompile Include="Models\Support\Drawable.cpp" />
     <ClCompile Include="Models\Support\DrawData.cpp" />
@@ -163,6 +164,7 @@
     <ClCompile Include="Models\Support\Shader.cpp" />
     <ClCompile Include="Models\Support\Texture.cpp" />
     <ClCompile Include="Models\Support\UpdateData.cpp" />
+    <ClCompile Include="Models\Tree.cpp" />
     <ClCompile Include="SceneGraph\Cube.cpp" />
     <ClCompile Include="SceneGraph\Enemy.cpp" />
     <ClCompile Include="SceneGraph\FogMT.cpp" />
@@ -206,6 +208,7 @@
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Models\LSystem\LSysParam.h" />
     <ClInclude Include="Models\LSystem\LTree.h" />
+    <ClInclude Include="Models\LSystem\ProcMesh.h" />
     <ClInclude Include="Models\Skybox.h" />
     <ClInclude Include="Models\Support\Drawable.h" />
     <ClInclude Include="Models\Support\DrawData.h" />
@@ -213,6 +216,7 @@
     <ClInclude Include="Models\Support\Shader.h" />
     <ClInclude Include="Models\Support\Texture.h" />
     <ClInclude Include="Models\Support\UpdateData.h" />
+    <ClInclude Include="Models\Tree.h" />
     <ClInclude Include="SceneGraph\Cube.h" />
     <ClInclude Include="SceneGraph\Enemy.h" />
     <ClInclude Include="SceneGraph\FogMT.h" />

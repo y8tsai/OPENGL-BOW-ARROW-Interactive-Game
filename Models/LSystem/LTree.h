@@ -7,6 +7,8 @@
 #include <vector>
 
 #include "LSysParam.h"
+#include "ProcMesh.h"
+
 #include "DrawData.h"
 #include "math3d.h"
 
@@ -14,7 +16,7 @@ class LTree {
 public:
 	LTree(unsigned int randseed, LSysParam properties);
 	void reset(unsigned int randseed);
-	std::vector<DrawData*>* generate();
+	std::vector<CylinderMesh*>* generate();
 	
 
 private:
@@ -23,24 +25,21 @@ private:
 	std::string evalRule(std::string &rule, int iterations);
 
 	// Takes final sequence to draw cylinders to represent model
-	std::vector<DrawData*>* draw(std::string tape);
+	std::vector<CylinderMesh*>* draw(std::string tape);
 
 	// Helper functions for drawing model
-	DrawData* drawForward();
+	CylinderMesh* drawForward();
 	void yawLeft(GLfloat turnRadian);
 	void yawRight(GLfloat turnRadian);
 
-	DrawData* parametricCylinder(GLfloat height, GLfloat radius, GLint slices, GLint stacks);
+	//DrawData* parametricCylinder(GLfloat height, GLfloat radius, GLint slices, GLint stacks);
 
 	unsigned int seed;
 	LSysParam prop;
 
-	RuleMap *memo;
-	char currentLv;
-
-	vec3 heading;
+	
+	float yaw;
 	vec3 position;
-	unsigned int numDraws;
 };
 
 

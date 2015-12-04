@@ -10,6 +10,8 @@
 #include "Event.h"
 
 #include "Skybox.h"
+#include "Models\Tree.h"
+#include "LSystem\ProcMesh.h"
 
 class Window : public Event {
 public:
@@ -32,7 +34,8 @@ private:
 	SDL_Window* winHandle;
 	SDL_GLContext glContext;
 	Skybox* skybox;
-	std::vector<DrawData*>* tree;
+	Tree* sampleTree;
+	std::vector<CylinderMesh*>* treeData;
 };
 
 #endif

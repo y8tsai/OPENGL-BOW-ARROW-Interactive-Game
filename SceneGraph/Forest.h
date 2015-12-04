@@ -1,6 +1,6 @@
-#pragma once
 #ifndef __FOREST_H__
 #define __FOREST_H__
+
 #include "MatrixTransform.h"
 #include "Geode.h"
 #include "Group.h"
@@ -8,8 +8,7 @@
 #include "Cube.h"
 #include "math3d.h"
 
-class Forest: public MatrixTransform
-{
+class Forest: public MatrixTransform {
 public: 
 	Forest(); //create a forest
 	~Forest();

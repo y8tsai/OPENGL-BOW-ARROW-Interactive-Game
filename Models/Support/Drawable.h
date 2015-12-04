@@ -17,16 +17,19 @@ public:
     
     mat4 toWorld;
     //Material material;
-	vec3 center;
-
-	float* maxValues;
-	float* minValues;
     
     Drawable(void);
     ~Drawable(void);
     
     virtual void draw(DrawData&);
     virtual void update(UpdateData&);
+
+
+	vec3 center;
+	float* maxValues;
+	float* minValues;
+
+	// For Collision
 	virtual vec3 getCenter();
 	virtual float* getMaxValues();
 	virtual float* getMinValues();

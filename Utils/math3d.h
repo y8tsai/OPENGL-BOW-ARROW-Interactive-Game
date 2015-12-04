@@ -36,6 +36,7 @@ public:
 
 	float* ptr();
 	void print(std::string comment);
+	void clear(); //zero out
 
 	float v[3];
 };
@@ -49,6 +50,7 @@ public:
 	vec4 operator-(const vec4&) const;
 	vec4 operator-() const;
 	vec4& dehomogenize();
+	vec3 toVec3(); //return everything but w
 
 	float* ptr();
 	void print(std::string comment);

@@ -1,18 +1,15 @@
 #include "LSysParam.h"
 
 LSysParam::LSysParam() {
-	iterations = 1;
-	length = 0.125f;
-	yawMin = DEG2RAD(15.0f);
-	yawMax = DEG2RAD(30.0f);
+	iterations = 4;
+	length = 0.15f;
+	yawMin = 15.0f;
+	yawMax = 30.0f;
 
-	radius = 0.01f;
-	segments = 4;
+	radius = 0.05f;
+	segments = 6;
 
-	/*rules['X'] = "F-[[X]+X]+F[+FX]-X";
-	rules['F'] = "FF";*/
-	/*rules['X'] = "F+F-[[X]+X]-F";
-	rules['F'] = "FF";*/
-	rules['X'] = "F";
+	rules['X'] = "F-[[X]+X]+F[+FX]-X";
+	rules['F'] = "FF";
 	startRule = 'X';
 }

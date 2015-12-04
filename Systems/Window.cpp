@@ -60,7 +60,8 @@ void Window::initialize() {
 	reshape(Window::WIDTH, Window::HEIGHT);
 
 	skybox = new Skybox(5.0f);
-	tree = Globals::ltree.generate();
+	sampleTree = new Tree();
+	treeData = Globals::ltree.generate();
 }
 
 void Window::glConfiguration() {
@@ -119,32 +120,14 @@ void Window::display() {
 	skybox->draw(DrawData());
 
 
-	//drawCoordinateAxes();
+	drawCoordinateAxes();
 
 	mat4 identity;
 	identity.makeIdentity();
 	//Globals::scene.draw(identity);
 
-	glColor3f(1.0f, 0.0f, 0.0f);
-	glPointSize(5.0f);
-	glPushMatrix();
-
-	std::vector<DrawData*>::iterator iter = tree->begin();
-	while(iter != tree->end()) {
-		(*iter)->shaders->enable();
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, (*iter)->texture->getID());
-		glBindVertexArray((*iter)->vao);
-		glDrawElements(GL_TRIANGLE_STRIP, (*iter)->indexCount, GL_UNSIGNED_INT, (GLvoid*)0);
-		glBindVertexArray(0);
-		glBindTexture(GL_TEXTURE_2D, 0);
-		(*iter)->shaders->disable();
-		++iter;
-	}
-
-
-	glPopMatrix();
-
+	sampleTree->draw(treeData);
+	
 	// This will swap the buffers
 	SDL_GL_SwapWindow( winHandle );
 
