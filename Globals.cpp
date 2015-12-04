@@ -21,3 +21,9 @@ Core Globals::core = Core();
 LTree Globals::ltree = LTree(0, LSysParam());
 
 Scene Globals::scene;
+
+
+// Used in Window::DisplayHUD for crosshair animation
+// mouse left down - draw bow
+// mouse left up   - fire bow
+bool Globals::fireDown = false;

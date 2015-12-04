@@ -128,7 +128,14 @@ void Core::OnMouseMove(int mX, int mY, int relX, int relY, bool lt, bool rt, boo
 	Globals::camera.dir.v[0] = xtarget.x + Globals::camera.eye.v[0];
 	Globals::camera.dir.v[1] = xtarget.y + Globals::camera.eye.v[1];
 	Globals::camera.dir.v[2] = xtarget.z + Globals::camera.eye.v[2];
+}
 
+void Core::OnLButtonDown(int mX, int mY) {
+	Globals::fireDown = true;
+}
+
+void Core::OnLButtonUp(int mX, int mY) {
+	Globals::fireDown = false;
 }
 
 void Core::OnExit() {

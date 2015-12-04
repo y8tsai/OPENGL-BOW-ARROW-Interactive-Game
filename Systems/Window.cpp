@@ -79,8 +79,9 @@ void Window::glConfiguration() {
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 
+	glLightModelf(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
 	// Mask filter for textures to allow for transparency
-	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void Window::reshape(GLsizei w, GLsizei h) {
@@ -126,12 +127,83 @@ void Window::display() {
 	identity.makeIdentity();
 	//Globals::scene.draw(identity);
 
-	sampleTree->draw(treeData);
+	//sampleTree->draw(treeData);
 	
+
+	this->DisplayHUD();
 	// This will swap the buffers
 	SDL_GL_SwapWindow( winHandle );
 
 	//Globals::hiresTime.displayElapsed(); don't need this yet
+}
+
+void DrawCircle(float cx, float cy, float r, int num_segments) {
+	float theta = 2 * 3.1415926 / float(num_segments); 
+	float tangetial = tanf(theta);
+	float radial = cosf(theta); 
+	float x = r;
+	float y = 0; 
+    
+	glBegin(GL_LINE_LOOP); 
+	glNormal3f(0.f, 0.f, -1.f);
+	for(int i = 0; i < num_segments; ++i) { 
+		glVertex2f(x + cx, y + cy);
+		float tx = -y; 
+		float ty = x; 
+		x += tx * tangetial; 
+		y += ty * tangetial; 
+		x *= radial; 
+		y *= radial; 
+	} 
+	glEnd(); 
+}
+
+void Window::DisplayHUD() {
+	glDepthMask(GL_FALSE);
+	glDisable(GL_DEPTH_TEST);
+	glClear(GL_DEPTH_BUFFER_BIT);
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(0.f, Window::WIDTH, Window::HEIGHT, 0.f, -1.f, 0.f);
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+
+	GLfloat midX = (GLfloat)Window::WIDTH/2.f;
+	GLfloat midY = (GLfloat)Window::HEIGHT/2.f;
+
+	glColor4f(1.f, 1.f, 1.f, 1.0f);
+	GLfloat light_diffuse[] = { 0.6f, 0.6f, 0.6f, 1.0 };
+	GLfloat light_position[] = { 0.0, 0.0, -1.0, 0.0 };
+
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+	glEnable(GL_LIGHT0);
+
+	const static float radMin = 8;
+	const static float radMax = 15;
+	const static float radDelta = 0.1f;
+	static float radius = radMax;
+	static bool drawn = false;
+
+	if( Globals::fireDown && radius > radMin) {
+		drawn = true;
+		radius -= radDelta;
+		
+	} else if ( !Globals::fireDown && drawn ) {
+		radius = radMax;
+		drawn = false;
+	}
+
+	glLineWidth(3.0f);
+	DrawCircle(midX, midY, radius, 60);
+
+	glDisable(GL_LIGHT0);
+	glEnable(GL_DEPTH_TEST);
+	glDepthMask(GL_TRUE);
+	reshape(Window::WIDTH, Window::HEIGHT);
 }
 
 void Window::shutdown() {
@@ -146,3 +218,4 @@ void Window::OnEvent(SDL_Event* evt) {
 void Window::OnResize(int w, int h) {
 	reshape(w, h);
 }
+

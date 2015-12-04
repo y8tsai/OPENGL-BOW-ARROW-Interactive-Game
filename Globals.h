@@ -16,6 +16,8 @@ public:
 	static LTree ltree;
 
 	static Scene scene;
+
+	static bool fireDown;
 };
 
 

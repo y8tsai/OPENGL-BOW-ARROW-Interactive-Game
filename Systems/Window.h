@@ -31,6 +31,9 @@ public:
 private:
 	void glConfiguration();
 	void OnResize(int w, int h);
+	void DisplayHUD();
+
+
 	SDL_Window* winHandle;
 	SDL_GLContext glContext;
 	Skybox* skybox;
