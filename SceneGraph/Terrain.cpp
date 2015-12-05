@@ -17,6 +17,12 @@
 #include <stdio.h>
 #include "tga.h"
 
+/*For terrain multi-texturing*/
+GLint grassSamplerHandle;
+GLint dirtSamplerHandle;
+GLint rockSamplerHandle;
+GLint snowSamplerHandle;
+
 /*Constants*/
 // stuff for lighting
 GLfloat lAmbient[] = { 0.3,0.3,0.3,1.0 };
@@ -57,6 +63,10 @@ float n1[3] = { 0.0,0.0,0.0 }, n2[3] = { 0.0,0.0,0.0 }, n3[3] = { 0.0,0.0,0.0 },
 static void terrainComputeNormals();
 static void terrainNormalize(float *v);
 
+static const std::string grass = "Resources\\Textures\\grass.JPG";
+static const std::string dirt = "Resources\\Textures\\dirt.JPG";
+static const std::string rock = "Resources\\Textures\\rock.JPG";
+static const std::string snow = "Resources\\Textures\\snow.JPG";
 
 void Terrain::terrainLightPosition(float x, float y, float z, float w) {
 
@@ -457,7 +467,7 @@ int Terrain::terrainScale(float min, float max) {
 	}
 	for (i = 0; i < total; i++) {
 		height = (terrainHeights[i] - min1) / (max1 - min1);
-		terrainHeights[i] = height * amp - min;
+		terrainHeights[i] = height * amp - amp;
 	}
 	if (terrainNormals != NULL)
 		terrainComputeNormals();
@@ -514,11 +524,38 @@ int Terrain::terrainCreateDL(float xOffset, float yOffset, float zOffset, int li
 
 	terrainDL = glGenLists(1);
 
+
+	glNewList(terrainDL, GL_COMPILE);
+
 	if (lighting)
 		terrainSimLight = 0;
 
+	glPushMatrix();
+	glMatrixMode(GL_MODELVIEW);
+	glDisable(GL_COLOR);
+	
 
-	glNewList(terrainDL, GL_COMPILE);
+	model.shaders->enable();
+
+	glEnable(GL_TEXTURE_2D);
+	//get the textures
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, model.texture->getID());
+
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, m1.texture->getID());
+
+	glActiveTexture(GL_TEXTURE2);
+	glBindTexture(GL_TEXTURE_2D, m2.texture->getID());
+
+	glActiveTexture(GL_TEXTURE3);
+	glBindTexture(GL_TEXTURE_2D, m3.texture->getID());
+
+	glUniform1i(grassSamplerHandle, 0);
+	glUniform1i(dirtSamplerHandle, 1);
+	glUniform1i(rockSamplerHandle, 2);
+	glUniform1i(snowSamplerHandle, 3);
+
 	for (i = 0; i < terrainGridLength - 1; i++) {
 		glBegin(GL_TRIANGLE_STRIP);
 		for (j = 0; j < terrainGridWidth; j++) {
@@ -543,6 +580,12 @@ int Terrain::terrainCreateDL(float xOffset, float yOffset, float zOffset, int li
 				glNormal3f(terrainNormals[3 * ((i + 1)*terrainGridWidth + j)],
 					terrainNormals[3 * ((i + 1)*terrainGridWidth + j) + 1],
 					terrainNormals[3 * ((i + 1)*terrainGridWidth + j) + 2]);
+			
+			//glTexCoord2d( float(i) / terrainGridLength, float(j)/terrainGridWidth);
+			glMultiTexCoord2f(GL_TEXTURE0, float(i) / terrainGridLength, float(j) / terrainGridWidth );
+			glMultiTexCoord2f(GL_TEXTURE1, float(i) / terrainGridLength, float(j) / terrainGridWidth);
+		    glMultiTexCoord2f(GL_TEXTURE2, float(i) / terrainGridLength, float(j) / terrainGridWidth);
+			glMultiTexCoord2f(GL_TEXTURE3, float(i) / terrainGridLength, float(j) / terrainGridWidth);
 			glVertex3f(
 				(startW + j)*terrainStepWidth,// * stepW,
 				terrainHeights[(i + 1)*terrainGridWidth + (j)],
@@ -568,6 +611,12 @@ int Terrain::terrainCreateDL(float xOffset, float yOffset, float zOffset, int li
 				glNormal3f(terrainNormals[3 * (i*terrainGridWidth + j)],
 					terrainNormals[3 * (i*terrainGridWidth + j) + 1],
 					terrainNormals[3 * (i*terrainGridWidth + j) + 2]);
+
+			//glTexCoord2d(float(i) / terrainGridLength, float(j) / terrainGridWidth);
+			glMultiTexCoord2fARB(GL_TEXTURE0, float(i) / terrainGridLength, float(j)/terrainGridWidth );
+			glMultiTexCoord2fARB(GL_TEXTURE1, float(i) / terrainGridLength, float(j) / terrainGridWidth);
+			glMultiTexCoord2fARB(GL_TEXTURE2, float(i) / terrainGridLength, float(j) / terrainGridWidth);
+			glMultiTexCoord2fARB(GL_TEXTURE3, float(i) / terrainGridLength, float(j) / terrainGridWidth );
 			glVertex3f(
 				(startW + j)*terrainStepWidth,// * stepW,
 				terrainHeights[i*terrainGridWidth + j],
@@ -575,8 +624,11 @@ int Terrain::terrainCreateDL(float xOffset, float yOffset, float zOffset, int li
 		}
 		glEnd();
 	}
+	model.shaders->disable();
 	glEndList();
 
+	glPopMatrix();
+	glEnable(GL_COLOR);
 	return(terrainDL);
 }
 
@@ -642,6 +694,93 @@ void Terrain::terrainSmooth(float k) {
 /*Geode Code*/
 Terrain::Terrain() {
 	terrainDL = -1;
+	//create the shader programs
+	model.shaders = Program::LoadShaders("Models/Shaders/terrain.vert", "Models/Shaders/terrain.frag");
+
+	//create the texture objects
+	model.texture = new Texture();
+	m1.texture = new Texture();
+	m2.texture = new Texture();
+	m3.texture = new Texture();
+
+	GLuint GRASS, DIRT, ROCK, SNOW;
+	int width, height;
+	unsigned char *img;
+
+	glGenTextures(1, &GRASS);
+	glGenTextures(1, &DIRT);
+	glGenTextures(1, &ROCK);
+	glGenTextures(1, &SNOW);
+
+	//bind the GRASS
+	glBindTexture(GL_TEXTURE_2D, GRASS);
+	img = SOIL_load_image(grass.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
+	//printf("Soil? %s\n", SOIL_last_result());
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, img);
+
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+
+	//Bind the DIRT
+	glBindTexture(GL_TEXTURE_2D, DIRT);
+	img = SOIL_load_image(dirt.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
+	//printf("Soil? %s\n", SOIL_last_result());
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, img);
+
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+	//Bind the ROCK
+	glBindTexture(GL_TEXTURE_2D, ROCK);
+	img = SOIL_load_image(rock.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
+	//printf("Soil? %s\n", SOIL_last_result());
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, img);
+
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+	//Bind the SNOW
+	glBindTexture(GL_TEXTURE_2D, SNOW);
+	img = SOIL_load_image(snow.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
+	//printf("Soil? %s\n", SOIL_last_result());
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, img);
+
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+	model.texture->setID(GRASS);
+
+	glBindTexture(GL_TEXTURE_2D, 1);
+	m1.texture->setID(DIRT);
+
+	glBindTexture(GL_TEXTURE_2D, 2);
+	m2.texture->setID(ROCK);
+
+	glBindTexture(GL_TEXTURE_2D, 3);
+	m3.texture->setID(SNOW);
+
+	grassSamplerHandle = glGetUniformLocation(model.shaders->getHandle(), "grass");
+	dirtSamplerHandle = glGetUniformLocation(model.shaders->getHandle(), "dirt");
+	rockSamplerHandle = glGetUniformLocation(model.shaders->getHandle(), "rock");
+    snowSamplerHandle = glGetUniformLocation(model.shaders->getHandle(), "snow");
 }
 
 Terrain::~Terrain() {
@@ -665,7 +804,7 @@ void Terrain::render() {
 	if (terrainDL == -1)  //if terrainDL has not been set yet
 	{
 		terrainDL = terrainCreateDL(0, 0, 0, lighting);
-		terrainSmooth(0.0);
+		terrainSmooth(0.5);
 	}
 
 	glLightfv(GL_LIGHT0, GL_AMBIENT, lAmbient);

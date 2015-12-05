@@ -21,7 +21,7 @@ public:
 	float* terrainNormals;
 
 	int terrainDL;
-	DrawData model;
+	DrawData model, m1, m2, m3;
 
 	Terrain(); //create a terrain
 	~Terrain();

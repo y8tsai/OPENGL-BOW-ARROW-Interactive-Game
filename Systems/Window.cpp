@@ -63,6 +63,7 @@ void Window::initialize() {
 	skybox = new Skybox(5.0f);
 	sampleTree = new Tree();
 	treeData = Globals::ltree.generate();
+	Globals::scene = new Scene();
 }
 
 void Window::glConfiguration() {
@@ -121,6 +122,10 @@ void Window::display() {
 	glLoadMatrixf(Globals::camera.ci.ptr());
 
 	skybox->draw(DrawData());
+
+	mat4 identity = mat4();
+	identity.makeIdentity();
+	Globals::scene->draw(identity);
 
 	for(int i = 0; i < Globals::fired.size(); ++i) {
 		Globals::fired[i]->draw(DrawData());

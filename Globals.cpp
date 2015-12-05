@@ -20,7 +20,7 @@ Core Globals::core = Core();
 
 LTree Globals::ltree = LTree(0, LSysParam());
 
-Scene Globals::scene;
+Scene* Globals::scene;
 
 std::vector<Arrow*> Globals::fired = std::vector<Arrow*>();
 // Used in Window::DisplayHUD for crosshair animation
