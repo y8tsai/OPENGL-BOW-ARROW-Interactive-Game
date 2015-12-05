@@ -64,6 +64,7 @@ void Window::initialize() {
 	sampleTree = new Tree();
 	treeData = Globals::ltree.generate();
 	Globals::scene = new Scene();
+	particles = new Particles(1000, vec3(0, 0, 0) );  //1000 particles at source origin 
 }
 
 void Window::glConfiguration() {
@@ -126,6 +127,9 @@ void Window::display() {
 	mat4 identity = mat4();
 	identity.makeIdentity();
 	Globals::scene->draw(identity);
+
+	//render the particles
+	particles->draw(DrawData());
 
 	for(int i = 0; i < Globals::fired.size(); ++i) {
 		Globals::fired[i]->draw(DrawData());
@@ -202,6 +206,10 @@ void Window::DisplayHUD() {
 
 	glLineWidth(3.0f);
 	DrawCircle(midX, midY, radius, 60);
+
+	//update particles
+	for (int i = 0; i < particles->numParticles; i++)
+		particles->particles[i].update(UpdateData());
 
 	glDisable(GL_LIGHT0);
 	glEnable(GL_DEPTH_TEST);

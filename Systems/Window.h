@@ -12,6 +12,7 @@
 #include "Skybox.h"
 #include "Models\Tree.h"
 #include "LSystem\ProcMesh.h"
+#include "Particles.h"
 
 class Window : public Event {
 public:
@@ -39,6 +40,7 @@ private:
 	Skybox* skybox;
 	Tree* sampleTree;
 	std::vector<CylinderMesh*>* treeData;
+	Particles* particles;
 };
 
 #endif
