@@ -139,6 +139,17 @@
     <ClCompile Include="Systems\Window.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
+    <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="Particles.cpp" />
+    <ClCompile Include="Light.cpp" />
+    <ClCompile Include="EntityBST.cpp" />
+    <ClCompile Include="EntityNode.cpp" />
+    <ClCompile Include="Models\Support\MaterialData.cpp">
+      <Filter>Models\Support</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\Timer.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
@@ -152,6 +163,9 @@
       <Filter>Models\Shaders</Filter>
     </None>
     <None Include="Models\Shaders\tree.vs">
+      <Filter>Models\Shaders</Filter>
+    </None>
+    <None Include="terrain.vert">
       <Filter>Models\Shaders</Filter>
     </None>
   </ItemGroup>
@@ -288,5 +302,22 @@
     <ClInclude Include="Systems\PhysicsManager.h">
       <Filter>Systems</Filter>
     </ClInclude>
+    <ClInclude Include="Particle.h" />
+    <ClInclude Include="Particles.h" />
+    <ClInclude Include="Light.h" />
+    <ClInclude Include="BST.h" />
+    <ClInclude Include="EntityBST.h" />
+    <ClInclude Include="EntityNode.h" />
+    <ClInclude Include="Models\Support\MaterialData.h">
+      <Filter>Models\Support</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\Timer.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="terrain.frag">
+      <Filter>Models\Shaders</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -9,10 +9,10 @@ public:
 	void StartUp();
 	void Shutdown();
 
-	void Update();
+	void Update(float t, float dt);
 
 private:
-	void UpdatePlayer();
+	void UpdatePlayer(float t, float dt);
 };
 
 #endif

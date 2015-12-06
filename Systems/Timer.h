@@ -2,16 +2,14 @@
 #define __TIMER_H__
 
 #include <SDL.h>
-#include <SDL_opengl.h>
-#include <GL\GLU.h>
-#include <SDL_ttf.h>
+
 
 class Timer {
 public:
 	static Uint32 startTicks;
 	static Uint32 pausedTicks;
-	static SDL_Color fpsDisplayColor;
-	void displayElapsed();
+	static Uint32 interval;
+	//void displayElapsed();
 
 	Timer();
 	void start();
@@ -21,11 +19,12 @@ public:
 	void resetTicks();
 	Uint32 getTicks();
 
+	void updateInterval();
+
+
 private:
 	bool started;
 	bool paused;
-	TTF_Font *arialTypeset;
-	SDL_Surface *hud;
 };
 
 

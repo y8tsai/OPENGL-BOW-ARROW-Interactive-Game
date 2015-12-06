@@ -4,39 +4,11 @@
 
 Uint32 Timer::startTicks = 0;
 Uint32 Timer::pausedTicks = 0;
-SDL_Color Timer::fpsDisplayColor = {255, 255, 255};
-
-void Timer::displayElapsed() {
-
-//	GLuint texture;
-//
-//	glGenTextures(1, &texture);
-//	glBindTexture(GL_TEXTURE_2D, texture);
-//
-//	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-//	
-//	hud = TTF_RenderUTF8_Blended(arialTypeset, "Time per Frame: " + Timer::getTicks(), Timer::fpsDisplayColor);
-//	Timer::startTicks = SDL_GetTicks();
-//
-//	glTexImage2D(GL_TEXTURE_2D, 0, 3, hud->w, hud->h, 0, GL_RGB, GL_UNSIGNED_BYTE, hud->pixels);
-//
-//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-//
-//	glBegin(GL_QUADS);
-//		glTexCoord2d(0, 0); glVertex3d(-0.5, -0.5, 0.0 );
-//		glTexCoord2d(0, 1); glVertex3d(-0.5, 0.5, 0.0);
-//		glTexCoord2d(1, 1); glVertex3d(0.5, 0.5, 0.0);
-//		glTexCoord2d(1, 0); glVertex3d(0.5, -0.5, 0.0);
-//	glEnd();
-//
-//	glDeleteTextures(1, &texture);
-//	SDL_FreeSurface(hud);
-}
+Uint32 Timer::interval = 0;
 
 Timer::Timer() : started(false), paused(false) {
-	TTF_Init();
-	arialTypeset = TTF_OpenFont(".\\arial.ttf", 24);
+	//TTF_Init();
+	//arialTypeset = TTF_OpenFont(".\\arial.ttf", 24);
 }
 
 void Timer::start() {
@@ -74,6 +46,7 @@ void Timer::resetTicks() {
 	Timer::pausedTicks = 0;
 }
 
+// Returns time in milliseconds that has passed since start() was called
 Uint32 Timer::getTicks() {
 	Uint32 time = 0;
 
@@ -87,3 +60,39 @@ Uint32 Timer::getTicks() {
 
 	return time;
 }
+
+void Timer::updateInterval() {
+	static Uint32 lastTick = SDL_GetTicks();
+	Timer::interval = SDL_GetTicks() - lastTick;
+	lastTick = SDL_GetTicks();
+}
+
+//SDL_Color Timer::fpsDisplayColor = {255, 255, 255};
+
+//void Timer::displayElapsed() {
+
+//	GLuint texture;
+//
+//	glGenTextures(1, &texture);
+//	glBindTexture(GL_TEXTURE_2D, texture);
+//
+//	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+//	
+//	hud = TTF_RenderUTF8_Blended(arialTypeset, "Time per Frame: " + Timer::getTicks(), Timer::fpsDisplayColor);
+//	Timer::startTicks = SDL_GetTicks();
+//
+//	glTexImage2D(GL_TEXTURE_2D, 0, 3, hud->w, hud->h, 0, GL_RGB, GL_UNSIGNED_BYTE, hud->pixels);
+//
+//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//
+//	glBegin(GL_QUADS);
+//		glTexCoord2d(0, 0); glVertex3d(-0.5, -0.5, 0.0 );
+//		glTexCoord2d(0, 1); glVertex3d(-0.5, 0.5, 0.0);
+//		glTexCoord2d(1, 1); glVertex3d(0.5, 0.5, 0.0);
+//		glTexCoord2d(1, 0); glVertex3d(0.5, -0.5, 0.0);
+//	glEnd();
+//
+//	glDeleteTextures(1, &texture);
+//	SDL_FreeSurface(hud);
+//}

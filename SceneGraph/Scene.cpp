@@ -25,10 +25,10 @@ Scene::Scene() {
 
 	sceneMT->addChild(terrain);
 	//sceneMT->addChild(forest);
-	sceneMT->addChild(player);
+	//sceneMT->addChild(player);
 	//sceneMT->addChild(enemy);
-	sceneMT->addChild(fog);
-	sceneMT->addChild(light);
+	//sceneMT->addChild(fog);
+	//sceneMT->addChild(light);
 }
 
 Scene::~Scene() {

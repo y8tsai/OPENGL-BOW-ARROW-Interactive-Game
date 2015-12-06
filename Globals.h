@@ -1,6 +1,7 @@
 #ifndef __GLOBALS_H__
 #define __GLOBALS_H__
 
+#include "Timer.h"
 #include "InputManager.h"
 #include "Camera.h"
 #include "Window.h"
@@ -14,6 +15,7 @@
 
 class Globals {
 public:
+	static Timer clock;
 	static InputManager EvtMgr;
 	static Camera camera;
 	static Window window;

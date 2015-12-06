@@ -1,5 +1,7 @@
 #include "Globals.h"
 
+Timer Globals::clock;
+
 // Handles input and update game state which it holds
 InputManager Globals::EvtMgr;
 

@@ -1,10 +1,10 @@
 #ifndef CSE167_UpdateData_h
 #define CSE167_UpdateData_h
 
+
 #include <iostream>
 
-class UpdateData
-{
+class UpdateData {
     
 public:
     

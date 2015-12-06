@@ -19,15 +19,31 @@ void Core::StartUp() {
 	SDL_StartTextInput();
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	
+	float t = 0.f;
+	const float dt = 10.0f; // milliseconds
+	float deltaTime = 0.f;
+	float accumulator = 0.f;
+
 	while( running ){
+		Globals::clock.updateInterval();
+		deltaTime = Timer::interval;
+
 		// Step 1: Respond to actions and change game state
 		SDL_Event eve;
 		while( SDL_PollEvent(&eve) ){
 			Globals::EvtMgr.OnEvent(eve);
 		}
 
-		// Step 2: Update Physics based on current game state
-		Globals::gPhysicsMgr.Update();
+		if( deltaTime > 0.0f ){
+			accumulator += deltaTime;
+
+			while( accumulator >= dt ){
+				// Step 2: Update Physics based on current game state
+				Globals::gPhysicsMgr.Update(t, dt);
+				accumulator -= dt;
+				t += dt;
+			}
+		}
 
 		// Step 3: Display game state
 		Globals::window.display();
