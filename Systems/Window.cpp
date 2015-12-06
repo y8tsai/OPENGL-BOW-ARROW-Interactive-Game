@@ -64,6 +64,23 @@ void Window::StartUp() {
 	Globals::scene = new Scene();
 	particles = new Particles(1000, vec3(0, 0, 0) );  //1000 particles at source origin 
 	light = Light();
+
+	entity = EntityBST();
+
+	 
+	//entity.insert(new EntityNode("a", DrawData(), MaterialData(), UpdateData() ) );
+	//entity.insert(new EntityNode("b", DrawData(), MaterialData(), UpdateData()));
+	//entity.insert(new EntityNode("w", DrawData(), MaterialData(), UpdateData()));
+	//entity.insert(new EntityNode("u", DrawData(), MaterialData(), UpdateData()));
+	//entity.insert(new EntityNode("p", DrawData(), MaterialData(), UpdateData()));
+	//entity.insert(new EntityNode("q", DrawData(), MaterialData(), UpdateData()));
+	//
+	//EntityNode* findC = entity.find("w");
+	//std::cout << "Find w: " << findC->name << std::endl;
+
+	//entity.remove("p");
+	//entity.printAll( entity.root );
+
 }
 
 void Window::Shutdown() {
