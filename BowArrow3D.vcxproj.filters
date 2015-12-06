@@ -47,9 +47,6 @@
     <ClCompile Include="Systems\Core.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
-    <ClCompile Include="Systems\Window.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
     <ClCompile Include="Models\Skybox.cpp">
       <Filter>Models</Filter>
     </ClCompile>
@@ -137,6 +134,9 @@
       <Filter>Systems</Filter>
     </ClCompile>
     <ClCompile Include="Systems\PhysicsManager.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\Window.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
   </ItemGroup>
