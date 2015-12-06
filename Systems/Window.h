@@ -14,6 +14,7 @@
 #include "LSystem\ProcMesh.h"
 #include "Particles.h"
 #include "Light.h"
+#include "EntityBST.h"
 
 class Window : public Event {
 public:
@@ -43,6 +44,7 @@ private:
 	std::vector<CylinderMesh*>* treeData;
 	Particles* particles;
 	Light light; //addded to test light
+	EntityBST entity;
 };
 
 #endif
