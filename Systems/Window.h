@@ -11,6 +11,8 @@
 #include "Skybox.h"
 #include "Models\Tree.h"
 #include "LSystem\ProcMesh.h"
+#include "Particles.h"
+#include "Light.h"
 
 class Window {
 public:
@@ -35,6 +37,8 @@ private:
 	Skybox* skybox;
 	Tree* sampleTree;
 	std::vector<CylinderMesh*>* treeData;
+	Particles* particles;
+	Light light; //addded to test light
 };
 
 #endif
