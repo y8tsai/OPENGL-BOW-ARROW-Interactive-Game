@@ -166,6 +166,8 @@
     <ClCompile Include="Models\Support\Texture.cpp" />
     <ClCompile Include="Models\Support\UpdateData.cpp" />
     <ClCompile Include="Models\Tree.cpp" />
+    <ClCompile Include="Physics\AABB.cpp" />
+    <ClCompile Include="Physics\BVH.cpp" />
     <ClCompile Include="SceneGraph\Cube.cpp" />
     <ClCompile Include="SceneGraph\Enemy.cpp" />
     <ClCompile Include="SceneGraph\FogMT.cpp" />
@@ -181,7 +183,8 @@
     <ClCompile Include="SceneGraph\Terrain.cpp" />
     <ClCompile Include="Systems\Camera.cpp" />
     <ClCompile Include="Systems\Core.cpp" />
-    <ClCompile Include="Systems\Event.cpp" />
+    <ClCompile Include="Systems\InputManager.cpp" />
+    <ClCompile Include="Systems\PhysicsManager.cpp" />
     <ClCompile Include="Systems\Window.cpp" />
     <ClCompile Include="Utils\math3d.cpp" />
     <ClCompile Include="Utils\tga.cpp" />
@@ -219,6 +222,9 @@
     <ClInclude Include="Models\Support\Texture.h" />
     <ClInclude Include="Models\Support\UpdateData.h" />
     <ClInclude Include="Models\Tree.h" />
+    <ClInclude Include="Physics\AABB.h" />
+    <ClInclude Include="Physics\BVH.h" />
+    <ClInclude Include="Physics\Simulation.h" />
     <ClInclude Include="SceneGraph\Cube.h" />
     <ClInclude Include="SceneGraph\Enemy.h" />
     <ClInclude Include="SceneGraph\FogMT.h" />
@@ -234,7 +240,8 @@
     <ClInclude Include="SceneGraph\Terrain.h" />
     <ClInclude Include="Systems\Camera.h" />
     <ClInclude Include="Systems\Core.h" />
-    <ClInclude Include="Systems\Event.h" />
+    <ClInclude Include="Systems\InputManager.h" />
+    <ClInclude Include="Systems\PhysicsManager.h" />
     <ClInclude Include="Systems\Window.h" />
     <ClInclude Include="Utils\math3d.h" />
     <ClInclude Include="Utils\tga.h" />

@@ -32,6 +32,9 @@
     <Filter Include="SceneGraph">
       <UniqueIdentifier>{03ef880b-bd86-4f5e-93ca-64882bed0992}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Physics">
+      <UniqueIdentifier>{4f51ac08-0b8f-47f1-9d32-1d01df327a06}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -42,9 +45,6 @@
       <Filter>Systems</Filter>
     </ClCompile>
     <ClCompile Include="Systems\Core.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="Systems\Event.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
     <ClCompile Include="Systems\Window.cpp">
@@ -127,6 +127,18 @@
       <Filter>Models</Filter>
     </ClCompile>
     <ClCompile Include="Arrow.cpp" />
+    <ClCompile Include="Physics\BVH.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\AABB.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\InputManager.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\PhysicsManager.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
@@ -179,9 +191,6 @@
       <Filter>Systems</Filter>
     </ClInclude>
     <ClInclude Include="Systems\Core.h">
-      <Filter>Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="Systems\Event.h">
       <Filter>Systems</Filter>
     </ClInclude>
     <ClInclude Include="Systems\Window.h">
@@ -264,5 +273,20 @@
       <Filter>Models</Filter>
     </ClInclude>
     <ClInclude Include="Arrow.h" />
+    <ClInclude Include="Physics\BVH.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\AABB.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\Simulation.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\InputManager.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\PhysicsManager.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

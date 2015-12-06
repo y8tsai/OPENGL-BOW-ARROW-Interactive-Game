@@ -7,13 +7,12 @@
 
 #include <GL/GLU.h>
 #include <stdio.h>
-#include "Event.h"
 
 #include "Skybox.h"
 #include "Models\Tree.h"
 #include "LSystem\ProcMesh.h"
 
-class Window : public Event {
+class Window {
 public:
 	static GLsizei WIDTH;
 	static GLsizei HEIGHT;
@@ -21,16 +20,13 @@ public:
 	Window();
 	~Window();
 
-	void initialize();
+	void StartUp();
+	void Shutdown();
 	void reshape(GLsizei w, GLsizei h);
 	void display();
-	void OnEvent(SDL_Event* evt);
-
-	void shutdown();
 
 private:
 	void glConfiguration();
-	void OnResize(int w, int h);
 	void DisplayHUD();
 
 

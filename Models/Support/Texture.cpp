@@ -13,7 +13,6 @@ Texture::Texture(const std::string filepath, int force_ch, unsigned int reuse, u
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-
 Texture::~Texture() {
 	width = 0;
 	height = 0;

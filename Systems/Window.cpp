@@ -10,9 +10,7 @@ Window::Window() : winHandle(NULL), glContext(NULL) {}
 
 Window::~Window() {}
 
-void Window::initialize() {
-
-
+void Window::StartUp() {
 	if( SDL_Init( SDL_INIT_VIDEO ) < 0 ) {
 		printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError());
 		SDL_Quit();
@@ -35,7 +33,7 @@ void Window::initialize() {
 	// SDL_WINDOW_OPENGL :: let opengl render window
 	// SDL_WINDOW_SHOWN :: Makes the window visible
 	Uint32 windowFlags = (SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
-	winHandle = SDL_CreateWindow( "OpenGLTestBench", 500, 100, Window::WIDTH, Window::HEIGHT,  windowFlags);
+	winHandle = SDL_CreateWindow( "Crepes BETA", 500, 100, Window::WIDTH, Window::HEIGHT,  windowFlags);
 
 	if( !winHandle || !(glContext = SDL_GL_CreateContext(winHandle)) ) {
 		printf( "SDL Error: %s\n", SDL_GetError());
@@ -50,20 +48,25 @@ void Window::initialize() {
 	glewExperimental = GL_TRUE;
 	GLenum err = glewInit();
 	if(GLEW_OK != err){
-		/* Problem: glewInit failed, something is seriously wrong. */
 		fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
 	}
 
-	/* if( SDL_GL_SetSwapInterval(1) < 0 ) {
-		printf( "Warning: Unable to set VSync! SDL Error: %s\n", SDL_GetError());
-	} */
 	glConfiguration(); // Set OpenGL specific options
 	reshape(Window::WIDTH, Window::HEIGHT);
+	Globals::EvtMgr.Register("Window::Resize", [&](SDL_Event &evt){
+		this->reshape(evt.window.data1, evt.window.data2);
+	});
+
 
 	skybox = new Skybox(5.0f);
 	sampleTree = new Tree();
 	treeData = Globals::ltree.generate();
 	Globals::scene = new Scene();
+}
+
+void Window::Shutdown() {
+	SDL_DestroyWindow(winHandle);
+	SDL_Quit();
 }
 
 void Window::glConfiguration() {
@@ -95,24 +98,6 @@ void Window::reshape(GLsizei w, GLsizei h) {
 	gluPerspective(60.0, GLdouble(w)/h, 0.1, 1000.0);
 }
 
-
-void drawCoordinateAxes() {
-	glLineWidth(1.0f);
-	glBegin(GL_LINES);
-	glColor3f(1.0f, 0.0f, 0.0f);
-	glVertex3f(0.0f, 0.0f, 0.0f);
-	glVertex3f(3.0f, 0.0f, 0.0f);
-
-	glColor3f(0.0f, 1.0f, 0.0f);
-	glVertex3f(0.0f, 0.0f, 0.0f);
-	glVertex3f(0.0f, 3.0f, 0.0f);
-
-	glColor3f(0.0f, 0.0f, 1.0f);
-	glVertex3f(0.0f, 0.0f, 0.0f);
-	glVertex3f(0.0f, 0.0f, 3.0f);
-	glEnd();
-}
-
 void Window::display() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
@@ -130,8 +115,6 @@ void Window::display() {
 	for(int i = 0; i < Globals::fired.size(); ++i) {
 		Globals::fired[i]->draw(DrawData());
 	}
-
-	drawCoordinateAxes();
 
 	this->DisplayHUD();
 	// This will swap the buffers
@@ -181,9 +164,9 @@ void Window::DisplayHUD() {
 	GLfloat light_diffuse[] = { 0.6f, 0.6f, 0.6f, 1.0 };
 	GLfloat light_position[] = { 0.0, 0.0, -1.0, 0.0 };
 
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
-	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-	glEnable(GL_LIGHT0);
+	glLightfv(GL_LIGHT7, GL_DIFFUSE, light_diffuse);
+	glLightfv(GL_LIGHT7, GL_POSITION, light_position);
+	glEnable(GL_LIGHT7);
 
 	const static float radMin = 8;
 	const static float radMax = 15;
@@ -191,11 +174,11 @@ void Window::DisplayHUD() {
 	static float radius = radMax;
 	static bool drawn = false;
 
-	if( Globals::fireDown && radius > radMin) {
+	if( Globals::EvtMgr.ActionState._chargeAttack && radius > radMin) {
 		drawn = true;
 		radius -= radDelta;
 		
-	} else if ( !Globals::fireDown && drawn ) {
+	} else if ( !Globals::EvtMgr.ActionState._chargeAttack && drawn ) {
 		radius = radMax;
 		drawn = false;
 	}
@@ -203,22 +186,8 @@ void Window::DisplayHUD() {
 	glLineWidth(3.0f);
 	DrawCircle(midX, midY, radius, 60);
 
-	glDisable(GL_LIGHT0);
+	glDisable(GL_LIGHT7);
 	glEnable(GL_DEPTH_TEST);
 	glDepthMask(GL_TRUE);
 	reshape(Window::WIDTH, Window::HEIGHT);
 }
-
-void Window::shutdown() {
-	SDL_DestroyWindow(winHandle);
-	SDL_Quit();
-}
-
-void Window::OnEvent(SDL_Event* evt) {
-	Event::OnEvent(evt);
-}
-
-void Window::OnResize(int w, int h) {
-	reshape(w, h);
-}
-
