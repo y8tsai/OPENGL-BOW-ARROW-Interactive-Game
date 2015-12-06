@@ -16,7 +16,12 @@ Drawable::~Drawable()
 
 void Drawable::draw(DrawData& data)
 {
-    std::cout << "Warning: draw() is not implemented" << std::endl;
+    std::cout << "Warning: draw() with DrawData is not implemented" << std::endl;
+}
+
+void Drawable::draw(MaterialData&) 
+{
+	std::cout << "Warning: draw() with MaterialData is not implemented" << std::endl;
 }
 
 void Drawable::update(UpdateData& data)

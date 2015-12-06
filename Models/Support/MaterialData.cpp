@@ -6,15 +6,16 @@
     #include <GL/glut.h>
 #endif
 
+//default Material properties 
+static GLfloat defaultDiffuseColor[] = { 0.8f, 0.8f, 0.8f, 1.0f };
+static GLfloat defaultSpecularColor[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+static GLfloat defaultEmissionColor[]= { 0.0f, 0.0f, 0.0f, 1.0f };
+static GLfloat defaultAmbientColor[] = { 0.2f, 0.2f, 0.2f, 1.0f };
+static GLfloat defaultShininess = 0;
+
+
 MaterialData::MaterialData()
 {
-    //default Material properties 
-	defaultDiffuseColor = new GLfloat[]{ 0.8f, 0.8f, 0.8f, 1.0f }; ;
-	defaultSpecularColor = new GLfloat[]{ 0.0f, 0.0f, 0.0f, 1.0f }; 
-	defaultEmissionColor = new GLfloat[]{ 0.0f, 0.0f, 0.0f, 1.0f };
-	defaultAmbientColor = new GLfloat[]{ 0.2f, 0.2f, 0.2f, 1.0f };
-	defaultShininess = 0;
-
 	diffuseColor = defaultDiffuseColor;
 	specularColor = defaultSpecularColor;
 	emissionColor = defaultEmissionColor;
@@ -22,7 +23,7 @@ MaterialData::MaterialData()
 	shininess = defaultShininess;
 }
 
-MaterialData::MaterialData(GLfloat* diffuse, GLfloat* specular, GLfloat* emission, GLfloat* ambient, GLfloat Shininess)
+MaterialData::MaterialData(float* diffuse, float* specular, float* emission, float* ambient, float Shininess)
 {
 	//Set Material properties 
 	diffuseColor = diffuse;
@@ -35,28 +36,9 @@ MaterialData::MaterialData(GLfloat* diffuse, GLfloat* specular, GLfloat* emissio
 MaterialData::~MaterialData()
 {
     //Delete any dynamically allocated memory/objects here
-
-	if (diffuseColor != defaultDiffuseColor) {  //pointer has been changed
-		delete defaultDiffuseColor;
-		delete defaultSpecularColor;
-		delete defaultEmissionColor;
-		delete defaultAmbientColor;
-
-		delete diffuseColor;
-		delete specularColor;
-		delete emissionColor;
-		delete ambientColor;
-	}
-
-	else {  //if the pointers weren't changed, just delete the same pointer
-		delete defaultDiffuseColor;
-		delete defaultSpecularColor;
-		delete defaultEmissionColor;
-		delete defaultAmbientColor;
-	}
 }
 
-void MaterialData::setMaterial(GLfloat* diffuse, GLfloat* specular, GLfloat* emission, GLfloat* ambient, GLfloat Shininess)
+void MaterialData::setMaterial(float* diffuse, float* specular, float* emission, float* ambient, float Shininess)
 {
 	//Set Material properties 
 	diffuseColor = diffuse;

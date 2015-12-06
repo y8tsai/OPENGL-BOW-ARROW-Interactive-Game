@@ -5,6 +5,7 @@
 #include "math3d.h"
 #include "DrawData.h"
 #include "UpdateData.h"
+#include "MaterialData.h"  //newly added for materials
 #include <float.h>
 #include <math.h>
 #include <vector>
@@ -22,6 +23,7 @@ public:
     ~Drawable(void);
     
     virtual void draw(DrawData&);
+	virtual void draw(MaterialData&);
     virtual void update(UpdateData&);
 
 

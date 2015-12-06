@@ -8,25 +8,18 @@ class MaterialData
     
 public:
 
-	//Default properties
-	GLfloat* defaultDiffuseColor;
-	GLfloat* defaultSpecularColor;
-	GLfloat* defaultEmissionColor;
-	GLfloat* defaultAmbientColor;
-	GLfloat defaultShininess;
-
     //Material properties 
-	GLfloat* diffuseColor;
-	GLfloat* specularColor;
-	GLfloat* emissionColor;
-	GLfloat* ambientColor;
-	GLfloat shininess;
+	float* diffuseColor;
+	float* specularColor;
+	float* emissionColor;
+	float* ambientColor;
+	float shininess;
     
     MaterialData(void); //uses default openGL material settings
-	MaterialData(GLfloat* ambient, GLfloat* diffuse, GLfloat* specular, GLfloat* emission, GLfloat shininess); //copy constructor
+	MaterialData(float* ambient, float* diffuse, float* specular, float* emission, float shininess); //copy constructor
     ~MaterialData(void);
     
-	virtual void setMaterial(GLfloat* ambient, GLfloat* diffuse, GLfloat* specular, GLfloat* emission, GLfloat shininess);
+	virtual void setMaterial(float* ambient, float* diffuse, float* specular, float* emission, float shininess);
 
 	//apply material with current setting 
     virtual void apply(void);

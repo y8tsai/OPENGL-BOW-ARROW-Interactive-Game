@@ -65,6 +65,7 @@ void Window::initialize() {
 	treeData = Globals::ltree.generate();
 	Globals::scene = new Scene();
 	particles = new Particles(1000, vec3(0, 0, 0) );  //1000 particles at source origin 
+	light = Light();
 }
 
 void Window::glConfiguration() {
@@ -129,13 +130,18 @@ void Window::display() {
 	Globals::scene->draw(identity);
 
 	//render the particles
-	particles->draw(DrawData());
+	//particles->draw(DrawData());
 
 	for(int i = 0; i < Globals::fired.size(); ++i) {
 		Globals::fired[i]->draw(DrawData());
 	}
 
 	drawCoordinateAxes();
+
+
+	//light.bind(0);
+	//light.bind(1);
+	light.bind(2); //binds directional light
 
 	this->DisplayHUD();
 	// This will swap the buffers
@@ -185,9 +191,9 @@ void Window::DisplayHUD() {
 	GLfloat light_diffuse[] = { 0.6f, 0.6f, 0.6f, 1.0 };
 	GLfloat light_position[] = { 0.0, 0.0, -1.0, 0.0 };
 
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
-	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-	glEnable(GL_LIGHT0);
+	//glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+	//glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+	//glEnable(GL_LIGHT0);
 
 	const static float radMin = 8;
 	const static float radMax = 15;
@@ -211,7 +217,7 @@ void Window::DisplayHUD() {
 	for (int i = 0; i < particles->numParticles; i++)
 		particles->particles[i].update(UpdateData());
 
-	glDisable(GL_LIGHT0);
+	//glDisable(GL_LIGHT0);
 	glEnable(GL_DEPTH_TEST);
 	glDepthMask(GL_TRUE);
 	reshape(Window::WIDTH, Window::HEIGHT);
