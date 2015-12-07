@@ -24,7 +24,6 @@ public:
 	static LTree ltree;
 	static Scene* scene;
 	static std::vector<Arrow*> fired;
-	static bool fireDown;
 };
 
 

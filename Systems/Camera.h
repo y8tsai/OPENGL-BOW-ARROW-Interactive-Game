@@ -7,8 +7,7 @@ class Camera {
 public:
 	Camera();
 	~Camera();
-	
-	void StartUp();
+
 	void Orbit(int mX, int mY, int relX, int relY);
 	void lookAt(const vec3& e, const vec3& d, const vec3& u);
 	void update();

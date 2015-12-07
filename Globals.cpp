@@ -24,7 +24,3 @@ PhysicsManager Globals::gPhysicsMgr;
 // TODO: Move to level manager
 LTree Globals::ltree = LTree(0, LSysParam());
 std::vector<Arrow*> Globals::fired = std::vector<Arrow*>();
-// Used in Window::DisplayHUD for crosshair animation
-// mouse left down - draw bow
-// mouse left up   - fire bow
-bool Globals::fireDown = false;

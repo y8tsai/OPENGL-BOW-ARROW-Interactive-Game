@@ -217,11 +217,11 @@ void Window::DisplayHUD() {
 	static float radius = radMax;
 	static bool drawn = false;
 
-	if( Globals::fireDown && radius > radMin) {
+	if( Globals::EvtMgr.ActionState._chargeAttack && radius > radMin) {
 		drawn = true;
 		radius -= radDelta;
 		
-	} else if ( !Globals::fireDown && drawn ) {
+	} else if ( !Globals::Globals::EvtMgr.ActionState._chargeAttack && drawn ) {
 		radius = radMax;
 		drawn = false;
 	}
