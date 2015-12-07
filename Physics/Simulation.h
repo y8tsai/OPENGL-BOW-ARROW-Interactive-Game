@@ -4,7 +4,7 @@
 #include <math.h>
 #include "math3d.h"
 
-#define GRAVITY -0.002
+#define GRAVITY -0.002f
 
 // Class::Simulation
 // Utility class for physics calculations
@@ -25,12 +25,8 @@
 
 	If momentum is added to the equation.
 
-
 	Mass is specified in kilograms
 
-
-
-	
 */	
 
 
@@ -86,13 +82,5 @@ public:
 		return vec3(0.f, body.velocity[1] + GRAVITY, 0.f);
 	}
 };
-
-
-
-
-
-
-
-
 
 #endif

@@ -1,9 +1,9 @@
 #pragma once
 #ifndef __PLAYER_H__
 #define __PLAYER_H__
-#include "MatrixTransform.h"
-#include "Geode.h"
-#include "Group.h"
+#include "SceneGraph/Base/MatrixTransform.h"
+#include "SceneGraph/Base/Geode.h"
+#include "SceneGraph/Base/Group.h"
 #include "Sphere.h"
 #include "Cube.h"
 #include "math3d.h"

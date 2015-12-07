@@ -75,7 +75,7 @@ public:
 	mat4& operator=(const mat4&);
 
 	mat4& makeIdentity();
-	mat4& makeTranspose();
+	mat4 makeTranspose();
 	mat4& makeRotateX(float deg);
 	mat4& makeRotateY(float deg);
 	mat4& makeRotateZ(float deg);

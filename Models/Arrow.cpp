@@ -27,7 +27,7 @@ void Arrow::draw(DrawData& dd) {
 	
 	glLineWidth(1.0f);
 	glBegin(GL_LINES);
-	for(int i=0; i < debug_trace.size();++i) {
+	for(std::size_t i=0; i < debug_trace.size();++i) {
 		glColor3fv(tracecolor.ptr());
 		vec3 trace = debug_trace[i];
 		glVertex3fv( trace.ptr() );

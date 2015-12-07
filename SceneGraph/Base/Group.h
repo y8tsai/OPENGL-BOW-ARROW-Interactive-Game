@@ -1,13 +1,11 @@
-#pragma once
-#ifndef CSE167_Group_h
-#define CSE167_Group_h
+#ifndef __GROUP_H__
+#define __GROUP_H__
 
 #include "Node.h"
 #include "math3d.h"
 #include <vector>
 
-class Group : public Node
-{
+class Group : public Node {
 public:
 	std::vector<Node*> children;
 	void addChild(Node*);

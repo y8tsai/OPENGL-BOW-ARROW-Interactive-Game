@@ -11,8 +11,6 @@ Window::Window() : winHandle(NULL), glContext(NULL) {}
 Window::~Window() {}
 
 void Window::StartUp() {
-
-
 	if( SDL_Init( SDL_INIT_VIDEO ) < 0 ) {
 		printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError());
 		SDL_Quit();
@@ -54,35 +52,13 @@ void Window::StartUp() {
 		fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
 	}
 
-	/* if( SDL_GL_SetSwapInterval(1) < 0 ) {
-		printf( "Warning: Unable to set VSync! SDL Error: %s\n", SDL_GetError());
-	} */
 	glConfiguration(); // Set OpenGL specific options
 	reshape(Window::WIDTH, Window::HEIGHT);
 
 	skybox = new Skybox(5.0f);
-	sampleTree = new Tree();
-	treeData = Globals::ltree.generate();
-	Globals::scene = new Scene();
+
 	//particles = new Particles(1000, vec3(0, 0, 0) );  //1000 particles at source origin 
-	light = Light();
-
-	entity = EntityBST();
-
-	 
-	//entity.insert(new EntityNode("a", DrawData(), MaterialData(), UpdateData() ) );
-	//entity.insert(new EntityNode("b", DrawData(), MaterialData(), UpdateData()));
-	//entity.insert(new EntityNode("w", DrawData(), MaterialData(), UpdateData()));
-	//entity.insert(new EntityNode("u", DrawData(), MaterialData(), UpdateData()));
-	//entity.insert(new EntityNode("p", DrawData(), MaterialData(), UpdateData()));
-	//entity.insert(new EntityNode("q", DrawData(), MaterialData(), UpdateData()));
-	//
-	//EntityNode* findC = entity.find("w");
-	//std::cout << "Find w: " << findC->name << std::endl;
-
-	//entity.remove("p");
-	//entity.printAll( entity.root );
-
+	//light = Light();
 }
 
 void Window::glConfiguration() {
@@ -135,35 +111,18 @@ void drawCoordinateAxes() {
 void Window::display() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
-	
 
 	Globals::camera.update();
 	glLoadMatrixf(Globals::camera.ci.ptr());
 
+	Globals::camera.eye.print("position: ");
+
 	skybox->draw(DrawData());
-
-	mat4 identity = mat4();
-	identity.makeIdentity();
-	Globals::scene->draw(identity);
-
-	//render the particles
-	//particles->draw(DrawData());
-
-	for(std::size_t i = 0; i < Globals::fired.size(); ++i) {
-		Globals::fired[i]->draw(DrawData());
-	}
-
-	drawCoordinateAxes();
-
-
-	//light.bind(0);
-	//light.bind(1);
-	light.bind(2); //binds directional light
+	Globals::SceneGraph->draw(mat4().makeIdentity());
 
 	this->DisplayHUD();
-	// This will swap the buffers
-	SDL_GL_SwapWindow( winHandle );
 
+	SDL_GL_SwapWindow( winHandle );
 }
 
 void DrawCircle(float cx, float cy, float r, int num_segments) {

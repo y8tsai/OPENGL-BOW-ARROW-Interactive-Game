@@ -41,6 +41,12 @@
     <Filter Include="Entity\Properties">
       <UniqueIdentifier>{7848f1cc-6822-4f2e-a4d9-aa6a2b3f8735}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SceneGraph\Primitives">
+      <UniqueIdentifier>{b91b08a0-eb08-4018-90a6-0016c398feda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SceneGraph\Base">
+      <UniqueIdentifier>{fee91162-6a16-4fcc-9b03-b7c6e056ba77}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -63,43 +69,16 @@
       <Filter>Models\LSystem</Filter>
     </ClCompile>
     <ClCompile Include="Globals.cpp" />
-    <ClCompile Include="SceneGraph\Enemy.cpp">
-      <Filter>SceneGraph</Filter>
-    </ClCompile>
     <ClCompile Include="SceneGraph\FogMT.cpp">
-      <Filter>SceneGraph</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneGraph\Forest.cpp">
-      <Filter>SceneGraph</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneGraph\Geode.cpp">
       <Filter>SceneGraph</Filter>
     </ClCompile>
     <ClCompile Include="SceneGraph\LightMT.cpp">
       <Filter>SceneGraph</Filter>
     </ClCompile>
-    <ClCompile Include="SceneGraph\MatrixTransform.cpp">
-      <Filter>SceneGraph</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneGraph\Node.cpp">
-      <Filter>SceneGraph</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneGraph\Player.cpp">
-      <Filter>SceneGraph</Filter>
-    </ClCompile>
     <ClCompile Include="SceneGraph\Scene.cpp">
       <Filter>SceneGraph</Filter>
     </ClCompile>
-    <ClCompile Include="SceneGraph\Sphere.cpp">
-      <Filter>SceneGraph</Filter>
-    </ClCompile>
     <ClCompile Include="SceneGraph\Terrain.cpp">
-      <Filter>SceneGraph</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneGraph\Group.cpp">
-      <Filter>SceneGraph</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneGraph\Cube.cpp">
       <Filter>SceneGraph</Filter>
     </ClCompile>
     <ClCompile Include="Utils\tga.cpp">
@@ -107,9 +86,6 @@
     </ClCompile>
     <ClCompile Include="Models\LSystem\ProcMesh.cpp">
       <Filter>Models\LSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="Models\Tree.cpp">
-      <Filter>Models</Filter>
     </ClCompile>
     <ClCompile Include="Physics\BVH.cpp">
       <Filter>Physics</Filter>
@@ -163,6 +139,36 @@
     </ClCompile>
     <ClCompile Include="Utils\Shader.cpp">
       <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\LevelManager.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraph\Primitives\Cube.cpp">
+      <Filter>SceneGraph\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraph\Primitives\Enemy.cpp">
+      <Filter>SceneGraph\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraph\Primitives\Player.cpp">
+      <Filter>SceneGraph\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraph\Primitives\Sphere.cpp">
+      <Filter>SceneGraph\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraph\Primitives\Tree.cpp">
+      <Filter>SceneGraph\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraph\Base\Geode.cpp">
+      <Filter>SceneGraph\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraph\Base\Group.cpp">
+      <Filter>SceneGraph\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraph\Base\MatrixTransform.cpp">
+      <Filter>SceneGraph\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraph\Base\Node.cpp">
+      <Filter>SceneGraph\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -237,43 +243,16 @@
       <Filter>Models\LSystem</Filter>
     </ClInclude>
     <ClInclude Include="Globals.h" />
-    <ClInclude Include="SceneGraph\Enemy.h">
-      <Filter>SceneGraph</Filter>
-    </ClInclude>
     <ClInclude Include="SceneGraph\FogMT.h">
-      <Filter>SceneGraph</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneGraph\Forest.h">
-      <Filter>SceneGraph</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneGraph\Geode.h">
       <Filter>SceneGraph</Filter>
     </ClInclude>
     <ClInclude Include="SceneGraph\LightMT.h">
       <Filter>SceneGraph</Filter>
     </ClInclude>
-    <ClInclude Include="SceneGraph\MatrixTransform.h">
-      <Filter>SceneGraph</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneGraph\Node.h">
-      <Filter>SceneGraph</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneGraph\Player.h">
-      <Filter>SceneGraph</Filter>
-    </ClInclude>
     <ClInclude Include="SceneGraph\Scene.h">
       <Filter>SceneGraph</Filter>
     </ClInclude>
-    <ClInclude Include="SceneGraph\Sphere.h">
-      <Filter>SceneGraph</Filter>
-    </ClInclude>
     <ClInclude Include="SceneGraph\Terrain.h">
-      <Filter>SceneGraph</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneGraph\Group.h">
-      <Filter>SceneGraph</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneGraph\Cube.h">
       <Filter>SceneGraph</Filter>
     </ClInclude>
     <ClInclude Include="Utils\tga.h">
@@ -281,9 +260,6 @@
     </ClInclude>
     <ClInclude Include="Models\LSystem\ProcMesh.h">
       <Filter>Models\LSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="Models\Tree.h">
-      <Filter>Models</Filter>
     </ClInclude>
     <ClInclude Include="Physics\BVH.h">
       <Filter>Physics</Filter>
@@ -340,6 +316,36 @@
     </ClInclude>
     <ClInclude Include="Utils\Shader.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\LevelManager.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGraph\Primitives\Cube.h">
+      <Filter>SceneGraph\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGraph\Primitives\Enemy.h">
+      <Filter>SceneGraph\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGraph\Primitives\Player.h">
+      <Filter>SceneGraph\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGraph\Primitives\Sphere.h">
+      <Filter>SceneGraph\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGraph\Primitives\Tree.h">
+      <Filter>SceneGraph\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGraph\Base\Geode.h">
+      <Filter>SceneGraph\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGraph\Base\Group.h">
+      <Filter>SceneGraph\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGraph\Base\MatrixTransform.h">
+      <Filter>SceneGraph\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGraph\Base\Node.h">
+      <Filter>SceneGraph\Base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

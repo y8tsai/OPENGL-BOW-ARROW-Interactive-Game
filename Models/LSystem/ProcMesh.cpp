@@ -36,10 +36,6 @@ void CylinderMesh::CreateCylinder(float h, float r, int stacks, int slices) {
 			// rotate then translate
 			vec3 k = quat::tovec3( rot * quat(vec3(x,y,z)) * rot.conjugate());
 			raw->push_back( (m2w * vec4(k.v[0],k.v[1],k.v[2], 1.0)).toVec3() );
-
-			// translate then rotate
-			//vec3 junk = (m2w * vec4(x,y,z, 1.0)).toVec3();
-			//raw->push_back( quat::tovec3( rot * quat(junk) * rot.conjugate() ) );
 		}
 		raw_mesh->push_back(raw);
 	}

@@ -1,29 +1,29 @@
 #ifndef __GLOBALS_H__
 #define __GLOBALS_H__
 
-#include "Timer.h"
-#include "InputManager.h"
-#include "Camera.h"
-#include "Window.h"
-#include "PhysicsManager.h"
+#include "Systems/Window.h"
+#include "Systems/InputManager.h"
+#include "Systems/PhysicsManager.h"
+#include "Systems/LevelManager.h"
 
-// To move to it's own space
-#include "LSystem/LTree.h"
+#include "Systems/Timer.h"
+#include "Systems/Camera.h"
 #include "SceneGraph/Scene.h"
-#include "Arrow.h"
-
+#include "Entity/EntityBST.h"
+// #include "Physics/BVH.h"
 
 class Globals {
 public:
-	static Timer clock;
-	static InputManager EvtMgr;
-	static Camera camera;
 	static Window window;
+	static InputManager EvtMgr;
 	static PhysicsManager gPhysicsMgr;
+	static LevelManager gLevelMgr;
 
-	static LTree ltree;
-	static Scene* scene;
-	static std::vector<Arrow*> fired;
+	static Timer clock;
+	static Camera camera;
+	static Scene* SceneGraph;
+	static EntityBST* EntityStore;
+	//static BVH* CollisionStore;   //TODO
 };
 
 

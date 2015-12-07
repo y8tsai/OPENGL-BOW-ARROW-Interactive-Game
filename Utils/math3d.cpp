@@ -246,8 +246,9 @@ mat4& mat4::makeIdentity() {
 	return *this;
 }
 
-mat4& mat4::makeTranspose() {
+mat4 mat4::makeTranspose() {
 	float t;
+	mat4 transposed = *this;
 	for( int i = 0; i < 4; ++i ) {
         for( int j = i; j < 4; ++j ) {
             
@@ -255,12 +256,12 @@ mat4& mat4::makeTranspose() {
 				continue;
 			}
 
-            t = m[j][i];
-            m[j][i] = m[i][j];
-            m[i][j] = t;
+            t = transposed.m[j][i];
+            transposed.m[j][i] = transposed.m[i][j];
+            transposed.m[i][j] = t;
         }
     }
-	return *this;
+	return transposed;
 }
 
 mat4& mat4::makeRotateX(float deg) {

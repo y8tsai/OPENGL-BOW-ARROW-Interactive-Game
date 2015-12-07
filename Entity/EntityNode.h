@@ -1,5 +1,9 @@
+#ifndef __ENTITY_NODE_H__
+#define __ENTITY_NODE_H__
+
 #include <string>
 #include "Models/Drawable.h"
+#include "LSystem/ProcMesh.h" //temp
 
 class EntityNode {
 public:
@@ -11,8 +15,12 @@ public:
 	DrawData drawData;
 	MaterialData materialData;
 	UpdateData updateData;
+	std::vector<CylinderMesh*>* parts; //temp
+
 
 	EntityNode* parent;
 	EntityNode* left;
 	EntityNode* right;
 };
+
+#endif

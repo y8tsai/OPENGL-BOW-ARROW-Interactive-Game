@@ -1,11 +1,11 @@
-#pragma once
 #ifndef __LIGHTMT_H__
 #define __LIGHTMT_H__
-#include "MatrixTransform.h"
-#include "Geode.h"
-#include "Group.h"
-#include "Sphere.h"
-#include "Cube.h"
+
+#include "SceneGraph/Base/MatrixTransform.h"
+#include "SceneGraph/Base/Geode.h"
+#include "SceneGraph/Base/Group.h"
+#include "SceneGraph/Primitives/Sphere.h"
+#include "SceneGraph/Primitives/Cube.h"
 #include "math3d.h"
 
 class LightMT : public MatrixTransform

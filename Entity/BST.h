@@ -1,11 +1,8 @@
-#pragma once
-
-
+#ifndef __BST_H__
+#define __BST_H__
 
 template <class T>
-class BinaryTree
-{
-
+class BinaryTree {
 	struct node {
 		T value;
 		struct node* right;
@@ -155,3 +152,5 @@ bool BinaryTree<T>::lookup(struct node* node, T val) {
 	}
 
 }
+
+#endif

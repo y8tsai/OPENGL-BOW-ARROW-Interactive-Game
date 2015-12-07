@@ -2,7 +2,7 @@
 #define __TERRAIN__H__
 
 #include "Models/Drawable.h"
-#include "Geode.h"
+#include "SceneGraph/Base/Geode.h"
 
 #define TERRAIN_ERROR_INVALID_PARAM     -5
 #define TERRAIN_ERROR_LOADING_IMAGE		-4

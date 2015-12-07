@@ -2,11 +2,9 @@
 #define CSE167_Cube_h
 
 #include "Models/Drawable.h"
-#include "Geode.h"
+#include "SceneGraph/Base/Geode.h"
 
-class Cube : public Geode
-{
-    
+class Cube : public Geode {
 public:
     
     float size;

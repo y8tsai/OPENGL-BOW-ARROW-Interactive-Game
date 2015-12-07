@@ -1,3 +1,6 @@
+#ifndef __ENTITYBST_H__
+#define __ENTITYBST_H__
+
 #include "EntityNode.h"
 
 class EntityBST {
@@ -19,3 +22,5 @@ public:
 
 	void printAll(EntityNode* node);
 };
+
+#endif

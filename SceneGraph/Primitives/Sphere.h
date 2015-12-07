@@ -2,7 +2,7 @@
 #define CSE167_Sphere_h
 
 #include <iostream>
-#include "Geode.h"
+#include "SceneGraph/Base/Geode.h"
 
 class Sphere : public Geode
 {

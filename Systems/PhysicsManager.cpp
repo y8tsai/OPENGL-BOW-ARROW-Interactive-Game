@@ -46,13 +46,13 @@ void PhysicsManager::UpdatePlayer(float t, float dt) {
 	}
 	//strafe left
 	if( Globals::EvtMgr.ActionState._moveleft ) {
-		turn -= 1.5707; // 90 rad
+		turn -= 1.5707f; // 90 rad
 		dx -= velocity * cosf(turn);
 		dz -= velocity * sinf(turn);
 	}
 	//strafe right
 	if( Globals::EvtMgr.ActionState._moveright ) {
-		turn -= 1.5707; // 90 rad
+		turn -= 1.5707f; // 90 rad
 		dx += velocity * cosf(turn);
 		dz += velocity * sinf(turn);
 	}
@@ -62,10 +62,13 @@ void PhysicsManager::UpdatePlayer(float t, float dt) {
 	Body sim = Body(1.f, Globals::camera.eye, vec3(0.f,0.f,0.f));
 	Simulation::RK4(sim, t, dt);
 	vec3 newEyePstn = sim.position;
-	float height = Globals::scene->terrain->terrainGetHeight(Globals::camera.eye.v[0], Globals::camera.eye.v[2]);
+
+	float height = 0.f;
+	if( Globals::SceneGraph != nullptr ) 
+		height = (float)Globals::SceneGraph->terrain->terrainGetHeight(Globals::camera.eye.v[0], Globals::camera.eye.v[2]);
 
 	if( newEyePstn.v[1] < height ) {
-		newEyePstn.v[1] =  height; 
+		newEyePstn.v[1] = height; 
 	}
-	Globals::camera.eye.v[1] = newEyePstn.v[1] + 1.0;
+	Globals::camera.eye.v[1] = newEyePstn.v[1] + 1.0f;
 }

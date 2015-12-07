@@ -9,11 +9,9 @@
 #include <stdio.h>
 
 #include "Models/Skybox.h"
-#include "Models/Tree.h"
 #include "LSystem/ProcMesh.h"
 #include "Particles.h"
 #include "Entity/Properties/Light.h"
-#include "Entity/EntityBST.h"
 
 class Window {
 public:
@@ -32,15 +30,14 @@ private:
 	void glConfiguration();
 	void DisplayHUD();
 
-
 	SDL_Window* winHandle;
 	SDL_GLContext glContext;
 	Skybox* skybox;
-	Tree* sampleTree;
-	std::vector<CylinderMesh*>* treeData;
-	Particles* particles;
-	Light light; //addded to test light
-	EntityBST entity;
+
+	//Tree* sampleTree;
+	//std::vector<CylinderMesh*>* treeData;
+	//Particles* particles;
+	//Light light; //addded to test light
 };
 
 #endif
