@@ -1,0 +1,73 @@
+﻿Build started 12/7/2015 1:42:57 AM.
+     1>Project "C:\Users\Freedom\Desktop\CSE167Final\BowArrow3D.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /IC:\Users\Freedom\Desktop\CSE167Final\ /IC:\Users\Freedom\Desktop\CSE167Final\/Systems/ /IC:\Users\Freedom\Desktop\CSE167Final\/Utils/ /IC:\Users\Freedom\Desktop\CSE167Final\/Models/ /IC:\Users\Freedom\Desktop\CSE167Final\/Models/Support /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Release\\" /Fd"Release\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt SceneGraph\Terrain.cpp
+         Terrain.cpp
+     1>SceneGraph\Terrain.cpp(28): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+     1>SceneGraph\Terrain.cpp(43): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+     1>SceneGraph\Terrain.cpp(44): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+     1>SceneGraph\Terrain.cpp(56): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+     1>SceneGraph\Terrain.cpp(58): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Freedom\Desktop\CSE167Final\Release\BowArrow3D.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:C:\Users\Freedom\Desktop\CSE167Final\3rdParty\Glew.1.13.0\lib\x64 /LIBPATH:C:\Users\Freedom\Desktop\CSE167Final\3rdParty\Glew.1.13.0\lib\Win32 glu32.lib opengl32.lib glew32s.lib glew64s.lib glut32.lib SDL2.lib SDL2main.lib SDL2_ttf.lib SOIL2.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\Freedom\Desktop\CSE167Final\Release\BowArrow3D.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG:incremental /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Freedom\Desktop\CSE167Final\Release\BowArrow3D.lib" /MACHINE:X86 /SAFESEH Release\EntityBST.obj
+         Release\EntityNode.obj
+         Release\DrawData.obj
+         Release\Light.obj
+         Release\MaterialData.obj
+         Release\Texture.obj
+         Release\UpdateData.obj
+         Release\Globals.obj
+         Release\main.obj
+         Release\Arrow.obj
+         Release\Drawable.obj
+         Release\LSysParam.obj
+         Release\LTree.obj
+         Release\ProcMesh.obj
+         Release\Skybox.obj
+         Release\Particle.obj
+         Release\Particles.obj
+         Release\AABB.obj
+         Release\BVH.obj
+         Release\Geode.obj
+         Release\Group.obj
+         Release\MatrixTransform.obj
+         Release\Node.obj
+         Release\FogMT.obj
+         Release\LightMT.obj
+         Release\Cube.obj
+         Release\Enemy.obj
+         Release\Player.obj
+         Release\Sphere.obj
+         Release\Tree.obj
+         Release\Scene.obj
+         Release\Terrain.obj
+         Release\Camera.obj
+         Release\Core.obj
+         Release\InputManager.obj
+         Release\LevelManager.obj
+         Release\PhysicsManager.obj
+         Release\Timer.obj
+         Release\Window.obj
+         Release\math3d.obj
+         Release\Program.obj
+         Release\Shader.obj
+         Release\tga.obj
+     1>SOIL2.lib(SOIL2.obj) : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:ICF' specification
+     1>LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+     1>LINK : warning LNK4098: defaultlib 'MSVCRTD' conflicts with use of other libs; use /NODEFAULTLIB:library
+         Generating code
+         1 of 1722 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+           0 functions were new in current compilation
+           1 functions had inline decision re-evaluated but remain unchanged
+         Finished generating code
+     1>glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\Users\Freedom\Desktop\CSE167Final\Release\vc120.pdb'; linking object as if no debug info
+     1>SOIL2.lib(etc1_utils.obj) : warning LNK4099: PDB 'soil2-debug.pdb' was not found with 'SOIL2.lib(etc1_utils.obj)' or at 'C:\Users\Freedom\Desktop\CSE167Final\Release\soil2-debug.pdb'; linking object as if no debug info
+     1>SOIL2.lib(image_DXT.obj) : warning LNK4099: PDB 'soil2-debug.pdb' was not found with 'SOIL2.lib(image_DXT.obj)' or at 'C:\Users\Freedom\Desktop\CSE167Final\Release\soil2-debug.pdb'; linking object as if no debug info
+     1>SOIL2.lib(image_helper.obj) : warning LNK4099: PDB 'soil2-debug.pdb' was not found with 'SOIL2.lib(image_helper.obj)' or at 'C:\Users\Freedom\Desktop\CSE167Final\Release\soil2-debug.pdb'; linking object as if no debug info
+     1>SOIL2.lib(SOIL2.obj) : warning LNK4099: PDB 'soil2-debug.pdb' was not found with 'SOIL2.lib(SOIL2.obj)' or at 'C:\Users\Freedom\Desktop\CSE167Final\Release\soil2-debug.pdb'; linking object as if no debug info
+         BowArrow3D.vcxproj -> C:\Users\Freedom\Desktop\CSE167Final\Release\BowArrow3D.exe
+     1>Done Building Project "C:\Users\Freedom\Desktop\CSE167Final\BowArrow3D.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:03.66

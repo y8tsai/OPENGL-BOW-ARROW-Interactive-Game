@@ -472,6 +472,9 @@ int Terrain::terrainScale(float min, float max) {
 	}
 	if (terrainNormals != NULL)
 		terrainComputeNormals();
+
+	terrainSmooth(0.75);//smooth out the terrain before finish creating
+
 	return(TERRAIN_OK);
 }
 
