@@ -91,7 +91,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;GLEW_STATIC;%(PreprocessorDefinitions);</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)/Systems/;$(ProjectDir)/Utils/;$(ProjectDir)/Models/;$(ProjectDir)/Models/Support</AdditionalIncludeDirectories>
     </ClCompile>
@@ -224,7 +224,6 @@
     <Font Include="Resources\Fonts\arial.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Entity\BST.h" />
     <ClInclude Include="Entity\EntityBST.h" />
     <ClInclude Include="Entity\EntityNode.h" />
     <ClInclude Include="Entity\Properties\DrawData.h" />

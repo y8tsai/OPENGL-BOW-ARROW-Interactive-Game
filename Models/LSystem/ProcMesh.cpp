@@ -87,10 +87,11 @@ Verts* CylinderMesh::ExportGLTriangleStrip() {
 	while(it != raw_mesh->end()) {
 		Verts *curr = *it;
 		Verts* submesh = Interleave(prev, curr);
-		for(int i = 0; i < submesh->size(); ++i) {
+		for(std::size_t i = 0; i < submesh->size(); ++i) {
 			exp->push_back( (*submesh)[i] );
 		}
 		prev = *it++;
+		delete submesh;
 	}
 	return exp;
 }

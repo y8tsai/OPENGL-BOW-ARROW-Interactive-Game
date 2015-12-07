@@ -28,6 +28,7 @@ void Tree::render() {
 				glVertex3f(vert.v[0], vert.v[1], vert.v[2]);
 			}
 			glEnd();
+			delete mesh;
 		}
 
 		// (2)[b] If debug is set, draw debug too

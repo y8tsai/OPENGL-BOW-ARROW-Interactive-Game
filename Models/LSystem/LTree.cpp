@@ -40,7 +40,7 @@ std::vector<CylinderMesh*>* LTree::draw(std::string tape) {
 	std::stack<vec3> transSave;
 	std::stack<float> rotSave;
 	std::vector<CylinderMesh*> *TreeMesh = new std::vector<CylinderMesh*>();
-
+	int level = 0;
 	int vertIdx = 0;
 	for (std::size_t i = 0; i < tape.length(); ++i) {
 		if (tape[i] == Grammar::DRAW) {
@@ -52,11 +52,13 @@ std::vector<CylinderMesh*>* LTree::draw(std::string tape) {
 		} else if (tape[i] == Grammar::SAVE) {
 			transSave.push(position);
 			rotSave.push(yaw);
+			++level;
 		} else if (tape[i] == Grammar::RESTORE) {
 			position = transSave.top();
 			yaw = rotSave.top();
 			transSave.pop();
 			rotSave.pop();
+			--level;
 		}
 	}
 	return TreeMesh;
@@ -77,9 +79,6 @@ CylinderMesh* LTree::drawForward() {
 
 void LTree::yawLeft(GLfloat turnRadian) {
 	yaw += turnRadian;
-	//quat qyaw = quat::rotate(yaw, vec3(0.f, 0.f, 1.f));
-	//qyaw = qyaw * vec3(0.f, prop.length, 0.f) * qyaw.conjugate();
-	//position = position + quat::tovec3(qyaw);
 }
 
 void LTree::yawRight(GLfloat turnRadian) {

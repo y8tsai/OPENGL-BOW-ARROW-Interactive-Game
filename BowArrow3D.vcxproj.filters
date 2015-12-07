@@ -282,9 +282,6 @@
     <ClInclude Include="Systems\Timer.h">
       <Filter>Systems</Filter>
     </ClInclude>
-    <ClInclude Include="Entity\BST.h">
-      <Filter>Entity</Filter>
-    </ClInclude>
     <ClInclude Include="Entity\EntityBST.h">
       <Filter>Entity</Filter>
     </ClInclude>
