@@ -115,8 +115,6 @@ void Window::display() {
 	Globals::camera.update();
 	glLoadMatrixf(Globals::camera.ci.ptr());
 
-	Globals::camera.eye.print("position: ");
-
 	skybox->draw(DrawData());
 	Globals::SceneGraph->draw(mat4().makeIdentity());
 

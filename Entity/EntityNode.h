@@ -3,7 +3,7 @@
 
 #include <string>
 #include "Models/Drawable.h"
-#include "LSystem/ProcMesh.h" //temp
+#include "LSystem/ProcMesh.h"
 
 class EntityNode {
 public:
@@ -15,7 +15,7 @@ public:
 	DrawData drawData;
 	MaterialData materialData;
 	UpdateData updateData;
-	std::vector<CylinderMesh*>* parts; //temp
+	std::vector<Verts*>* vertices;
 
 
 	EntityNode* parent;

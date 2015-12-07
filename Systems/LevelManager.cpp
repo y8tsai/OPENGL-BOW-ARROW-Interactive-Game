@@ -57,12 +57,11 @@ void LevelManager::LoadTestLevel() {
 	forestMT->addChild(tree4MT);
 	
 	// Creating our first tree
-	std::string treeSample = "Tree::sample";
+	std::string treeSample = "Tree::Fern Grammar";
 	
-	EntityNode *tree0_EN = new EntityNode();
-	tree0_EN->name = treeSample;
-	tree0_EN->parts = TreeGenerator.generate();
-	refES->insert(tree0_EN);
+	EntityNode *treeSampleNode = TreeGenerator.generate();
+	treeSampleNode->name = treeSample;
+	refES->insert(treeSampleNode);
 
 	Tree *tree0 = new Tree(treeSample);
 	Tree *tree1 = new Tree(treeSample);

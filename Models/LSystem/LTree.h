@@ -8,14 +8,14 @@
 
 #include "LSysParam.h"
 #include "ProcMesh.h"
-
+#include "Entity/EntityNode.h"
 #include "math3d.h"
 
 class LTree {
 public:
 	LTree(unsigned int randseed, LSysParam properties);
 	void reset(unsigned int randseed);
-	std::vector<CylinderMesh*>* generate();
+	EntityNode* generate();
 	
 
 private:
@@ -30,8 +30,6 @@ private:
 	CylinderMesh* drawForward();
 	void yawLeft(GLfloat turnRadian);
 	void yawRight(GLfloat turnRadian);
-
-	//DrawData* parametricCylinder(GLfloat height, GLfloat radius, GLint slices, GLint stacks);
 
 	unsigned int seed;
 	LSysParam prop;

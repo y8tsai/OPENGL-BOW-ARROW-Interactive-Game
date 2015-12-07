@@ -1,10 +1,11 @@
 #include "EntityNode.h"
 
 EntityNode::EntityNode() {
-	name = " ";
+	name = "";
 	drawData = DrawData();
 	materialData = MaterialData();
 	updateData = UpdateData();
+	vertices = nullptr;
 }
 
 
@@ -16,4 +17,7 @@ EntityNode::EntityNode(std::string n, DrawData& dd, MaterialData& md, UpdateData
 }
 
 EntityNode::~EntityNode() {
+	if( vertices != nullptr ){
+		delete vertices;
+	}
 }

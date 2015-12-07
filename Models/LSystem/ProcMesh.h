@@ -27,10 +27,9 @@ private:
 	Verts* Interleave(Verts *bottom, Verts *top);
 
 protected:
-	vec3 pos;  //position to draw
 	quat rot;  //rotation to draw
 	mat4 m2w;  
-
+	Mesh *texcoord;
 	Mesh *raw_mesh;
 };
 #endif

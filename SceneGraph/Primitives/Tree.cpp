@@ -19,18 +19,44 @@ void Tree::render() {
 	
 	if( data != NULL ){
 		// (2)[a] Setup draw calls and draw the object
-		for( int i = 0; i < data->parts->size(); ++i ) {
-			Verts *mesh = (*data->parts)[i]->ExportGLTriangleStrip();
-			glColor3f(1.0f, 0.f, 0.5f);
+		data->drawData.shaders->enable();
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, data->drawData.texture->getID());
+		for( int i = 0; i < data->vertices->size(); ++i ) {
+			Verts *mesh = (*data->vertices)[i];
 			glBegin(GL_TRIANGLE_STRIP);
-			for( int j = 0; j < mesh->size(); ++j ) {
-				vec3 vert = (*mesh)[j];
-				glVertex3f(vert.v[0], vert.v[1], vert.v[2]);
+			for( int j = 0; j < mesh->size(); j+=2 ) {				
+				glTexCoord2f((*mesh)[j+1][0], (*mesh)[j+1][1]);
+				glVertex3fv((*mesh)[j].ptr());
 			}
 			glEnd();
-			delete mesh;
 		}
-
+		/*		glTexCoord2f(0,1);	
+		glVertex3f(1,1,0);
+		glTexCoord2f(0,0);
+		glVertex3f(1,0,0);
+		
+		glTexCoord2f(0.33,1);
+		glVertex3f(0,1,1);
+		glTexCoord2f(0.33,0);
+		glVertex3f(0,0,1);
+		
+		glTexCoord2f(0.66,1);
+		glVertex3f(-1,1,0);
+		glTexCoord2f(0.66,0);
+		glVertex3f(-1,0,0);
+		
+		glTexCoord2f(1, 1);
+		glVertex3f(0,1,-1);
+		glTexCoord2f(1, 0);
+		glVertex3f(0,0,-1);
+		
+		glTexCoord2f(0,1);
+		glVertex3f(1,1,0);
+		glTexCoord2f(0,0);
+		glVertex3f(1,0,0);*/
+		glBindTexture(GL_TEXTURE_2D, 0);
+		data->drawData.shaders->disable();
 		// (2)[b] If debug is set, draw debug too
 		if( debug ){
 			

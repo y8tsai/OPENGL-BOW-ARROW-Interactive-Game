@@ -1,9 +1,8 @@
 #version 120
 
-attribute vec2 turd;
-varying vec2 texturd;
+varying vec2 texcoord;
 
 void main() {
 	gl_Position = ftransform();
-	texturd = turd;
+	texcoord = gl_MultiTexCoord0.st;
 }
