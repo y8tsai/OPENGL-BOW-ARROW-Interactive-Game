@@ -124,11 +124,12 @@ Verts* CylinderMesh::Interleave(Verts *bottom, Verts *top) {
 	// +2 is to close the mesh
 	interleaved->reserve(bottom->size() + top->size() + 2);
 	for(std::size_t i = 0; i < bottom->size(); ++i) {
-		interleaved->push_back((*bottom)[i]);
 		interleaved->push_back((*top)[i]);
+		interleaved->push_back((*bottom)[i]);
 	}
-	interleaved->push_back((*bottom)[0]);
 	interleaved->push_back((*top)[0]);
+	interleaved->push_back((*bottom)[0]);
+	
 
 	return interleaved;
 }

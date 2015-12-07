@@ -1,4 +1,4 @@
-#include "Window.h"
+﻿#include "Window.h"
 #include "Globals.h"
 #include "math3d.h"
 #include <GL/glut.h>
@@ -65,8 +65,9 @@ void Window::glConfiguration() {
 	glEnable(GL_DEPTH_TEST);
 	glClear(GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	glDisable(GL_CULL_FACE);
+	glPolygonMode(GL_FRONT, GL_FILL);
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
 	glShadeModel(GL_SMOOTH);
 
 	glEnable(GL_COLOR_MATERIAL);

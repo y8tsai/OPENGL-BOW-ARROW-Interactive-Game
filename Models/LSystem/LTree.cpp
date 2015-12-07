@@ -19,7 +19,7 @@ void LTree::reset(unsigned int randseed) {
 
 EntityNode* LTree::generate() {
 	std::string rule = prop.rules[prop.startRule];
-	//parametricCylinder(1.0, 1.f, 4, 1);
+
 	rule = evalRule(rule, prop.iterations - 1);
 	EntityNode *modelData = new EntityNode();
 	modelData->vertices = new std::vector<Verts*>();
@@ -34,7 +34,7 @@ EntityNode* LTree::generate() {
 	unsigned char *img = SOIL_load_image("Resources/Textures/treebark.jpg", &w, &h, 0, SOIL_LOAD_RGB);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, w, h, 0, GL_RGB, GL_UNSIGNED_BYTE, img);
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
