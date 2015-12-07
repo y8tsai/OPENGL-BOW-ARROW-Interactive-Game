@@ -23,6 +23,8 @@ public:
 
 	vec3& negate();
 
+	float operator[](int i) const;  // retrieval
+	float& operator[](int i);		// assignment
 	vec3 operator*(float) const;
 	vec3 operator*(const vec3&) const;
 	vec3 cross(const vec3&) const;

@@ -23,6 +23,14 @@ vec3::vec3(const float (&el)[3]) {
 	v[1] = el[1];
 	v[2] = el[2];
 }
+float vec3::operator[](int i) const {
+	if( i > -1 && i < 3)
+		return v[i];
+}
+
+float& vec3::operator[](int i) {
+	return v[i];
+}
 
 vec3 vec3::operator+(const vec3 &b) const {
 	return vec3( v[0]+b.v[0], v[1]+b.v[1], v[2]+b.v[2] );

@@ -4,6 +4,8 @@
 #include <math.h>
 #include "math3d.h"
 
+#define GRAVITY -0.002
+
 // Class::Simulation
 // Utility class for physics calculations
 // F = m/a <=> a = F/m 
@@ -81,7 +83,7 @@ public:
 	}
 
 	static vec3 Acceleration(const Body &body, float t) {
-		return vec3(0.f, -0.0002f, 0.f);
+		return vec3(0.f, body.velocity[1] + GRAVITY, 0.f);
 	}
 };
 
