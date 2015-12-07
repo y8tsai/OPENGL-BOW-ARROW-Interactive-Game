@@ -191,6 +191,7 @@
     <None Include="Models\Shaders\terrain.vert">
       <Filter>Models\Shaders</Filter>
     </None>
+    <None Include=".gitignore" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Textures\mnight_bk.png">
