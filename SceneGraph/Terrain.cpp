@@ -649,7 +649,6 @@ float Terrain::terrainGetHeight(int x, int z) {
 	return(terrainHeights[zt * terrainGridWidth + xt]);
 }
 
-
 void Terrain::terrainDestroy() {
 
 	if (terrainHeights != NULL)

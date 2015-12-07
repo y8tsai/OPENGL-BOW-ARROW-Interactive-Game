@@ -149,7 +149,7 @@ void Window::display() {
 	//render the particles
 	//particles->draw(DrawData());
 
-	for(int i = 0; i < Globals::fired.size(); ++i) {
+	for(std::size_t i = 0; i < Globals::fired.size(); ++i) {
 		Globals::fired[i]->draw(DrawData());
 	}
 

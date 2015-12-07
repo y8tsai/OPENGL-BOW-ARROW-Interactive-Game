@@ -1,4 +1,3 @@
-#pragma once
 #include "EntityNode.h"
 
 class EntityBST {

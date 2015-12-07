@@ -8,12 +8,12 @@
 #include <GL/GLU.h>
 #include <stdio.h>
 
-#include "Skybox.h"
-#include "Models\Tree.h"
-#include "LSystem\ProcMesh.h"
+#include "Models/Skybox.h"
+#include "Models/Tree.h"
+#include "LSystem/ProcMesh.h"
 #include "Particles.h"
-#include "Light.h"
-#include "EntityBST.h"
+#include "Entity/Properties/Light.h"
+#include "Entity/EntityBST.h"
 
 class Window {
 public:

@@ -1,6 +1,5 @@
 #include "Core.h"
 #include "Globals.h"
-#include "UpdateData.h"
 
 #include <iostream>
 #include <vector>

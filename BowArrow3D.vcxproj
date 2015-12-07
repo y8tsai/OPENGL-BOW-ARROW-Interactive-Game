@@ -152,23 +152,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Arrow.cpp" />
-    <ClCompile Include="EntityBST.cpp" />
-    <ClCompile Include="EntityNode.cpp" />
+    <ClCompile Include="Entity\EntityBST.cpp" />
+    <ClCompile Include="Entity\EntityNode.cpp" />
+    <ClCompile Include="Entity\Properties\DrawData.cpp" />
+    <ClCompile Include="Entity\Properties\Light.cpp" />
+    <ClCompile Include="Entity\Properties\MaterialData.cpp" />
+    <ClCompile Include="Entity\Properties\Texture.cpp" />
+    <ClCompile Include="Entity\Properties\UpdateData.cpp" />
     <ClCompile Include="Globals.cpp" />
-    <ClCompile Include="Light.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Models\Arrow.cpp" />
+    <ClCompile Include="Models\Drawable.cpp" />
     <ClCompile Include="Models\LSystem\LSysParam.cpp" />
     <ClCompile Include="Models\LSystem\LTree.cpp" />
     <ClCompile Include="Models\LSystem\ProcMesh.cpp" />
     <ClCompile Include="Models\Skybox.cpp" />
-    <ClCompile Include="Models\Support\Drawable.cpp" />
-    <ClCompile Include="Models\Support\DrawData.cpp" />
-    <ClCompile Include="Models\Support\MaterialData.cpp" />
-    <ClCompile Include="Models\Support\Program.cpp" />
-    <ClCompile Include="Models\Support\Shader.cpp" />
-    <ClCompile Include="Models\Support\Texture.cpp" />
-    <ClCompile Include="Models\Support\UpdateData.cpp" />
     <ClCompile Include="Models\Tree.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="Particles.cpp" />
@@ -194,15 +192,18 @@
     <ClCompile Include="Systems\Timer.cpp" />
     <ClCompile Include="Systems\Window.cpp" />
     <ClCompile Include="Utils\math3d.cpp" />
+    <ClCompile Include="Utils\Program.cpp" />
+    <ClCompile Include="Utils\Shader.cpp" />
     <ClCompile Include="Utils\tga.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Models\Shaders\Skybox.frag" />
     <None Include="Models\Shaders\Skybox.vert" />
+    <None Include="Models\Shaders\terrain.frag" />
+    <None Include="Models\Shaders\terrain.vert" />
     <None Include="Models\Shaders\tree.fs" />
     <None Include="Models\Shaders\tree.vs" />
     <None Include="README.md" />
-    <None Include="terrain.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Textures\mnight_bk.png" />
@@ -217,23 +218,21 @@
     <Font Include="Resources\Fonts\arial.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Arrow.h" />
-    <ClInclude Include="BST.h" />
-    <ClInclude Include="EntityBST.h" />
-    <ClInclude Include="EntityNode.h" />
+    <ClInclude Include="Entity\BST.h" />
+    <ClInclude Include="Entity\EntityBST.h" />
+    <ClInclude Include="Entity\EntityNode.h" />
+    <ClInclude Include="Entity\Properties\DrawData.h" />
+    <ClInclude Include="Entity\Properties\Light.h" />
+    <ClInclude Include="Entity\Properties\MaterialData.h" />
+    <ClInclude Include="Entity\Properties\Texture.h" />
+    <ClInclude Include="Entity\Properties\UpdateData.h" />
     <ClInclude Include="Globals.h" />
-    <ClInclude Include="Light.h" />
+    <ClInclude Include="Models\Arrow.h" />
+    <ClInclude Include="Models\Drawable.h" />
     <ClInclude Include="Models\LSystem\LSysParam.h" />
     <ClInclude Include="Models\LSystem\LTree.h" />
     <ClInclude Include="Models\LSystem\ProcMesh.h" />
     <ClInclude Include="Models\Skybox.h" />
-    <ClInclude Include="Models\Support\Drawable.h" />
-    <ClInclude Include="Models\Support\DrawData.h" />
-    <ClInclude Include="Models\Support\MaterialData.h" />
-    <ClInclude Include="Models\Support\Program.h" />
-    <ClInclude Include="Models\Support\Shader.h" />
-    <ClInclude Include="Models\Support\Texture.h" />
-    <ClInclude Include="Models\Support\UpdateData.h" />
     <ClInclude Include="Models\Tree.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="Particles.h" />
@@ -260,10 +259,9 @@
     <ClInclude Include="Systems\Timer.h" />
     <ClInclude Include="Systems\Window.h" />
     <ClInclude Include="Utils\math3d.h" />
+    <ClInclude Include="Utils\Program.h" />
+    <ClInclude Include="Utils\Shader.h" />
     <ClInclude Include="Utils\tga.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="terrain.frag" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

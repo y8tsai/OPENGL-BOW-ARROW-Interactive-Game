@@ -1,7 +1,7 @@
 #ifndef CSE167_Cube_h
 #define CSE167_Cube_h
 
-#include "Drawable.h"
+#include "Models/Drawable.h"
 #include "Geode.h"
 
 class Cube : public Geode

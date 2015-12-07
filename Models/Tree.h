@@ -4,8 +4,8 @@
 #include <iostream>
 #include <vector>
 
-#include "DrawData.h"
-#include "LSystem\ProcMesh.h"
+#include "Entity/Properties/DrawData.h"
+#include "LSystem/ProcMesh.h"
 
 class Tree {
 public:

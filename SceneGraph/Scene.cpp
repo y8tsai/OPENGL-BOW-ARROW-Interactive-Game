@@ -6,8 +6,6 @@
 #include <GL/glut.h>
 #endif
 
-
-
 Scene::Scene() {
 	sceneMT = new MatrixTransform();
 	
@@ -19,12 +17,12 @@ Scene::Scene() {
 	light = new LightMT();
 
 	// init terrain structures
-	if (terrain->terrainLoadFromImage("3dtech.tga", 1) != TERRAIN_OK)
+	if (terrain->terrainLoadFromImage("Resources/TGA/3dtech.tga", 1) != TERRAIN_OK)
 		std::cerr << ("TERRAIN_OK is FALSE") << std::endl;;
 	terrain->terrainScale(0, 40);
 
 	sceneMT->addChild(terrain);
-	//sceneMT->addChild(forest);
+	sceneMT->addChild(forest);
 	//sceneMT->addChild(player);
 	//sceneMT->addChild(enemy);
 	//sceneMT->addChild(fog);

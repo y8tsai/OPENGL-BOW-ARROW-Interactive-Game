@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 
-#include "DrawData.h"
+#include "Entity/Properties/DrawData.h"
 #include "math3d.h"
 
 typedef std::vector<vec3> Verts;
@@ -33,19 +33,4 @@ protected:
 
 	Mesh *raw_mesh;
 };
-
-
-//class ProcMesh {
-//public:
-//	ProcMesh();
-//	~ProcMesh();
-//
-//	DrawData* flatten();
-//
-//private:
-//	std::vector<vec3*> *vertices;
-//	std::vector<vec3*> *normals;
-//	std::vector<vec3*> *texcoord;
-//};
-
 #endif

@@ -1,8 +1,8 @@
 #ifndef CSE167_RenderData_h
 #define CSE167_RenderData_h
 
-#include "Program.h"
-#include "Texture.h"
+#include "Utils/Program.h"
+#include "Entity/Properties/Texture.h"
 
 class DrawData {
 public:  

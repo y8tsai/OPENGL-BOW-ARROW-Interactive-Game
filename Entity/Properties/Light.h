@@ -2,7 +2,7 @@
 #define __LIGHT_H__
 
 #include "math3d.h"
-#include "Drawable.h"
+#include "Models/Drawable.h"
 #include <vector>
 
 class Light : public Drawable

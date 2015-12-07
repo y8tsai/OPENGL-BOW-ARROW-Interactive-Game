@@ -20,9 +20,6 @@
     <Filter Include="Models">
       <UniqueIdentifier>{47f16d09-67f5-442c-9128-9c4d24c5b62c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Models\Support">
-      <UniqueIdentifier>{2f00ba3f-af49-4756-9636-ac490978ed2d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Models\LSystem">
       <UniqueIdentifier>{2fab3e5a-1e55-4ece-8895-88faf6bdfa05}</UniqueIdentifier>
     </Filter>
@@ -34,6 +31,15 @@
     </Filter>
     <Filter Include="Physics">
       <UniqueIdentifier>{4f51ac08-0b8f-47f1-9d32-1d01df327a06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity">
+      <UniqueIdentifier>{395dbd3e-67a5-410a-81f2-fe2448945cbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\TGA">
+      <UniqueIdentifier>{8020f234-46e0-4f06-b5aa-bccb9e4d84d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity\Properties">
+      <UniqueIdentifier>{7848f1cc-6822-4f2e-a4d9-aa6a2b3f8735}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -49,24 +55,6 @@
     </ClCompile>
     <ClCompile Include="Models\Skybox.cpp">
       <Filter>Models</Filter>
-    </ClCompile>
-    <ClCompile Include="Models\Support\Drawable.cpp">
-      <Filter>Models\Support</Filter>
-    </ClCompile>
-    <ClCompile Include="Models\Support\DrawData.cpp">
-      <Filter>Models\Support</Filter>
-    </ClCompile>
-    <ClCompile Include="Models\Support\Program.cpp">
-      <Filter>Models\Support</Filter>
-    </ClCompile>
-    <ClCompile Include="Models\Support\Shader.cpp">
-      <Filter>Models\Support</Filter>
-    </ClCompile>
-    <ClCompile Include="Models\Support\Texture.cpp">
-      <Filter>Models\Support</Filter>
-    </ClCompile>
-    <ClCompile Include="Models\Support\UpdateData.cpp">
-      <Filter>Models\Support</Filter>
     </ClCompile>
     <ClCompile Include="Models\LSystem\LSysParam.cpp">
       <Filter>Models\LSystem</Filter>
@@ -123,7 +111,6 @@
     <ClCompile Include="Models\Tree.cpp">
       <Filter>Models</Filter>
     </ClCompile>
-    <ClCompile Include="Arrow.cpp" />
     <ClCompile Include="Physics\BVH.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
@@ -141,14 +128,41 @@
     </ClCompile>
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="Particles.cpp" />
-    <ClCompile Include="Light.cpp" />
-    <ClCompile Include="EntityBST.cpp" />
-    <ClCompile Include="EntityNode.cpp" />
-    <ClCompile Include="Models\Support\MaterialData.cpp">
-      <Filter>Models\Support</Filter>
-    </ClCompile>
     <ClCompile Include="Systems\Timer.cpp">
       <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\EntityBST.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\EntityNode.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Models\Arrow.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\Properties\DrawData.cpp">
+      <Filter>Entity\Properties</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\Properties\MaterialData.cpp">
+      <Filter>Entity\Properties</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\Properties\UpdateData.cpp">
+      <Filter>Entity\Properties</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\Properties\Light.cpp">
+      <Filter>Entity\Properties</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\Properties\Texture.cpp">
+      <Filter>Entity\Properties</Filter>
+    </ClCompile>
+    <ClCompile Include="Models\Drawable.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\Program.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\Shader.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -165,7 +179,10 @@
     <None Include="Models\Shaders\tree.vs">
       <Filter>Models\Shaders</Filter>
     </None>
-    <None Include="terrain.vert">
+    <None Include="Models\Shaders\terrain.frag">
+      <Filter>Models\Shaders</Filter>
+    </None>
+    <None Include="Models\Shaders\terrain.vert">
       <Filter>Models\Shaders</Filter>
     </None>
   </ItemGroup>
@@ -189,7 +206,7 @@
       <Filter>Resources\Textures</Filter>
     </Image>
     <Image Include="Resources\TGA\3dtech.tga">
-      <Filter>Resources</Filter>
+      <Filter>Resources\TGA</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -212,24 +229,6 @@
     </ClInclude>
     <ClInclude Include="Models\Skybox.h">
       <Filter>Models</Filter>
-    </ClInclude>
-    <ClInclude Include="Models\Support\Drawable.h">
-      <Filter>Models\Support</Filter>
-    </ClInclude>
-    <ClInclude Include="Models\Support\DrawData.h">
-      <Filter>Models\Support</Filter>
-    </ClInclude>
-    <ClInclude Include="Models\Support\Program.h">
-      <Filter>Models\Support</Filter>
-    </ClInclude>
-    <ClInclude Include="Models\Support\Shader.h">
-      <Filter>Models\Support</Filter>
-    </ClInclude>
-    <ClInclude Include="Models\Support\Texture.h">
-      <Filter>Models\Support</Filter>
-    </ClInclude>
-    <ClInclude Include="Models\Support\UpdateData.h">
-      <Filter>Models\Support</Filter>
     </ClInclude>
     <ClInclude Include="Models\LSystem\LSysParam.h">
       <Filter>Models\LSystem</Filter>
@@ -286,7 +285,6 @@
     <ClInclude Include="Models\Tree.h">
       <Filter>Models</Filter>
     </ClInclude>
-    <ClInclude Include="Arrow.h" />
     <ClInclude Include="Physics\BVH.h">
       <Filter>Physics</Filter>
     </ClInclude>
@@ -304,20 +302,44 @@
     </ClInclude>
     <ClInclude Include="Particle.h" />
     <ClInclude Include="Particles.h" />
-    <ClInclude Include="Light.h" />
-    <ClInclude Include="BST.h" />
-    <ClInclude Include="EntityBST.h" />
-    <ClInclude Include="EntityNode.h" />
-    <ClInclude Include="Models\Support\MaterialData.h">
-      <Filter>Models\Support</Filter>
-    </ClInclude>
     <ClInclude Include="Systems\Timer.h">
       <Filter>Systems</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="terrain.frag">
-      <Filter>Models\Shaders</Filter>
-    </Text>
+    <ClInclude Include="Entity\BST.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\EntityBST.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\EntityNode.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\Arrow.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Properties\DrawData.h">
+      <Filter>Entity\Properties</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Properties\MaterialData.h">
+      <Filter>Entity\Properties</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Properties\UpdateData.h">
+      <Filter>Entity\Properties</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Properties\Light.h">
+      <Filter>Entity\Properties</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Properties\Texture.h">
+      <Filter>Entity\Properties</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\Drawable.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Program.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Shader.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

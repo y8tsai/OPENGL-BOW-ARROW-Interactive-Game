@@ -2,18 +2,16 @@
 #define CSE167_Drawable_h
 
 #include <iostream>
-#include "math3d.h"
-#include "DrawData.h"
-#include "UpdateData.h"
-#include "MaterialData.h"  //newly added for materials
 #include <float.h>
 #include <math.h>
 #include <vector>
 
+#include "math3d.h"
+#include "Entity\Properties\DrawData.h"
+#include "Entity\Properties\UpdateData.h"
+#include "Entity\Properties\MaterialData.h"
 
-class Drawable
-{
-    
+class Drawable {
 public:
     
     mat4 toWorld;

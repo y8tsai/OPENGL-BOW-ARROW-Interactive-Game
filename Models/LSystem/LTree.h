@@ -9,7 +9,6 @@
 #include "LSysParam.h"
 #include "ProcMesh.h"
 
-#include "DrawData.h"
 #include "math3d.h"
 
 class LTree {

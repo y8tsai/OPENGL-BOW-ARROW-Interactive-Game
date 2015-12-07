@@ -1,6 +1,5 @@
-#pragma once
 #include <string>
-#include "Drawable.h"
+#include "Models/Drawable.h"
 
 class EntityNode {
 public:

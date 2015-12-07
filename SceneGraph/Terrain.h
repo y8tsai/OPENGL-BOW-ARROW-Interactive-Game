@@ -1,7 +1,7 @@
 #ifndef __TERRAIN__H__
 #define __TERRAIN__H__
 
-#include "Drawable.h"
+#include "Models/Drawable.h"
 #include "Geode.h"
 
 #define TERRAIN_ERROR_INVALID_PARAM     -5
