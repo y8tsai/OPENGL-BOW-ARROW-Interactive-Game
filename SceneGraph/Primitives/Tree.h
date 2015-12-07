@@ -6,6 +6,7 @@
 
 class Tree: public Geode {
 public:
+	Tree();
 	Tree(std::string EntityID);
 	~Tree();
 

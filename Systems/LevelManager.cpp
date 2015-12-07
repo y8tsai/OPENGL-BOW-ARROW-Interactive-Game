@@ -29,51 +29,82 @@ void LevelManager::Shutdown() {
 void LevelManager::LoadTestLevel() {
 	LTree TreeGenerator = LTree(0, LSysParam());
 
-
 	MatrixTransform *forestMT = new MatrixTransform();
 	refSG->addChild(forestMT);
 
-	MatrixTransform *tree0MT = new MatrixTransform();
-	MatrixTransform *tree1MT = new MatrixTransform();
-	MatrixTransform *tree2MT = new MatrixTransform();
-	MatrixTransform *tree3MT = new MatrixTransform();
-	MatrixTransform *tree4MT = new MatrixTransform();
-
-	int height = refSG->terrain->terrainGetHeight(0,0);
-	tree0MT->setMatrix(mat4().makeIdentity().setTranslate(vec3(0.f, (float)(height) - 0.3f, 0.f)));
-	height = refSG->terrain->terrainGetHeight(6,-6);
-	tree1MT->setMatrix(mat4().makeIdentity().setTranslate(vec3(6.f, (float)(height) - 0.3f, -6.f)));
-	height = refSG->terrain->terrainGetHeight(-6,0);
-	tree2MT->setMatrix(mat4().makeIdentity().setTranslate(vec3(-6.f, (float)(height) - 0.3f, 0.f)));
-	height = refSG->terrain->terrainGetHeight(6,0);
-	tree3MT->setMatrix(mat4().makeIdentity().setTranslate(vec3(6.f, (float)(height) - 0.3f, 0.f)));
-	height = refSG->terrain->terrainGetHeight(0,-6);
-	tree4MT->setMatrix(mat4().makeIdentity().setTranslate(vec3(0.f, (float)(height) - 0.3f, -6.f)));
-
-	forestMT->addChild(tree0MT);
-	forestMT->addChild(tree1MT);
-	forestMT->addChild(tree2MT);
-	forestMT->addChild(tree3MT);
-	forestMT->addChild(tree4MT);
 	
-	// Creating our first tree
-	std::string treeSample = "Tree::Fern Grammar";
-	
+	int NumberOfTrees = 200;
+
+	std::string fernTree = "Tree::Fern Grammar";
 	EntityNode *treeSampleNode = TreeGenerator.generate();
-	treeSampleNode->name = treeSample;
+	treeSampleNode->name = fernTree;
 	refES->insert(treeSampleNode);
 
-	Tree *tree0 = new Tree(treeSample);
-	Tree *tree1 = new Tree(treeSample);
-	Tree *tree2 = new Tree(treeSample);
-	Tree *tree3 = new Tree(treeSample);
-	Tree *tree4 = new Tree(treeSample);
+	std::string niceTree = "Tree::Nice Grammar";
+	LSysParam niceTreeProp;
+	niceTreeProp.iterations = 5;
+	niceTreeProp.length = 0.12f;
+	niceTreeProp.rules['X'] = "F[+X]F[-X]+X";
+	niceTreeProp.rules['F'] = "FF";
+	niceTreeProp.startRule = 'X';
 
-	tree0MT->addChild(tree0);
-	tree1MT->addChild(tree1);
-	tree2MT->addChild(tree2);
-	tree3MT->addChild(tree3);
-	tree4MT->addChild(tree4);
+	TreeGenerator.setProperties(niceTreeProp);
+	EntityNode *niceTreeNode = TreeGenerator.generate();
+	niceTreeNode->name = niceTree;
+	refES->insert(niceTreeNode);
+
+	std::string bushTree = "Tree::Bush Grammar";
+	LSysParam bushTreeProp;
+	bushTreeProp.iterations = 3;
+	bushTreeProp.length = 0.5f;
+	bushTreeProp.radius = 0.009f;
+	bushTreeProp.rules['F'] = "FF-[-F+F+F]+[+F-F-F]";
+	bushTreeProp.startRule = 'F';
+
+	TreeGenerator.setProperties(bushTreeProp);
+	EntityNode *bushTreeNode = TreeGenerator.generate();
+	bushTreeNode->name = bushTree;
+	refES->insert(bushTreeNode);
+
+
+	std::string mysteryTree = "Tree::Mystery Grammar";
+	LSysParam mysteryTreeProp;
+	mysteryTreeProp.iterations = 4;
+	mysteryTreeProp.length = 0.3f;
+	mysteryTreeProp.radius = 0.08f;
+	mysteryTreeProp.rules['F'] = "F[+F]F[-F]F";;
+	mysteryTreeProp.startRule = 'F';
+
+	TreeGenerator.setProperties(mysteryTreeProp);
+	EntityNode *mysteryTreeNode = TreeGenerator.generate();
+	mysteryTreeNode->name = mysteryTree;
+	refES->insert(mysteryTreeNode);
+	
+
+	
+
+
+	MatrixTransform **treeMT = new MatrixTransform*[NumberOfTrees];
+	Tree **tree = new Tree*[NumberOfTrees];
+	for(int i = 0; i < NumberOfTrees; ++i) {
+		treeMT[i] = new MatrixTransform();
+		
+		if( i % 5 == 0) {
+			tree[i] = new Tree(mysteryTree);
+		} else if( i % 4 == 0 ){
+			tree[i] = new Tree(niceTree);
+		} else if( i % 3 ) {
+			tree[i] = new Tree(fernTree);
+		} else {
+			tree[i] = new Tree(bushTree);
+		}
+		int rx = (rand() % refSG->terrain->terrainGridWidth) - refSG->terrain->terrainGridWidth/2;
+		int rz = (rand() % refSG->terrain->terrainGridLength) - refSG->terrain->terrainGridLength/2;
+		int height = refSG->terrain->terrainGetHeight(rx,rz);
+		treeMT[i]->setMatrix( mat4().makeIdentity().setTranslate( vec3(rx,(float)(height) - 0.3f, rz)) );
+		treeMT[i]->addChild(tree[i]);
+		forestMT->addChild(treeMT[i]);
+	}
 
 }
 

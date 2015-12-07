@@ -6,6 +6,10 @@ LTree::LTree(unsigned int randseed, LSysParam properties) {
 	prop = properties;
 	reset(randseed);
 }
+void LTree::setProperties(LSysParam properties) {
+	prop = properties;
+	reset(0);
+}
 
 void LTree::reset(unsigned int randseed) {
 	seed = randseed;

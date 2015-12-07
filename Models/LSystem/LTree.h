@@ -15,6 +15,7 @@ class LTree {
 public:
 	LTree(unsigned int randseed, LSysParam properties);
 	void reset(unsigned int randseed);
+	void setProperties(LSysParam properties);
 	EntityNode* generate();
 	
 

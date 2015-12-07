@@ -1,6 +1,10 @@
 #include "Tree.h"
 #include "Globals.h"
 
+Tree::Tree() {
+	visible = true; // from Node
+	debug = false;
+}
 
 Tree::Tree(std::string EntityID) {
 	visible = true; // from Node
