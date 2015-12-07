@@ -31,7 +31,7 @@ EntityNode* LTree::generate() {
 	glGenTextures(1, &woodtex);
 	glBindTexture(GL_TEXTURE_2D, woodtex);
 	int w, h;
-	unsigned char *img = SOIL_load_image("Resources/Textures/woodbark.jpg", &w, &h, 0, SOIL_LOAD_RGB);
+	unsigned char *img = SOIL_load_image("Resources/Textures/treebark.jpg", &w, &h, 0, SOIL_LOAD_RGB);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, w, h, 0, GL_RGB, GL_UNSIGNED_BYTE, img);
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);

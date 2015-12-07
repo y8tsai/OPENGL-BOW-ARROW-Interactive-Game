@@ -81,9 +81,6 @@ void LevelManager::LoadTestLevel() {
 	refES->insert(mysteryTreeNode);
 	
 
-	
-
-
 	MatrixTransform **treeMT = new MatrixTransform*[NumberOfTrees];
 	Tree **tree = new Tree*[NumberOfTrees];
 	for(int i = 0; i < NumberOfTrees; ++i) {
