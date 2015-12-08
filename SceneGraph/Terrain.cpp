@@ -467,8 +467,7 @@ int Terrain::terrainScale(float min, float max) {
 	}
 	for (i = 0; i < total; i++) {
 		height = (terrainHeights[i] - min1) / (max1 - min1);
-		//terrainHeights[i] = height * amp - amp;
-		terrainHeights[i] = height * amp - min1;
+		terrainHeights[i] = height * amp + min1;
 	}
 	if (terrainNormals != NULL)
 		terrainComputeNormals();

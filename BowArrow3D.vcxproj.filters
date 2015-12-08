@@ -233,6 +233,9 @@
     <Image Include="Resources\Textures\treebark.jpg">
       <Filter>Resources\Textures</Filter>
     </Image>
+    <Image Include="Resources\Textures\creface.png">
+      <Filter>Resources\Textures</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\Fonts\arial.ttf">

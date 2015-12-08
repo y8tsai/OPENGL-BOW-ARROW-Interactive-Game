@@ -61,8 +61,31 @@ void PhysicsManager::UpdatePlayer(float t, float dt) {
 		tx += velocity * cosf(turn);
 		tz += velocity * sinf(turn);
 	}
-	Globals::camera.eye = Globals::camera.eye + vec3(tx, 0.f, tz);
-	Globals::camera.dir = Globals::camera.dir + vec3(tx, 0.f, tz);
+	//Invisible walls
+	bool atBoundary = false;
+	if( Globals::SceneGraph != nullptr ) {
+		float boundaryX = (float)Globals::SceneGraph->terrain->terrainGridWidth/2.f;
+		float boundaryZ = (float)Globals::SceneGraph->terrain->terrainGridLength/2.f;
+
+		if( Globals::camera.eye[0] + tx > boundaryX ) {
+			Globals::camera.eye[0] = boundaryX;
+			atBoundary = true;
+		} else if ( Globals::camera.eye[0] + tx < -boundaryX ){
+			Globals::camera.eye[0] = boundaryX;
+			atBoundary = true;
+		}
+		if( Globals::camera.eye[2] + tz > boundaryZ ) {
+			Globals::camera.eye[2] = boundaryZ;
+			atBoundary = true;
+		} else if ( Globals::camera.eye[2] + tz < -boundaryZ ){
+			Globals::camera.eye[2] = boundaryZ;
+			atBoundary = true;
+		}
+	}
+	if( !atBoundary ) {
+		Globals::camera.eye = Globals::camera.eye + vec3(tx, 0.f, tz);
+		Globals::camera.dir = Globals::camera.dir + vec3(tx, 0.f, tz);
+	}
 
 	float newHeight = 0.f;
 	static float prevHeight = 0.f;

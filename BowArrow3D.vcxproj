@@ -212,6 +212,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Textures\creeper.jpg" />
+    <Image Include="Resources\Textures\creface.png" />
     <Image Include="Resources\Textures\dirt.JPG" />
     <Image Include="Resources\Textures\grass.JPG" />
     <Image Include="Resources\Textures\mnight_bk.png" />
