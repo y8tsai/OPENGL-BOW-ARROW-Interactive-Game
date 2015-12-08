@@ -15,6 +15,10 @@ void main()
     vec4 snowColor  = texture2D( snow,  vec2(gl_TexCoord[3]) );
 
     //set fragment color to the color we want
-    gl_FragColor = dirtColor ;
-	  
+	if ( pos.t < 5 )
+		gl_FragColor = ( 5 - pos.t)/5 * dirtColor + ( pos.t / 5 ) * grassColor;
+	else if ( pos.t > 5  && pos.t < 20 )
+		gl_FragColor = (20 - pos.t)/15 * grassColor + (pos.t/ 20)*rockColor;
+	else 
+		gl_FragColor = (40 - pos.t)/20 * rockColor + ( (pos.t-20) / 20) * snowColor;
 }
