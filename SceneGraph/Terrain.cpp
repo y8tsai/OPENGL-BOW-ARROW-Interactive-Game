@@ -635,11 +635,11 @@ float Terrain::GetInterpolatedHeight(float x, float z) {
 	//get height at these positions
 	float Q11 = terrainGetHeight(x_floor, z_floor);     // Q11---------z---------Q12
 	float Q21 = terrainGetHeight(x_floor, z_ceil);      //  |		   |		  |
-															//  |          |	      |
+													    //  |          |	      |
 	float Q12 = terrainGetHeight(x_ceil, z_floor);      //  x----------P----------x
 	float Q22 = terrainGetHeight(x_ceil, z_ceil);       //  |          |          |
-															//  |          |          |
-	//interpolate heights									// Q21---------z---------Q22
+														//  |          |          |
+	//interpolate heights								// Q21---------z---------Q22
 	
 	
 	float R1 = (x_ceil - x)/(x_ceil - x_floor)*Q11 + (x - x_floor)/(x_ceil - x_floor)*Q21;

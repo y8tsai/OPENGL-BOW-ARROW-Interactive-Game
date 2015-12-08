@@ -32,6 +32,10 @@ void PhysicsManager::Update(float t, float dt) {
 void PhysicsManager::UpdatePlayer(float t, float dt) {
 	
 	float velocity = 0.1f;
+	if(Globals::EvtMgr.ActionState._run) {
+		velocity = 0.18f;
+	}
+
 	vec3 heading = Globals::camera.eye - Globals::camera.dir;
 	float turn = atan2f(heading[2], heading[0]);
 	float dx = 0.f;

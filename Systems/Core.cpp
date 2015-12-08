@@ -26,6 +26,7 @@ void Core::StartUp() {
 	while( running ){
 		Globals::clock.updateInterval();
 		deltaTime = (float)Timer::interval;
+		std::cout << "FPS: " << 1000.f / deltaTime << std::endl;
 
 		// Step 1: Respond to actions and change game state
 		SDL_Event eve;

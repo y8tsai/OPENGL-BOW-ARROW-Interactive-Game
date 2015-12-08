@@ -24,6 +24,7 @@ public:
 		bool _moveleft;
 		bool _moveright;
 		bool _chargeAttack;
+		bool _run;
 	} ActionState;
 
 private:

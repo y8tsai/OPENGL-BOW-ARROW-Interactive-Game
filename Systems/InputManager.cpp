@@ -6,6 +6,7 @@ InputManager::InputManager() {
 	ActionState._moveleft = false;
 	ActionState._moveright = false;
 	ActionState._chargeAttack = false;
+	ActionState._run = false;
 }
 
 void InputManager::Register(std::string cmd, std::function<void(SDL_Event&)> func) {
@@ -42,6 +43,7 @@ void InputManager::OnEvent(SDL_Event& evt) {
 			if( sym == SDLK_s ) ActionState._movebackward = true;
 			if( sym == SDLK_a ) ActionState._moveleft = true;
 			if( sym == SDLK_d ) ActionState._moveright = true;
+			if( sym == SDLK_LSHIFT) ActionState._run = true;
 			break;
 		case SDL_KEYUP:
 			sym = evt.key.keysym.sym;
@@ -49,6 +51,7 @@ void InputManager::OnEvent(SDL_Event& evt) {
 			if( sym == SDLK_s ) ActionState._movebackward = false;
 			if( sym == SDLK_a ) ActionState._moveleft = false;
 			if( sym == SDLK_d ) ActionState._moveright = false;
+			if( sym == SDLK_LSHIFT) ActionState._run = false;
 			break;
 		case SDL_MOUSEMOTION:
 			Fire("Camera::Orbit", evt);
