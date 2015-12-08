@@ -473,7 +473,7 @@ int Terrain::terrainScale(float min, float max) {
 	if (terrainNormals != NULL)
 		terrainComputeNormals();
 
-	terrainSmooth(0.75);//smooth out the terrain before finish creating
+	terrainSmooth(0.25); // !! Causes stretch of terrain at edges even with low factor
 
 	return(TERRAIN_OK);
 }
@@ -795,6 +795,9 @@ void Terrain::update() {
 }
 
 void Terrain::render() {
+	// Disabling terrain lighting since it's making everything look yellow
+	lighting = false;
+
 	//if lighting is on
 	if (lighting)
 		glLightfv(GL_LIGHT0, GL_POSITION, lPosition);
@@ -807,7 +810,7 @@ void Terrain::render() {
 	if (terrainDL == -1)  //if terrainDL has not been set yet
 	{
 		terrainDL = terrainCreateDL(0, 0, 0, lighting);
-		terrainSmooth(0.5);
+		terrainSmooth(0.6);
 	}
 
 	glLightfv(GL_LIGHT0, GL_AMBIENT, lAmbient);

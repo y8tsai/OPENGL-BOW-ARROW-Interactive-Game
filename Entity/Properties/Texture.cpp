@@ -6,6 +6,12 @@ Texture::Texture() {
 	texid = 0;
 }
 
+Texture::Texture(GLuint textureID, GLfloat w, GLfloat h) {
+	texid = textureID;
+	width = w;
+	height = h;
+}
+
 Texture::Texture(const std::string filepath, int force_ch, unsigned int reuse, unsigned int flags) {
 	texid = SOIL_load_OGL_texture( filepath.c_str(), force_ch, reuse, flags );
 	glGetTexLevelParameterfv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &width);

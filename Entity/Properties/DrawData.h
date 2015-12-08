@@ -8,9 +8,13 @@ class DrawData {
 public:  
     DrawData(void);
     ~DrawData(void);
+
+	void EnableShader();
+	void DisableShader();
     
 	Program* shaders;
 	Texture* texture;
+	int multipleTex;
 	GLuint vbo;
 	GLuint vao;
 	GLenum type;

@@ -63,6 +63,8 @@ void Window::StartUp() {
 
 void Window::glConfiguration() {
 	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LEQUAL);
+	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 	glClear(GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glPolygonMode(GL_FRONT, GL_FILL);
@@ -108,6 +110,8 @@ void drawCoordinateAxes() {
 	glVertex3f(0.0f, 0.0f, 3.0f);
 	glEnd();
 }
+
+static DrawData test;
 
 void Window::display() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

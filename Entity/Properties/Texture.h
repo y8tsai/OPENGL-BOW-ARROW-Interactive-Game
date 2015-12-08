@@ -17,6 +17,7 @@ class Texture {
 public:
 
 	Texture();
+	Texture(GLuint textureID, GLfloat w = 0.f, GLfloat h = 0.f);
 	Texture(const std::string filepath, int force_ch = SOIL_LOAD_AUTO, unsigned int reuse = SOIL_CREATE_NEW_ID, unsigned int flags = 0);
 	~Texture();
 

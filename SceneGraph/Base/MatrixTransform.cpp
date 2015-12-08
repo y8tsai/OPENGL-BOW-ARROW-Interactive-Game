@@ -7,6 +7,11 @@ MatrixTransform::MatrixTransform() {
 	M.makeIdentity(); //make identity matrix
 }
 
+MatrixTransform::MatrixTransform(mat4 m2w) {
+	visible = true;
+	M = m2w;
+}
+
 MatrixTransform::~MatrixTransform() {
 
 }

@@ -4,7 +4,7 @@ varying vec4 pos;
 void main()
 {
   //Transforming the vertex
-  gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+  gl_Position = ftransform(); // ftransform is fasters
   pos = gl_Vertex;
 
   //figure out texture coordinates

@@ -24,9 +24,6 @@ EntityNode* LTree::generate() {
 	EntityNode *modelData = new EntityNode();
 	modelData->vertices = new std::vector<Verts*>();
 	
-	modelData->drawData.shaders = Program::LoadShaders("Models/Shaders/tree.vs", "Models/Shaders/tree.fs");
-
-	modelData->drawData.texture = new Texture();
 	GLuint woodtex;
 	glGenTextures(1, &woodtex);
 	glBindTexture(GL_TEXTURE_2D, woodtex);
@@ -39,7 +36,7 @@ EntityNode* LTree::generate() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	glBindTexture(GL_TEXTURE_2D, 0);
-	modelData->drawData.texture->setID(woodtex);
+	modelData->drawData.texture = new Texture(woodtex);
 
 	std::vector<CylinderMesh*>* raw = draw(rule);
 	for( int i = 0; i < raw->size(); ++i ) {

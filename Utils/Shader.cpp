@@ -81,7 +81,10 @@ Shader& Shader::operator=(const Shader& b) {
 }
 
 void Shader::retain() {
-	*refCount += 1;
+	if(refCount != NULL){
+		*refCount += 1;
+	}
+
 }
 
 void Shader::release() {

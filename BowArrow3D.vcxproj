@@ -166,7 +166,6 @@
     <ClCompile Include="Entity\Properties\UpdateData.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Models\Arrow.cpp" />
     <ClCompile Include="Models\Drawable.cpp" />
     <ClCompile Include="Models\LSystem\LSysParam.cpp" />
     <ClCompile Include="Models\LSystem\LTree.cpp" />
@@ -180,10 +179,11 @@
     <ClCompile Include="SceneGraph\Base\Group.cpp" />
     <ClCompile Include="SceneGraph\Base\MatrixTransform.cpp" />
     <ClCompile Include="SceneGraph\Base\Node.cpp" />
+    <ClCompile Include="SceneGraph\Creeper.cpp" />
     <ClCompile Include="SceneGraph\FogMT.cpp" />
     <ClCompile Include="SceneGraph\LightMT.cpp" />
+    <ClCompile Include="SceneGraph\Primitives\Arrow.cpp" />
     <ClCompile Include="SceneGraph\Primitives\Cube.cpp" />
-    <ClCompile Include="SceneGraph\Primitives\Enemy.cpp" />
     <ClCompile Include="SceneGraph\Primitives\Player.cpp" />
     <ClCompile Include="SceneGraph\Primitives\Sphere.cpp" />
     <ClCompile Include="SceneGraph\Primitives\Tree.cpp" />
@@ -207,17 +207,23 @@
     <None Include="Models\Shaders\Skybox.vert" />
     <None Include="Models\Shaders\terrain.frag" />
     <None Include="Models\Shaders\terrain.vert" />
-    <None Include="Models\Shaders\tree.fs" />
-    <None Include="Models\Shaders\tree.vs" />
+    <None Include="Models\Shaders\CreeperFace.fs" />
+    <None Include="Models\Shaders\CreeperFace.vs" />
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Resources\Textures\creeper.jpg" />
+    <Image Include="Resources\Textures\dirt.JPG" />
+    <Image Include="Resources\Textures\grass.JPG" />
     <Image Include="Resources\Textures\mnight_bk.png" />
     <Image Include="Resources\Textures\mnight_dn.png" />
     <Image Include="Resources\Textures\mnight_ft.png" />
     <Image Include="Resources\Textures\mnight_lf.png" />
     <Image Include="Resources\Textures\mnight_rt.png" />
     <Image Include="Resources\Textures\mnight_up.png" />
+    <Image Include="Resources\Textures\rock.JPG" />
+    <Image Include="Resources\Textures\snow.JPG" />
+    <Image Include="Resources\Textures\treebark.jpg" />
     <Image Include="Resources\TGA\3dtech.tga" />
   </ItemGroup>
   <ItemGroup>
@@ -232,7 +238,7 @@
     <ClInclude Include="Entity\Properties\Texture.h" />
     <ClInclude Include="Entity\Properties\UpdateData.h" />
     <ClInclude Include="Globals.h" />
-    <ClInclude Include="Models\Arrow.h" />
+    <ClInclude Include="Models\CreeperModel.h" />
     <ClInclude Include="Models\Drawable.h" />
     <ClInclude Include="Models\LSystem\LSysParam.h" />
     <ClInclude Include="Models\LSystem\LTree.h" />
@@ -242,15 +248,17 @@
     <ClInclude Include="Particles.h" />
     <ClInclude Include="Physics\AABB.h" />
     <ClInclude Include="Physics\BVH.h" />
+    <ClInclude Include="Physics\BVH\New folder\Object.h" />
     <ClInclude Include="Physics\Simulation.h" />
     <ClInclude Include="SceneGraph\Base\Geode.h" />
     <ClInclude Include="SceneGraph\Base\Group.h" />
     <ClInclude Include="SceneGraph\Base\MatrixTransform.h" />
     <ClInclude Include="SceneGraph\Base\Node.h" />
+    <ClInclude Include="SceneGraph\Creeper.h" />
     <ClInclude Include="SceneGraph\FogMT.h" />
     <ClInclude Include="SceneGraph\LightMT.h" />
+    <ClInclude Include="SceneGraph\Primitives\Arrow.h" />
     <ClInclude Include="SceneGraph\Primitives\Cube.h" />
-    <ClInclude Include="SceneGraph\Primitives\Enemy.h" />
     <ClInclude Include="SceneGraph\Primitives\Player.h" />
     <ClInclude Include="SceneGraph\Primitives\Sphere.h" />
     <ClInclude Include="SceneGraph\Primitives\Tree.h" />

@@ -3,6 +3,7 @@
 
 #include "Models/LSystem/LTree.h"
 #include "SceneGraph/Primitives/Tree.h"
+#include "SceneGraph/Creeper.h"
 
 LevelManager::LevelManager() {
 }
@@ -29,11 +30,16 @@ void LevelManager::Shutdown() {
 void LevelManager::LoadTestLevel() {
 	LTree TreeGenerator = LTree(0, LSysParam());
 
+	int theight = refSG->terrain->terrainGetHeight(0, -10);
+	Creeper *creepsMT = Creeper::MakeCreeper(
+		mat4().makeIdentity().setTranslate(vec3(0.f, (theight), -10.f))
+	);
+	refSG->addChild(creepsMT);
+
 	MatrixTransform *forestMT = new MatrixTransform();
 	refSG->addChild(forestMT);
 
-	
-	int NumberOfTrees = 200;
+	int NumberOfTrees = 20;
 
 	std::string fernTree = "Tree::Fern Grammar";
 	EntityNode *treeSampleNode = TreeGenerator.generate();

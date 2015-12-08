@@ -7,9 +7,10 @@
 class MatrixTransform : public Group {
 public: 
 	MatrixTransform();
+	MatrixTransform(mat4 m2w);
 	~MatrixTransform();
 
-	void draw(mat4 C);
+	virtual void draw(mat4 C);
 	virtual void update();
 
 	mat4 getMatrix();  //get its toWorld Matrix "M"

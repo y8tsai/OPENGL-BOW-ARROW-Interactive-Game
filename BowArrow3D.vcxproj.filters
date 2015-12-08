@@ -47,6 +47,9 @@
     <Filter Include="SceneGraph\Base">
       <UniqueIdentifier>{fee91162-6a16-4fcc-9b03-b7c6e056ba77}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Physics\BVH">
+      <UniqueIdentifier>{82e09135-29f5-4bab-9ba1-1f59329a12ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -87,12 +90,6 @@
     <ClCompile Include="Models\LSystem\ProcMesh.cpp">
       <Filter>Models\LSystem</Filter>
     </ClCompile>
-    <ClCompile Include="Physics\BVH.cpp">
-      <Filter>Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="Physics\AABB.cpp">
-      <Filter>Physics</Filter>
-    </ClCompile>
     <ClCompile Include="Systems\InputManager.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
@@ -112,9 +109,6 @@
     </ClCompile>
     <ClCompile Include="Entity\EntityNode.cpp">
       <Filter>Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="Models\Arrow.cpp">
-      <Filter>Models</Filter>
     </ClCompile>
     <ClCompile Include="Entity\Properties\DrawData.cpp">
       <Filter>Entity\Properties</Filter>
@@ -143,12 +137,6 @@
     <ClCompile Include="Systems\LevelManager.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
-    <ClCompile Include="SceneGraph\Primitives\Cube.cpp">
-      <Filter>SceneGraph\Primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneGraph\Primitives\Enemy.cpp">
-      <Filter>SceneGraph\Primitives</Filter>
-    </ClCompile>
     <ClCompile Include="SceneGraph\Primitives\Player.cpp">
       <Filter>SceneGraph\Primitives</Filter>
     </ClCompile>
@@ -170,6 +158,21 @@
     <ClCompile Include="SceneGraph\Base\Node.cpp">
       <Filter>SceneGraph\Base</Filter>
     </ClCompile>
+    <ClCompile Include="Physics\BVH.cpp">
+      <Filter>Physics\BVH</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\AABB.cpp">
+      <Filter>Physics\BVH</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraph\Primitives\Arrow.cpp">
+      <Filter>SceneGraph\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraph\Creeper.cpp">
+      <Filter>SceneGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraph\Primitives\Cube.cpp">
+      <Filter>SceneGraph\Primitives</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
@@ -179,12 +182,6 @@
     <None Include="Models\Shaders\Skybox.vert">
       <Filter>Models\Shaders</Filter>
     </None>
-    <None Include="Models\Shaders\tree.fs">
-      <Filter>Models\Shaders</Filter>
-    </None>
-    <None Include="Models\Shaders\tree.vs">
-      <Filter>Models\Shaders</Filter>
-    </None>
     <None Include="Models\Shaders\terrain.frag">
       <Filter>Models\Shaders</Filter>
     </None>
@@ -192,6 +189,12 @@
       <Filter>Models\Shaders</Filter>
     </None>
     <None Include=".gitignore" />
+    <None Include="Models\Shaders\CreeperFace.vs">
+      <Filter>Models\Shaders</Filter>
+    </None>
+    <None Include="Models\Shaders\CreeperFace.fs">
+      <Filter>Models\Shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Textures\mnight_bk.png">
@@ -214,6 +217,24 @@
     </Image>
     <Image Include="Resources\TGA\3dtech.tga">
       <Filter>Resources\TGA</Filter>
+    </Image>
+    <Image Include="Resources\Textures\creeper.jpg">
+      <Filter>Resources\Textures</Filter>
+    </Image>
+    <Image Include="Resources\Textures\dirt.JPG">
+      <Filter>Resources\Textures</Filter>
+    </Image>
+    <Image Include="Resources\Textures\grass.JPG">
+      <Filter>Resources\Textures</Filter>
+    </Image>
+    <Image Include="Resources\Textures\rock.JPG">
+      <Filter>Resources\Textures</Filter>
+    </Image>
+    <Image Include="Resources\Textures\snow.JPG">
+      <Filter>Resources\Textures</Filter>
+    </Image>
+    <Image Include="Resources\Textures\treebark.jpg">
+      <Filter>Resources\Textures</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -262,12 +283,6 @@
     <ClInclude Include="Models\LSystem\ProcMesh.h">
       <Filter>Models\LSystem</Filter>
     </ClInclude>
-    <ClInclude Include="Physics\BVH.h">
-      <Filter>Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Physics\AABB.h">
-      <Filter>Physics</Filter>
-    </ClInclude>
     <ClInclude Include="Physics\Simulation.h">
       <Filter>Physics</Filter>
     </ClInclude>
@@ -287,9 +302,6 @@
     </ClInclude>
     <ClInclude Include="Entity\EntityNode.h">
       <Filter>Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="Models\Arrow.h">
-      <Filter>Models</Filter>
     </ClInclude>
     <ClInclude Include="Entity\Properties\DrawData.h">
       <Filter>Entity\Properties</Filter>
@@ -321,9 +333,6 @@
     <ClInclude Include="SceneGraph\Primitives\Cube.h">
       <Filter>SceneGraph\Primitives</Filter>
     </ClInclude>
-    <ClInclude Include="SceneGraph\Primitives\Enemy.h">
-      <Filter>SceneGraph\Primitives</Filter>
-    </ClInclude>
     <ClInclude Include="SceneGraph\Primitives\Player.h">
       <Filter>SceneGraph\Primitives</Filter>
     </ClInclude>
@@ -344,6 +353,24 @@
     </ClInclude>
     <ClInclude Include="SceneGraph\Base\Node.h">
       <Filter>SceneGraph\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\BVH\New folder\Object.h">
+      <Filter>Physics\BVH</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\BVH.h">
+      <Filter>Physics\BVH</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\AABB.h">
+      <Filter>Physics\BVH</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGraph\Primitives\Arrow.h">
+      <Filter>SceneGraph\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\CreeperModel.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGraph\Creeper.h">
+      <Filter>SceneGraph</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
