@@ -473,7 +473,7 @@ int Terrain::terrainScale(float min, float max) {
 	if (terrainNormals != NULL)
 		terrainComputeNormals();
 
-	terrainSmooth(0.25); // !! Causes stretch of terrain at edges even with low factor
+	terrainSmooth(0.7);//smooth out the terrain before finish creating
 
 	return(TERRAIN_OK);
 }
@@ -563,68 +563,36 @@ int Terrain::terrainCreateDL(float xOffset, float yOffset, float zOffset, int li
 	for (i = 0; i < terrainGridLength - 1; i++) {
 		glBegin(GL_TRIANGLE_STRIP);
 		for (j = 0; j < terrainGridWidth; j++) {
-			if (terrainSimLight  && terrainColors != NULL) {
-				factor = terrainComputeLightFactor(i + 1, j, startL, startW);
-				glColor3f(terrainColors[3 * ((i + 1)*terrainGridWidth + j)] * factor + terrainAmbientCol[0],
-					terrainColors[3 * ((i + 1)*terrainGridWidth + j) + 1] * factor + terrainAmbientCol[1],
-					terrainColors[3 * ((i + 1)*terrainGridWidth + j) + 2] * factor + terrainAmbientCol[2]);
-			}
-			else if (terrainSimLight  && terrainColors == NULL) {
-				factor = terrainComputeLightFactor(i + 1, j, startL, startW);
-				glColor3f(terrainDiffuseCol[0] * factor + terrainAmbientCol[0],
-					terrainDiffuseCol[1] * factor + terrainAmbientCol[1],
-					terrainDiffuseCol[2] * factor + terrainAmbientCol[2]);
-			}
-			else if (terrainColors != NULL)
-				glColor3f(terrainColors[3 * ((i + 1)*terrainGridWidth + j)],
-					terrainColors[3 * ((i + 1)*terrainGridWidth + j) + 1],
-					terrainColors[3 * ((i + 1)*terrainGridWidth + j) + 2]);
-
 			if (terrainNormals != NULL && lighting)
 				glNormal3f(terrainNormals[3 * ((i + 1)*terrainGridWidth + j)],
 					terrainNormals[3 * ((i + 1)*terrainGridWidth + j) + 1],
 					terrainNormals[3 * ((i + 1)*terrainGridWidth + j) + 2]);
 			
-			//glTexCoord2d( float(i) / terrainGridLength, float(j)/terrainGridWidth);
-			glMultiTexCoord2f(GL_TEXTURE0, float(i) / terrainGridLength, float(j) / terrainGridWidth );
-			glMultiTexCoord2f(GL_TEXTURE1, float(i) / terrainGridLength, float(j) / terrainGridWidth);
-		    glMultiTexCoord2f(GL_TEXTURE2, float(i) / terrainGridLength, float(j) / terrainGridWidth);
-			glMultiTexCoord2f(GL_TEXTURE3, float(i) / terrainGridLength, float(j) / terrainGridWidth);
+			glMultiTexCoord2f(GL_TEXTURE0, float(i+1) / terrainGridLength, float(j) / terrainGridWidth );
+			glMultiTexCoord2f(GL_TEXTURE1, float(i+1) / terrainGridLength, float(j) / terrainGridWidth);
+		    glMultiTexCoord2f(GL_TEXTURE2, float(i+1) / terrainGridLength, float(j) / terrainGridWidth);
+			glMultiTexCoord2f(GL_TEXTURE3, float(i+1) / terrainGridLength, float(j) / terrainGridWidth);
 			glVertex3f(
 				(startW + j)*terrainStepWidth,// * stepW,
 				terrainHeights[(i + 1)*terrainGridWidth + (j)],
 				(startL - (i + 1))*terrainStepLength);// * stepL);					
 
-			if (terrainSimLight && !lighting && terrainColors != NULL) {
-				factor = terrainComputeLightFactor(i, j, startL, startW);
-				glColor3f(terrainColors[3 * (i*terrainGridWidth + j)] * factor + terrainAmbientCol[0],
-					terrainColors[3 * (i*terrainGridWidth + j) + 1] * factor + terrainAmbientCol[1],
-					terrainColors[3 * (i*terrainGridWidth + j) + 2] * factor + terrainAmbientCol[2]);
-			}
-			else if (terrainSimLight && !lighting && terrainColors == NULL) {
-				factor = terrainComputeLightFactor(i, j, startL, startW);
-				glColor3f(terrainDiffuseCol[0] * factor + terrainAmbientCol[0],
-					terrainDiffuseCol[1] * factor + terrainAmbientCol[1],
-					terrainDiffuseCol[2] * factor + terrainAmbientCol[2]);
-			}
-			else if (terrainColors != NULL)
-				glColor3f(terrainColors[3 * (i*terrainGridWidth + j)],
-					terrainColors[3 * (i*terrainGridWidth + j) + 1],
-					terrainColors[3 * (i*terrainGridWidth + j) + 2]);
 			if (terrainNormals != NULL && lighting)
 				glNormal3f(terrainNormals[3 * (i*terrainGridWidth + j)],
 					terrainNormals[3 * (i*terrainGridWidth + j) + 1],
 					terrainNormals[3 * (i*terrainGridWidth + j) + 2]);
 
-			//glTexCoord2d(float(i) / terrainGridLength, float(j) / terrainGridWidth);
-			glMultiTexCoord2fARB(GL_TEXTURE0, float(i) / terrainGridLength, float(j)/terrainGridWidth );
-			glMultiTexCoord2fARB(GL_TEXTURE1, float(i) / terrainGridLength, float(j) / terrainGridWidth);
-			glMultiTexCoord2fARB(GL_TEXTURE2, float(i) / terrainGridLength, float(j) / terrainGridWidth);
-			glMultiTexCoord2fARB(GL_TEXTURE3, float(i) / terrainGridLength, float(j) / terrainGridWidth );
+			glMultiTexCoord2f(GL_TEXTURE0, float(i) / terrainGridLength, float(j)/terrainGridWidth );
+			glMultiTexCoord2f(GL_TEXTURE1, float(i) / terrainGridLength, float(j) / terrainGridWidth);
+			glMultiTexCoord2f(GL_TEXTURE2, float(i) / terrainGridLength, float(j) / terrainGridWidth);
+			glMultiTexCoord2f(GL_TEXTURE3, float(i) / terrainGridLength, float(j) / terrainGridWidth );
 			glVertex3f(
 				(startW + j)*terrainStepWidth,// * stepW,
 				terrainHeights[i*terrainGridWidth + j],
 				(startL - i)*terrainStepLength);// * stepL);
+
+
+
 		}
 		glEnd();
 	}
@@ -795,9 +763,6 @@ void Terrain::update() {
 }
 
 void Terrain::render() {
-	// Disabling terrain lighting since it's making everything look yellow
-	lighting = false;
-
 	//if lighting is on
 	if (lighting)
 		glLightfv(GL_LIGHT0, GL_POSITION, lPosition);
@@ -809,8 +774,7 @@ void Terrain::render() {
     terrainLightPosition(lPosition[0], lPosition[1], lPosition[2], lPosition[3]);
 	if (terrainDL == -1)  //if terrainDL has not been set yet
 	{
-		terrainDL = terrainCreateDL(0, 0, 0, lighting);
-		terrainSmooth(0.6);
+		terrainDL = terrainCreateDL(0, 0, 0, 0);
 	}
 
 	glLightfv(GL_LIGHT0, GL_AMBIENT, lAmbient);
