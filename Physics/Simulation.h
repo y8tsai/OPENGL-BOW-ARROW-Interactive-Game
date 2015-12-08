@@ -4,7 +4,7 @@
 #include <math.h>
 #include "math3d.h"
 
-#define GRAVITY -0.002f
+#define GRAVITY -0.02f
 
 // Class::Simulation
 // Utility class for physics calculations
@@ -79,7 +79,7 @@ public:
 	}
 
 	static vec3 Acceleration(const Body &body, float t) {
-		return vec3(0.f, body.velocity[1] + GRAVITY, 0.f);
+		return body.velocity + vec3(0.f, GRAVITY, 0.f);
 	}
 };
 

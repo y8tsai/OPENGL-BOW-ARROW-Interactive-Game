@@ -64,31 +64,20 @@ void PhysicsManager::UpdatePlayer(float t, float dt) {
 	Globals::camera.eye = Globals::camera.eye + vec3(tx, 0.f, tz);
 	Globals::camera.dir = Globals::camera.dir + vec3(tx, 0.f, tz);
 
-	Body sim = Body(1.f, Globals::camera.eye, vec3(0.f,0.f,0.f));
-	Simulation::RK4(sim, t, dt);
-	vec3 newEyePstn = sim.position;
-
-	float height = 0.f;
+	float newHeight = 0.f;
+	static float prevHeight = 0.f;
+	static float currHeight = 0.f;
 	if( Globals::SceneGraph != nullptr ) {
-		height = (float)Globals::SceneGraph->terrain->terrainGetHeight(Globals::camera.eye.v[0], Globals::camera.eye.v[2]);
+		newHeight = Globals::SceneGraph->terrain->GetInterpolatedHeight(Globals::camera.eye[0], Globals::camera.eye[2]);
+		if(prevHeight != 0.f && prevHeight != currHeight) {
+			float slope = (currHeight - prevHeight);
+			float slope2 = (newHeight - currHeight);
+			float correction = slope2 - 0.042 * (slope2 - slope);
+			newHeight -= correction;
+		}
+		prevHeight = currHeight;
+		currHeight = newHeight;
+	}
 	
-	}
-	if( newEyePstn.v[1] < height ) {
-		// smoothing out movement, look ahead of where player is going
-		// TODO: need terrainGetHeight with floats as arguments
-		float zheight = height;
-		vec3 next = vec3();
-		if( Globals::EvtMgr.ActionState._moveforward || Globals::EvtMgr.ActionState._movebackward ) {
-			next = Globals::camera.eye + vec3(dx, 0.f, dz);
-			zheight = (float)Globals::SceneGraph->terrain->terrainGetHeight(next[0], next[2]);
-		}
-		if( Globals::EvtMgr.ActionState._moveright || Globals::EvtMgr.ActionState._moveleft ) {
-			next = Globals::camera.eye + vec3(tx, 0.f, tz);
-			zheight = (float)Globals::SceneGraph->terrain->terrainGetHeight(next[0], next[2]);
-		}
-
-		newEyePstn.v[1] = height - 0.2f*(zheight - height); 
-		Globals::camera.eye.v[1] = newEyePstn.v[1] + 3.0f;
-	}
-	//Globals::camera.eye.print("physMGr::eye");
+	Globals::camera.eye.v[1] = newHeight + 3.f;
 }

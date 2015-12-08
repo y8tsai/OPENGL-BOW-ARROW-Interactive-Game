@@ -473,7 +473,7 @@ int Terrain::terrainScale(float min, float max) {
 	if (terrainNormals != NULL)
 		terrainComputeNormals();
 
-	terrainSmooth(0.7);//smooth out the terrain before finish creating
+	terrainSmooth(0.8);//smooth out the terrain before finish creating
 
 	return(TERRAIN_OK);
 }
@@ -618,6 +618,36 @@ float Terrain::terrainGetHeight(int x, int z) {
 		return(0.0);
 
 	return(terrainHeights[zt * terrainGridWidth + xt]);
+}
+
+// Get height using bilinear interpolation
+float Terrain::GetInterpolatedHeight(float x, float z) {
+	if( terrainHeights == NULL ) return(0.0);
+
+	//need 4 reference points
+	int x_floor = (int)floorf(x);
+	int x_ceil = (int)ceilf(x);
+	int z_floor = (int)floorf(z);
+	int z_ceil = (int)ceilf(z);
+
+	if (x_ceil == x_floor || z_ceil == z_floor ) {
+		return terrainGetHeight(x_floor, z_floor);
+	}
+	//get height at these positions
+	float Q11 = terrainGetHeight(x_floor, z_floor);     // Q11---------z---------Q12
+	float Q21 = terrainGetHeight(x_floor, z_ceil);      //  |		   |		  |
+															//  |          |	      |
+	float Q12 = terrainGetHeight(x_ceil, z_floor);      //  x----------P----------x
+	float Q22 = terrainGetHeight(x_ceil, z_ceil);       //  |          |          |
+															//  |          |          |
+	//interpolate heights									// Q21---------z---------Q22
+	
+	
+	float R1 = (x_ceil - x)/(x_ceil - x_floor)*Q11 + (x - x_floor)/(x_ceil - x_floor)*Q21;
+	float R2 = (x_ceil - x)/(x_ceil - x_floor)*Q12 + (x - x_floor)/(x_ceil - x_floor)*Q22;
+
+	return (z_ceil - z)/(z_ceil - z_floor)*R1 + (z - z_floor)/(z_ceil - z_floor)*R2;
+	
 }
 
 void Terrain::terrainDestroy() {

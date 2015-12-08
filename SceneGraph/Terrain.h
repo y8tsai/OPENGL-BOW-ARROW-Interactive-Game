@@ -34,6 +34,8 @@ public:
 	void terrainDestroy();
 	int terrainScale(float min, float max);
 	float terrainGetHeight(int x, int z);
+	float GetInterpolatedHeight(float x, float z);
+
 
 	//lighting functions
 	int terrainSimulateLighting(int sim);

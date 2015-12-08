@@ -137,7 +137,7 @@ Texture* Creeper::CreateFaceTexture(std::string faceFilename, std::string skinFi
 		int w, h;
 		const char *filename = (i == 0 ? skinFilename.c_str() : faceFilename.c_str()); 
 		unsigned char *img = SOIL_load_image(filename, &w, &h, 0, SOIL_LOAD_RGB);
-		printf( "SOIL loading error: %i '%s'\n",i, SOIL_last_result() );
+
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, w, h, 0, GL_RGB, GL_UNSIGNED_BYTE, img);
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);

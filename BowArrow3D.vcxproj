@@ -174,7 +174,6 @@
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="Particles.cpp" />
     <ClCompile Include="Physics\AABB.cpp" />
-    <ClCompile Include="Physics\BVH.cpp" />
     <ClCompile Include="SceneGraph\Base\Geode.cpp" />
     <ClCompile Include="SceneGraph\Base\Group.cpp" />
     <ClCompile Include="SceneGraph\Base\MatrixTransform.cpp" />
@@ -247,8 +246,6 @@
     <ClInclude Include="Particle.h" />
     <ClInclude Include="Particles.h" />
     <ClInclude Include="Physics\AABB.h" />
-    <ClInclude Include="Physics\BVH.h" />
-    <ClInclude Include="Physics\BVH\New folder\Object.h" />
     <ClInclude Include="Physics\Simulation.h" />
     <ClInclude Include="SceneGraph\Base\Geode.h" />
     <ClInclude Include="SceneGraph\Base\Group.h" />
