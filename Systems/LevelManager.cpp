@@ -33,75 +33,75 @@ void LevelManager::LoadTestLevel() {
 	refSG->addChild(forestMT);
 
 	
-	int NumberOfTrees = 200;
+	//int NumberOfTrees = 200;
 
-	std::string fernTree = "Tree::Fern Grammar";
-	EntityNode *treeSampleNode = TreeGenerator.generate();
-	treeSampleNode->name = fernTree;
-	refES->insert(treeSampleNode);
+	//std::string fernTree = "Tree::Fern Grammar";
+	//EntityNode *treeSampleNode = TreeGenerator.generate();
+	//treeSampleNode->name = fernTree;
+	//refES->insert(treeSampleNode);
 
-	std::string niceTree = "Tree::Nice Grammar";
-	LSysParam niceTreeProp;
-	niceTreeProp.iterations = 5;
-	niceTreeProp.length = 0.12f;
-	niceTreeProp.rules['X'] = "F[+X]F[-X]+X";
-	niceTreeProp.rules['F'] = "FF";
-	niceTreeProp.startRule = 'X';
+	//std::string niceTree = "Tree::Nice Grammar";
+	//LSysParam niceTreeProp;
+	//niceTreeProp.iterations = 5;
+	//niceTreeProp.length = 0.12f;
+	//niceTreeProp.rules['X'] = "F[+X]F[-X]+X";
+	//niceTreeProp.rules['F'] = "FF";
+	//niceTreeProp.startRule = 'X';
 
-	TreeGenerator.setProperties(niceTreeProp);
-	EntityNode *niceTreeNode = TreeGenerator.generate();
-	niceTreeNode->name = niceTree;
-	refES->insert(niceTreeNode);
+	//TreeGenerator.setProperties(niceTreeProp);
+	//EntityNode *niceTreeNode = TreeGenerator.generate();
+	//niceTreeNode->name = niceTree;
+	//refES->insert(niceTreeNode);
 
-	std::string bushTree = "Tree::Bush Grammar";
-	LSysParam bushTreeProp;
-	bushTreeProp.iterations = 3;
-	bushTreeProp.length = 0.5f;
-	bushTreeProp.radius = 0.009f;
-	bushTreeProp.rules['F'] = "FF-[-F+F+F]+[+F-F-F]";
-	bushTreeProp.startRule = 'F';
+	//std::string bushTree = "Tree::Bush Grammar";
+	//LSysParam bushTreeProp;
+	//bushTreeProp.iterations = 3;
+	//bushTreeProp.length = 0.5f;
+	//bushTreeProp.radius = 0.009f;
+	//bushTreeProp.rules['F'] = "FF-[-F+F+F]+[+F-F-F]";
+	//bushTreeProp.startRule = 'F';
 
-	TreeGenerator.setProperties(bushTreeProp);
-	EntityNode *bushTreeNode = TreeGenerator.generate();
-	bushTreeNode->name = bushTree;
-	refES->insert(bushTreeNode);
+	//TreeGenerator.setProperties(bushTreeProp);
+	//EntityNode *bushTreeNode = TreeGenerator.generate();
+	//bushTreeNode->name = bushTree;
+	//refES->insert(bushTreeNode);
 
 
-	std::string mysteryTree = "Tree::Mystery Grammar";
-	LSysParam mysteryTreeProp;
-	mysteryTreeProp.iterations = 4;
-	mysteryTreeProp.length = 0.3f;
-	mysteryTreeProp.radius = 0.08f;
-	mysteryTreeProp.rules['F'] = "F[+F]F[-F]F";;
-	mysteryTreeProp.startRule = 'F';
+	//std::string mysteryTree = "Tree::Mystery Grammar";
+	//LSysParam mysteryTreeProp;
+	//mysteryTreeProp.iterations = 4;
+	//mysteryTreeProp.length = 0.3f;
+	//mysteryTreeProp.radius = 0.08f;
+	//mysteryTreeProp.rules['F'] = "F[+F]F[-F]F";;
+	//mysteryTreeProp.startRule = 'F';
 
-	TreeGenerator.setProperties(mysteryTreeProp);
-	EntityNode *mysteryTreeNode = TreeGenerator.generate();
-	mysteryTreeNode->name = mysteryTree;
-	refES->insert(mysteryTreeNode);
-	
+	//TreeGenerator.setProperties(mysteryTreeProp);
+	//EntityNode *mysteryTreeNode = TreeGenerator.generate();
+	//mysteryTreeNode->name = mysteryTree;
+	//refES->insert(mysteryTreeNode);
+	//
 
-	MatrixTransform **treeMT = new MatrixTransform*[NumberOfTrees];
-	Tree **tree = new Tree*[NumberOfTrees];
-	for(int i = 0; i < NumberOfTrees; ++i) {
-		treeMT[i] = new MatrixTransform();
-		
-		if( i % 5 == 0) {
-			tree[i] = new Tree(mysteryTree);
-		} else if( i % 4 == 0 ){
-			tree[i] = new Tree(niceTree);
-		} else if( i % 3 ) {
-			tree[i] = new Tree(fernTree);
-		} else {
-			tree[i] = new Tree(bushTree);
-		}
-		int rx = (rand() % refSG->terrain->terrainGridWidth) - refSG->terrain->terrainGridWidth/2;
-		int rz = (rand() % refSG->terrain->terrainGridLength) - refSG->terrain->terrainGridLength/2;
-		int height = refSG->terrain->terrainGetHeight(rx,rz);
-		treeMT[i]->setMatrix( mat4().makeIdentity().setTranslate( vec3(rx,(float)(height) - 0.3f, rz)) );
-		treeMT[i]->addChild(tree[i]);
-		forestMT->addChild(treeMT[i]);
-	}
+	//MatrixTransform **treeMT = new MatrixTransform*[NumberOfTrees];
+	//Tree **tree = new Tree*[NumberOfTrees];
+	//for(int i = 0; i < NumberOfTrees; ++i) {
+	//	treeMT[i] = new MatrixTransform();
+	//	
+	//	if( i % 5 == 0) {
+	//		tree[i] = new Tree(mysteryTree);
+	//	} else if( i % 4 == 0 ){
+	//		tree[i] = new Tree(niceTree);
+	//	} else if( i % 3 ) {
+	//		tree[i] = new Tree(fernTree);
+	//	} else {
+	//		tree[i] = new Tree(bushTree);
+	//	}
+	//	int rx = (rand() % refSG->terrain->terrainGridWidth) - refSG->terrain->terrainGridWidth/2;
+	//	int rz = (rand() % refSG->terrain->terrainGridLength) - refSG->terrain->terrainGridLength/2;
+	//	int height = refSG->terrain->terrainGetHeight(rx,rz);
+	//	treeMT[i]->setMatrix( mat4().makeIdentity().setTranslate( vec3(rx,(float)(height) - 0.3f, rz)) );
+	//	treeMT[i]->addChild(tree[i]);
+	//	forestMT->addChild(treeMT[i]);
+	//}
 
 }
 
