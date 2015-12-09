@@ -5,7 +5,7 @@
  *  Copyright 2011 __MyCompanyName__. All rights reserved.
  *
  */
-
+#include <ctime>
 #include "Drawable.h"
 
 class Particle: public Drawable
@@ -20,9 +20,12 @@ private:
 	
 
 public:
+	Particle();
+	~Particle();
 	void CreateParticle();
 	void CreateParticle(vec3 sourcePos); //added function to locate source
-	void EvolveParticle();
+	void CreateParticle(vec3 sourcePos, float iniVel, float distFromCenter); //added function for displacement mapping
+	void EvolveParticle();  //serves as updating the particles
 	void DrawObjects();
 	float GetXPos();
 	void SetXPos(float xPos);

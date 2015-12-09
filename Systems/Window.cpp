@@ -57,7 +57,7 @@ void Window::StartUp() {
 
 	skybox = new Skybox(5.0f);
 
-	//particles = new Particles(1000, vec3(0, 0, 0) );  //1000 particles at source origin 
+	particles = new Particles(1000, vec3(0, 200, 0) );  //1000 particles at source origin 
 	//light = Light();
 }
 
@@ -122,6 +122,8 @@ void Window::display() {
 
 	skybox->draw(DrawData());
 	Globals::SceneGraph->draw(mat4().makeIdentity());
+
+	particles->draw(DrawData());
 
 	this->DisplayHUD();
 
@@ -192,8 +194,7 @@ void Window::DisplayHUD() {
 	DrawCircle(midX, midY, radius, 60);
 
 	//update particles
-	//for (int i = 0; i < particles->numParticles; i++)
-	//	particles->particles[i].update(UpdateData());
+	particles->update(UpdateData());
 
 	//glDisable(GL_LIGHT0);
 	glEnable(GL_DEPTH_TEST);

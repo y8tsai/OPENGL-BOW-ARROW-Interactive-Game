@@ -10,6 +10,14 @@
 #include <stdlib.h>
 #include <GL/glut.h>
 
+Particle::Particle() {
+	srand(time(NULL));
+}
+
+Particle::~Particle() {
+	//delete dynamically allocated objects
+}
+
 // Constructor for a particle.
 void Particle::CreateParticle()
 {
@@ -32,6 +40,31 @@ void Particle::CreateParticle(vec3 sourcePos)
 {
 	lifetime = (float)rand();
 	decay = 1;
+	r = 1.0;
+	g = 0.0;
+	b = 0.0;
+	//get location of the source 
+	xpos = sourcePos.v[0];
+	ypos = sourcePos.v[1];
+	zpos = sourcePos.v[2];
+
+	//randomize speed
+	xspeed = float( 50 - rand() % 100 ) / 1000;  
+	yspeed = float( 50 - rand() % 100 ) / 1000;
+	zspeed = float( 50 - rand() % 100 ) / 1000;
+
+	std::cout << xspeed << " " << yspeed << " " << zspeed << std::endl;
+
+	//alive
+	active = true;
+}
+
+// Constructor for a particle with initial velocity and distance from center (for explosion).
+void Particle::CreateParticle(vec3 sourcePos, float iniVel, float distFromCenter)
+{
+	
+	lifetime = 1000; //live 10000 frames
+	decay = 1;
 	r = 0.7;
 	g = 0.7;
 	b = 1.0;
@@ -40,14 +73,34 @@ void Particle::CreateParticle(vec3 sourcePos)
 	ypos = sourcePos.v[1];
 	zpos = sourcePos.v[2];
 
+	int signX, signY, signZ;
+	if (rand() % 2 == 0) //determines the direction of the particle
+			signX = 1;
+	else
+			signX = -1;
+
+	if (rand() % 2 == 0) //determines the direction of the particle
+		signY = 1;
+	else
+		signY = -1;
+
+	if (rand() % 2 == 0) //determines the direction of the particle
+		signZ = 1;
+	else
+		signZ = -1;
+
 	//randomize speed
-	xspeed = 2 - (int)rand() % 5;  
-	yspeed = 2 - (int)rand() % 5;
-	zspeed = 2 - (int)rand() % 5;
+	xspeed = iniVel * distFromCenter * signX;  //still need to weigh this based on the distance from center
+	yspeed = iniVel * distFromCenter * signY;
+	zspeed = iniVel * distFromCenter * signZ;
+
+	if (yspeed == 0)
+		yspeed = 0.20; //give initial y speed so it drops
 
 	//alive
 	active = true;
 }
+
 
 /* 
  Evolves the particle parameters over time.
@@ -56,10 +109,10 @@ void Particle::CreateParticle(vec3 sourcePos)
 void Particle::EvolveParticle()
 {
 	lifetime-=decay;
-	xpos+= 2- (int)rand()  % 5 ;
-	ypos-= 2-(int)rand()  % 5 ;
-	zpos+= 2- (int)rand() % 5;
-	yspeed+= 2- (int)rand()  % 5 ;
+	xpos+= xspeed  ;
+	ypos-= yspeed ;
+	zpos+= zspeed ;
+	yspeed+= abs(yspeed) / 100 ;  //so it always falls
 }
 
 /*
@@ -72,18 +125,20 @@ void Particle::DrawObjects()
 {
 
 	glPushMatrix();
-
+	glEnable(GL_COLOR);
+	glDisable(GL_CULL_FACE);
 	if((lifetime>0.0) && (active == true) )
 	{
 		glColor3f(r,g,b);
 		glBegin(GL_TRIANGLE_STRIP);
-		glTexCoord2f(0.0,1.0); glVertex3f(xpos+0.01, ypos+0.01,zpos);     // top    right
-		glTexCoord2f(0.0,1.0); glVertex3f(xpos-0.01, ypos+0.01,zpos);     // top    left
-		glTexCoord2f(0.0,1.0); glVertex3f(xpos+0.01, ypos-0.01,zpos);     // bottom right
-		glTexCoord2f(0.0,1.0); glVertex3f(xpos-0.01, ypos-0.01,zpos);     // bottom left
+		glTexCoord2f(0.0,1.0); glVertex3f(xpos+1, ypos+1,zpos);     // top    right
+		glTexCoord2f(0.0,1.0); glVertex3f(xpos-1, ypos+1,zpos);     // top    left
+		glTexCoord2f(0.0,1.0); glVertex3f(xpos+1, ypos-1,zpos);     // bottom right
+		glTexCoord2f(0.0,1.0); glVertex3f(xpos-1, ypos-1,zpos);     // bottom left
 		glEnd();
 	} 
-
+	glEnable(GL_CULL_FACE);
+	glDisable(GL_COLOR);
 	glPopMatrix();
 }
 

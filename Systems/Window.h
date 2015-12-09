@@ -36,7 +36,7 @@ private:
 
 	//Tree* sampleTree;
 	//std::vector<CylinderMesh*>* treeData;
-	//Particles* particles;
+	Particles* particles;
 	//Light light; //addded to test light
 };
 

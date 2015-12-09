@@ -40,7 +40,7 @@ void LevelManager::LoadTestLevel() {
 	);
 	refSG->addChild(creepsMT);
 	
-	int NumberOfTrees = 100;
+	/*int NumberOfTrees = 100;
 
 	std::string fernTree = "Tree::Fern Grammar";
 	EntityNode *treeSampleNode = TreeGenerator.generate();
@@ -109,5 +109,5 @@ void LevelManager::LoadTestLevel() {
 		treeMT[i]->addChild(tree[i]);
 		forestMT->addChild(treeMT[i]);
 	}
-
+*/
 }
