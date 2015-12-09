@@ -11,8 +11,7 @@
 #define TERRAIN_ERROR_NOT_INITIALISED	-1
 #define TERRAIN_OK						 0
 
-class Terrain : public Geode
-{
+class Terrain : public Geode {
 
 public:
 	int terrainGridWidth, terrainGridLength;
@@ -26,6 +25,7 @@ public:
 	Terrain(); //create a terrain
 	~Terrain();
 
+	void prune();
 	virtual void update(float t, float dt);
 	virtual void render(); //render the terrain
 

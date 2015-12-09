@@ -1,8 +1,11 @@
 #include "Node.h"
 
 Node::Node() {
+	cleanup = false;
 	visible = true;
-	CID = 0;
+}
+Node::~Node() {
+	//do nothing
 }
 
 void Node::setMatrix(mat4 C) {

@@ -77,8 +77,6 @@ void Core::StartUp() {
 				          t += dt;
 			}
 		}
-
-		std::cout << "RUNING TIME: " << t << std::endl;
 		
 		// Step ???: Display game state
 		Globals::window.display();

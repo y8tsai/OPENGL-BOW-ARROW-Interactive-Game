@@ -3,8 +3,7 @@
 
 #include "Models/LSystem/LTree.h"
 #include "SceneGraph/Primitives/Tree.h"
-#include "SceneGraph/Creeper.h"
-
+#include "SceneGraph/Primitives/Creeper.h"
 #include "SceneGraph/Primitives/Arrow.h"
 
 LevelManager::LevelManager() {
@@ -43,13 +42,6 @@ void LevelManager::LoadTestLevel() {
 	);
 
 	refSG->addChild(creepsMT);
-	
-	Arrow *arrowMT = Arrow::MakeArrow(
-		mat4().makeIdentity().setTranslate(vec3(0.f, theight+0.70f, -10.f)),
-		vec3(1.2, 2.0, 0.0)
-	);
-
-	refSG->addChild(arrowMT);
 
 	//Globals::EntityStore->insert(arrowEN);
 	//Arrow *tempA = new Arrow("quick temp arrow");

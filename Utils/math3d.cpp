@@ -91,11 +91,9 @@ float vec3::length() const {
 
 vec3& vec3::normalize() {
 	float l = length();
-	if( l != 0.0 ) {
-		v[0] = v[0] / l;
-		v[1] = v[1] / l;
-		v[2] = v[2] / l;
-	}
+	v[0] = (l == 0.0 ? 0.0f : v[0] / l );
+	v[1] = (l == 0.0 ? 0.0f : v[1] / l );
+	v[2] = (l == 0.0 ? 0.0f : v[2] / l );
 	return *this;
 }
 

@@ -11,7 +11,7 @@ MatrixTransform::MatrixTransform(mat4 m2w) {
 }
 
 MatrixTransform::~MatrixTransform() {
-
+	prune();
 }
 
 void MatrixTransform::draw(mat4 C) {
@@ -26,6 +26,13 @@ void MatrixTransform::update(float t, float dt) {
 	for( std::size_t i = 0; i < Group::children.size(); ++i ){
 		Group::children.at(i)->update(t, dt);
 	}
+}
+
+void MatrixTransform::prune() {
+	for( std::size_t i = 0; i < Group::children.size(); ++i ){
+		Group::children.at(i)->prune();
+	}
+	children.clear();
 }
 
 mat4 MatrixTransform::getMatrix() {

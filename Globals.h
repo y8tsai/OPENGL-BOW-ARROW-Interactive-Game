@@ -12,6 +12,9 @@
 #include "Entity/EntityBST.h"
 // #include "Physics/BVH.h"
 
+
+#define CLAMP(n, lower, upper) std::fmax(lower, std::fmin(n, upper))
+
 class Globals {
 public:
 	static Window window;

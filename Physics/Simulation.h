@@ -6,7 +6,7 @@
 
 #include "BVH/AABB.h"
 
-#define GRAVITY -2.f
+#define GRAVITY -3.f
 
 // Class::Simulation
 // Utility class for physics calculations
@@ -92,8 +92,7 @@ namespace Fizzix {
 		}
 
 		static vec3 Acceleration(const PBody &body, float t) {
-			
-			return vec3(0.f, GRAVITY, 0.f); // right now, everything is modeled as unit mass
+			return vec3(-1.f, GRAVITY, -1.f); // right now, everything is modeled as unit mass
 		}
 	};
 

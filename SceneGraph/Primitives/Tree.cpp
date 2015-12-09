@@ -2,12 +2,11 @@
 #include "Globals.h"
 
 Tree::Tree() {
-	visible = true; // from Node
 }
 
-Tree::Tree(std::string EntityID) {
-	visible = true; // from Node
+Tree::Tree(std::string EntityID, unsigned int cid) {
 	EID = EntityID;
+	CID = cid;
 }
 
 Tree::~Tree() {

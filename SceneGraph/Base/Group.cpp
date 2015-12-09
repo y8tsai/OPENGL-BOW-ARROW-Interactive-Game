@@ -22,3 +22,10 @@ void Group::draw(mat4 C) {
 		children.at(i)->draw(C);
 	}
 }
+
+void Group::prune() {
+	for( std::size_t i = 0; i < children.size(); ++i ){
+		children.at(i)->prune();
+	}
+	children.clear();
+}

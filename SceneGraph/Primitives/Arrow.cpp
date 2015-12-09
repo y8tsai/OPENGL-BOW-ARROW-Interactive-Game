@@ -4,20 +4,22 @@
 #include "Models/ArrowModel.h"
 
 std::string Arrow::__ArrowEID = "";
+const float Arrow::lifetime = 1000.f; //Not Used
 
 // Static Factory Method
-Arrow* Arrow::MakeArrow(mat4 m2w, vec3 init_v) {
+Arrow* Arrow::MakeArrow(mat4 m2w, vec3 init_v, quat rot) {
 	if( __ArrowEID == "" ) {
 		__ArrowEID = "Arrow";
 		EntityNode *ArrowEN = CreateEntity(__ArrowEID, ArrowModel::Shaft, sizeof(ArrowModel::Shaft));
 		Globals::EntityStore->insert(ArrowEN);
 	}
 
-	Arrow *projectile = new Arrow(m2w, __ArrowEID);
-
-	// Each object has it's own physics body unlike Entity used for drawing
+	// Each geode object has it's own physics body unlike Entity used for drawing
 	Fizzix::PBody *pb = new Fizzix::PBody(m2w.getTranslate(), init_v, 1.f);
-	projectile->CID = Globals::gPhysicsMgr.RegisterPBody(pb);
+	pb->SetAABB(ArrowModel::BoundingBox[0], ArrowModel::BoundingBox[1]);
+	unsigned int collision_id = Globals::gPhysicsMgr.RegisterPBody(pb);
+
+	Arrow *projectile = new Arrow(m2w, __ArrowEID, collision_id);
 
 	return projectile;
 }
@@ -48,15 +50,11 @@ Arrow* Arrow::MakeArrow(mat4 m2w, vec3 init_v) {
  }
 
 Arrow::Arrow(): MatrixTransform() {
-	tracecolor = vec4(1.0f, 0.0f, 0.f, 1.0f);
-	markDelete = false;
 	model = nullptr;
 }
 
-Arrow::Arrow(mat4 m2w, std::string EntityID): MatrixTransform(m2w) {
-	tracecolor = vec4(1.0f, 0.0f, 0.f, 1.0f);
-	markDelete = false;
-	model = new Cube(EntityID);
+Arrow::Arrow(mat4 m2w, std::string EntityID, unsigned int cid): MatrixTransform(m2w) {
+	model = new Cube(EntityID, cid);
 }
 
 Arrow::~Arrow() {
@@ -67,21 +65,33 @@ Arrow::~Arrow() {
 }
 
 void Arrow::draw( mat4 C ) {
-	model->draw(C * M);
+	if( visible ) {
+		model->draw(C * M);
+	}
 }
 
 void Arrow::update(float t, float dt) {
-	Fizzix::PBody *info = Globals::gPhysicsMgr.GetPBody(CID);
-	vec3 currPstn = info->position;
+	Fizzix::PBody *info = Globals::gPhysicsMgr.GetPBody(model->CID);
+	if( !info->staticBody) {
+		vec3 currPstn = info->position;
+		float boundaryX = (float)Globals::SceneGraph->terrain->terrainGridWidth/2.f;
+		float boundaryZ = (float)Globals::SceneGraph->terrain->terrainGridLength/2.f;
+		float hitFloor = Globals::SceneGraph->terrain->terrainGetHeight((int)currPstn[0], (int)currPstn[2]);
+		if( currPstn[0] > boundaryX || currPstn[0] < -boundaryX || currPstn[2] < -boundaryZ || currPstn[2] > boundaryZ) {
+			cleanup = true;
+			visible = false;
+			info->staticBody = true;	
+		}
 
-	float hitFloor = Globals::SceneGraph->terrain->terrainGetHeight((int)currPstn[0], (int)currPstn[2]);
-	
-	if( currPstn[1] < hitFloor) {
-		info->position[1] = hitFloor;
-		info->staticBody = true;
-		info->velocity = vec3();
+		if( currPstn[1] < hitFloor) {
+			info->position[1] = hitFloor;
+			info->staticBody = true;
+			info->velocity = vec3(); //loses all momentum
+			cleanup = true;
+			// will be scenegraph's job to delete
+		}
+		M.setTranslate( info->position );
 	}
-	M.setTranslate( info->position );
 }
 
 

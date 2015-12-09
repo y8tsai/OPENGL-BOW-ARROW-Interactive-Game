@@ -833,3 +833,6 @@ void Terrain::render() {
 	glPopMatrix();
 	glEnable(GL_LIGHTING);
 }
+
+void Terrain::prune() {
+}

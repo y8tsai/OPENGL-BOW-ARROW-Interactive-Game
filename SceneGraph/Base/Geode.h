@@ -8,10 +8,13 @@
 
 class Geode : public Node {
 public:
+	virtual ~Geode();
 	void draw(mat4 C);
 	virtual void render() = 0;
+	void prune();
 
 	std::string EID;	// Entity ID
+	unsigned int CID;	// Collision ID
 };
 
 #endif

@@ -1,7 +1,7 @@
 #include "PhysicsManager.h"
 #include "Globals.h"
 #include "Physics/Simulation.h"
-
+#include "SceneGraph/Primitives/Arrow.h"
 #include <string> // temp for printing
 
 unsigned int PhysicsManager::cid_gen = 0;
@@ -94,22 +94,40 @@ void PhysicsManager::Update(float t, float dt) {
 
 // !kludge for charge
 static float charge = 0.0;
-static float charge_dt = 0.2;
+static const float MAXCHARGE = 1.f / 0.01f; //this should be 1 second
+static const float THRESHOLD = 0.6;
+static const float maxv_magnitude = 30.f;
 
-const static float MAXCHARGE = 1.0;
 void PhysicsManager::UpdatePlayer(float t, float dt) {
-	
-	if( Globals::EvtMgr.ActionState._chargeAttack ) {
-		
+	vec3 heading = Globals::camera.eye - Globals::camera.dir;
+	float velocity = 0.1f;
+
+	if( Globals::EvtMgr.ActionState._chargeAttack ) {	
+		if( charge < MAXCHARGE ){
+			++charge;
+		}	
+	}
+
+	if( !Globals::EvtMgr.ActionState._chargeAttack && charge > 0.0 ){
+		float percentage = CLAMP(charge / MAXCHARGE, 0.f, MAXCHARGE);
+		if( percentage > THRESHOLD) {
+			vec3 direcon = -heading;
+			direcon.normalize();
+			percentage *= maxv_magnitude;
+			direcon = direcon * percentage;
+			Arrow *fired = Arrow::MakeArrow(mat4().translate(Globals::camera.dir), direcon);
+			Globals::SceneGraph->addChild(fired);
+		}
+		charge = 0.0;
 	}
 
 
-	float velocity = 0.1f;
+	
 	if(Globals::EvtMgr.ActionState._run) {
 		velocity = 0.18f;
 	}
 
-	vec3 heading = Globals::camera.eye - Globals::camera.dir;
+	
 	float turn = atan2f(heading[2], heading[0]);
 	float dx = 0.f;
 	float dz = 0.f;

@@ -28,8 +28,8 @@ Creeper* Creeper::MakeCreeper(mat4 m2w) {
 	Creeper *Sapling = new Creeper(m2w, frontLeg, backLeg, body, head);
 
 	// creating a physics body
-	Fizzix::PBody *pb = new Fizzix::PBody(m2w.getTranslate(), vec3(0.f,0.f,0.5f), 1.f);
-	Sapling->CID = Globals::gPhysicsMgr.RegisterPBody(pb);
+	//Fizzix::PBody *pb = new Fizzix::PBody(m2w.getTranslate(), vec3(0.f,0.f,0.5f), 1.f);
+	//Sapling->CID = Globals::gPhysicsMgr.RegisterPBody(pb);
 
 	return Sapling;
 }
@@ -44,7 +44,7 @@ Cube* Creeper::CreateFrontLegModel() {
 		frontlegEN->drawData.texture = CreateTexture(CreeperModel::CreeperSkin);
 		Globals::EntityStore->insert(frontlegEN);
 	}
-	return new Cube(__frontlegEID);
+	return new Cube(__frontlegEID, 0);
 }
 
 Cube* Creeper::CreateBackLegModel() {
@@ -54,7 +54,7 @@ Cube* Creeper::CreateBackLegModel() {
 		backlegEN->drawData.texture = CreateTexture(CreeperModel::CreeperSkin);
 		Globals::EntityStore->insert(backlegEN);
 	}
-	return new Cube(__backlegEID);
+	return new Cube(__backlegEID,0);
 }
 
 Cube* Creeper::CreateBodyModel() {
@@ -64,7 +64,7 @@ Cube* Creeper::CreateBodyModel() {
 		bodyEN->drawData.texture = CreateTexture(CreeperModel::CreeperSkin);
 		Globals::EntityStore->insert(bodyEN);
 	}
-	return new Cube(__bodyEID);
+	return new Cube(__bodyEID,0);
 }
 
 Cube* Creeper::CreateHeadModel() {
@@ -77,7 +77,7 @@ Cube* Creeper::CreateHeadModel() {
 		headEN->drawData.shaders = shade;
 		Globals::EntityStore->insert(headEN);
 	}
-	return new Cube(__headEID);
+	return new Cube(__headEID, 0);
 }
 
 // Creates an Entity Node and fills in vbo vao

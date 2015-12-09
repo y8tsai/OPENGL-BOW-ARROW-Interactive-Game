@@ -2,19 +2,20 @@
 
 #include "Globals.h"
 #include <GL/glut.h>
-#include "SceneGraph/Creeper.h"
+#include "SceneGraph/Primitives/Creeper.h"
 
 
 Cube::Cube() {
    
 }
 
-Cube::Cube(std::string EntityID) {
+Cube::Cube(std::string EntityID, unsigned int cid) {
 	EID = EntityID;
+	CID = cid;
 }
 
 Cube::~Cube() {
-	
+	Globals::gPhysicsMgr.DeregisterPBody(CID);
 }
 
 void Cube::update(float t, float dt) {
@@ -27,7 +28,7 @@ void Cube::render() {
 	if( data != NULL ){
 		data->drawData.EnableShader();
 		if( data->drawData.texture != nullptr ){
-			if( data->drawData.multipleTex ){
+			if( data->drawData.multipleTex && EID == Creeper::__headEID){
 				GLuint prog = data->drawData.shaders->getHandle();
 				glUniform1i(glGetUniformLocation(prog, "SkinTex"), 0);
 				glUniform1i(glGetUniformLocation(prog, "FaceTex"), 1);
@@ -54,5 +55,11 @@ void Cube::render() {
 		data->drawData.DisableShader();
 	} else {
 		glutSolidCube(1.f); //render a unit cube
+	}
+
+	// janky but works, will take out bounding boxes from physics objects in a bit
+	if( EID == "Arrow" && Globals::gPhysicsMgr.DebugDraw.__arrows ) {
+		PBody *pb =Globals::gPhysicsMgr.GetPBody(CID);
+		pb->bbox.DrawDebug();
 	}
 }

@@ -72,12 +72,6 @@
       <Filter>Models\LSystem</Filter>
     </ClCompile>
     <ClCompile Include="Globals.cpp" />
-    <ClCompile Include="SceneGraph\FogMT.cpp">
-      <Filter>SceneGraph</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneGraph\LightMT.cpp">
-      <Filter>SceneGraph</Filter>
-    </ClCompile>
     <ClCompile Include="SceneGraph\Scene.cpp">
       <Filter>SceneGraph</Filter>
     </ClCompile>
@@ -137,12 +131,6 @@
     <ClCompile Include="Systems\LevelManager.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
-    <ClCompile Include="SceneGraph\Primitives\Player.cpp">
-      <Filter>SceneGraph\Primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneGraph\Primitives\Sphere.cpp">
-      <Filter>SceneGraph\Primitives</Filter>
-    </ClCompile>
     <ClCompile Include="SceneGraph\Primitives\Tree.cpp">
       <Filter>SceneGraph\Primitives</Filter>
     </ClCompile>
@@ -170,8 +158,8 @@
     <ClCompile Include="Physics\Simulation.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
-    <ClCompile Include="SceneGraph\Creeper.cpp">
-      <Filter>SceneGraph</Filter>
+    <ClCompile Include="SceneGraph\Primitives\Creeper.cpp">
+      <Filter>SceneGraph\Primitives</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -268,12 +256,6 @@
       <Filter>Models\LSystem</Filter>
     </ClInclude>
     <ClInclude Include="Globals.h" />
-    <ClInclude Include="SceneGraph\FogMT.h">
-      <Filter>SceneGraph</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneGraph\LightMT.h">
-      <Filter>SceneGraph</Filter>
-    </ClInclude>
     <ClInclude Include="SceneGraph\Scene.h">
       <Filter>SceneGraph</Filter>
     </ClInclude>
@@ -333,12 +315,6 @@
     <ClInclude Include="SceneGraph\Primitives\Cube.h">
       <Filter>SceneGraph\Primitives</Filter>
     </ClInclude>
-    <ClInclude Include="SceneGraph\Primitives\Player.h">
-      <Filter>SceneGraph\Primitives</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneGraph\Primitives\Sphere.h">
-      <Filter>SceneGraph\Primitives</Filter>
-    </ClInclude>
     <ClInclude Include="SceneGraph\Primitives\Tree.h">
       <Filter>SceneGraph\Primitives</Filter>
     </ClInclude>
@@ -369,8 +345,8 @@
     <ClInclude Include="Models\ArrowModel.h">
       <Filter>Models</Filter>
     </ClInclude>
-    <ClInclude Include="SceneGraph\Creeper.h">
-      <Filter>SceneGraph</Filter>
+    <ClInclude Include="SceneGraph\Primitives\Creeper.h">
+      <Filter>SceneGraph\Primitives</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

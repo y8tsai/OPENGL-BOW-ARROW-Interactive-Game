@@ -6,11 +6,11 @@
 class Cube : public Geode {
 public:
 	Cube();
-	Cube(std::string EntityID);
+	Cube(std::string EntityID, unsigned int cid);
 	~Cube();
 
 	void render();
-    virtual void update(float t, float dt);
+    void update(float t, float dt);
 	
 };
 
