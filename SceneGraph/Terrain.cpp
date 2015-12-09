@@ -787,7 +787,7 @@ Terrain::~Terrain() {
 
 }
 
-void Terrain::update() {
+void Terrain::update(float t, float dt) {
 	//fill in update logic
 }
 

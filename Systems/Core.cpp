@@ -36,7 +36,6 @@ void Core::StartUp() {
 			Globals::EvtMgr.OnEvent(eve);
 		}
 
-
 		if( delta > dt ){
 			// Variable time stepping so # of physics updates happen
 			// proportionally to (max frame rate - last reported display rate)
@@ -47,14 +46,17 @@ void Core::StartUp() {
 
 				// Do collision checking
 				// # # # #
+				
+				// Correct all dynamic objects positions
+				// and animations on Geodes
+				Globals::SceneGraph->update(t, dt);
 
 				accumulator -= dt;
 				          t += dt;
 			}
-
-			// Correct all dynamic objects positions
-			Globals::SceneGraph->update();
 		}
+
+		std::cout << "RUNING TIME: " << t << std::endl;
 		
 		// Step ???: Display game state
 		Globals::window.display();

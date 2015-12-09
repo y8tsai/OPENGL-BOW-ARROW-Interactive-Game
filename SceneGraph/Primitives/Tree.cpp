@@ -41,7 +41,7 @@ void Tree::render() {
 	}
 }
 
-void Tree::update() {
+void Tree::update(float t, float dt) {
 	// Nothing to update, trees dont move
 	// unless we were to do wind simulation
 }

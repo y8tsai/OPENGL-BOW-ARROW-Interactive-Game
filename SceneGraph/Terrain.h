@@ -26,7 +26,7 @@ public:
 	Terrain(); //create a terrain
 	~Terrain();
 
-	virtual void update();
+	virtual void update(float t, float dt);
 	virtual void render(); //render the terrain
 
 	int terrainLoadFromImage(char *filename, int normals);

@@ -11,7 +11,7 @@ public:
 	~Tree();
 
 	void render();
-	void update();
+	void update(float t, float dt);
 };
 
 #endif

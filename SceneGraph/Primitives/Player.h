@@ -22,7 +22,7 @@ public:
 	Cube* bow;
 	Cube* arrow;
 
-	virtual void update(); //update
+	virtual void update(float t, float dt); //update
 	virtual void draw(mat4 C); // draw function
 	virtual void drawBoundingSphere(vec3 C); // draw bounding spheres
 };

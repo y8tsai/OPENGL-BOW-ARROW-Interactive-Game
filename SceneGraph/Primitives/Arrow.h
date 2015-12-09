@@ -12,7 +12,7 @@ public:
 	static EntityNode* CreateEntity(std::string eid, const GLvoid *verts, GLsizeiptr vertsize);
 
     void draw( mat4 C );
-	void update();
+	void update(float t, float dt);
 
 	bool markDelete;
 

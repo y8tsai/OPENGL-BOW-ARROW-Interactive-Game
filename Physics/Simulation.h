@@ -6,7 +6,7 @@
 
 #include "BVH/AABB.h"
 
-#define GRAVITY -1.f
+#define GRAVITY -2.f
 
 // Class::Simulation
 // Utility class for physics calculations

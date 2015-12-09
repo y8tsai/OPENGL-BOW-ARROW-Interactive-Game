@@ -28,7 +28,7 @@ public:
 	//Enemy* enemy;
 	void addChild(Node *n);
 	virtual void draw(mat4 C); // draw function
-	virtual void update();
+	virtual void update(float t, float dt);
 	virtual void drawBoundingSphere(vec3 C); // draw bounding spheres
 };
 

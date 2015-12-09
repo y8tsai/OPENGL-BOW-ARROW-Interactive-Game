@@ -33,8 +33,8 @@ void Scene::draw(mat4 C) {
 	sceneMT->draw(C);
 }
 
-void Scene::update() {
-	sceneMT->update();
+void Scene::update(float t, float dt) {
+	sceneMT->update(t, dt);
 }
 
 

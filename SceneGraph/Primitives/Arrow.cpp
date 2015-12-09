@@ -70,7 +70,7 @@ void Arrow::draw( mat4 C ) {
 	model->draw(C * M);
 }
 
-void Arrow::update() {
+void Arrow::update(float t, float dt) {
 	Fizzix::PBody *info = Globals::gPhysicsMgr.GetPBody(CID);
 	vec3 currPstn = info->position;
 

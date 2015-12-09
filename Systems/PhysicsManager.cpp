@@ -87,14 +87,23 @@ void PhysicsManager::Update(float t, float dt) {
 		if( !it->second->staticBody ) {
 			it->second->UpdateSimulation(t, dt);
 		}
-
-		
 	}
 }
 
 //-------------------- PRIVATE FUNCTIONS --------------------
+
+// !kludge for charge
+static float charge = 0.0;
+static float charge_dt = 0.2;
+
+const static float MAXCHARGE = 1.0;
 void PhysicsManager::UpdatePlayer(float t, float dt) {
 	
+	if( Globals::EvtMgr.ActionState._chargeAttack ) {
+		
+	}
+
+
 	float velocity = 0.1f;
 	if(Globals::EvtMgr.ActionState._run) {
 		velocity = 0.18f;

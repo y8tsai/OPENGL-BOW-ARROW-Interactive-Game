@@ -18,7 +18,7 @@ LightMT::~LightMT() {
 	delete lightMT;
 }
 
-void LightMT::update() {
+void LightMT::update(float t, float dt) {
 	//add update logic
 }
 

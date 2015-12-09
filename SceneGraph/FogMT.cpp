@@ -18,7 +18,7 @@ FogMT::~FogMT() {
 	delete fogMT;
 }
 
-void FogMT::update(){
+void FogMT::update(float t, float dt){
 	//fill in update logic
 }
 

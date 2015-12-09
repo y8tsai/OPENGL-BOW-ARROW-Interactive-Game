@@ -43,7 +43,7 @@ Player::~Player() {
 	delete playerMT;
 }
 
-void Player::update() {
+void Player::update(float t, float dt) {
 	//add update logic
 }
 

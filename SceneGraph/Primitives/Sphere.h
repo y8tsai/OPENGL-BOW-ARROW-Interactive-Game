@@ -10,7 +10,7 @@ class Sphere : public Geode
 public:
 	Sphere();
 
-    virtual void update();
+    virtual void update(float t, float dt);
 	virtual void render();// render a unit sphere
 };
 

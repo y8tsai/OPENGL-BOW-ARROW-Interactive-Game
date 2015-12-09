@@ -48,8 +48,8 @@ public:
 	Creeper(mat4 m2w, Cube* fl, Cube* bl, Cube *bdy, Cube* hd);
 	~Creeper();
 	
-	virtual void draw( mat4 C );
-	virtual void update();
+	void draw( mat4 C );
+	void update(float t, float dt);
 
 private:
 	static Cube* CreateFrontLegModel();

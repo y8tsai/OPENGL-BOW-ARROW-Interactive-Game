@@ -7,7 +7,7 @@
 class Node {
 public:
 	virtual void draw(mat4 C) = 0; //pure virtual functions
-	virtual void update() = 0;
+	virtual void update(float t, float dt) = 0;
 
 	virtual void setMatrix(mat4 C);
 	virtual mat4 getMatrix();

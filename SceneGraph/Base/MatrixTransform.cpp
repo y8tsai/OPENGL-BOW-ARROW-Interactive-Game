@@ -22,9 +22,9 @@ void MatrixTransform::draw(mat4 C) {
 }
 
 
-void MatrixTransform::update() {
+void MatrixTransform::update(float t, float dt) {
 	for( std::size_t i = 0; i < Group::children.size(); ++i ){
-		Group::children.at(i)->update();
+		Group::children.at(i)->update(t, dt);
 	}
 }
 

@@ -30,11 +30,6 @@ void LevelManager::Shutdown() {
 
 
 void LevelManager::LoadTestLevel() {
-
-	float theight = refSG->terrain->terrainGetHeight(Globals::camera.eye[0], Globals::camera.eye[1]);
-	Globals::camera.eye[1] = theight + 3.f;
-	Globals::camera.dir[1] = theight + 3.f;
-
 	// Creating player info
 	PBody *player_pbody = new PBody(Globals::camera.eye, vec3(), 1.0f, false);
 	player_pbody->SetAABB(vec3(0.0, 1.5, 0.0), vec3(0.5f, 1.5f, 0.5f)); 
@@ -42,7 +37,7 @@ void LevelManager::LoadTestLevel() {
 
 	/*	Getting the Creepers Ready for Battle
 	 ----------------------------------------------------------- */
-	theight = refSG->terrain->terrainGetHeight(0, -10);
+	float theight = refSG->terrain->terrainGetHeight(0, -10);
 	Creeper *creepsMT = Creeper::MakeCreeper(
 		mat4().makeIdentity().setTranslate(vec3(0.f, theight+0.4f, -10.f))
 	);

@@ -12,7 +12,7 @@ Sphere::Sphere()
 	//
 }
 
-void Sphere::update()
+void Sphere::update(float t, float dt)
 {
     //
 }

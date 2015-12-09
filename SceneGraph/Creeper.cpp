@@ -197,7 +197,7 @@ void Creeper::draw( mat4 C ) {
 	head->draw(C * headMT);
 }
 
-void Creeper::update() {
+void Creeper::update(float t, float dt) {
 	vec3 camPos = Globals::camera.eye;
 	vec3 crpPos = headMT.getTranslate();
 	float xDist = camPos[0] - crpPos[0];
@@ -214,9 +214,9 @@ void Creeper::update() {
 		dotOverLength = -0.9999999999f;  //to prevent round off errors causing Nan
 	float angleY = ( acos(dotOverLength)* 180.0 / PI ) / 10;  
 
-	std::cout << "HeadLookAt: " << headLookAt[0] << ", " << headLookAt[1] << ", " << headLookAt[2] << std::endl;
-	std::cout << "distToCamXZ: " << distToCamXZ[0] << ", " << distToCamXZ[1] << ", " << distToCamXZ[2] << std::endl;
-	std::cout << "AngleY: " << angleY << std::endl << std::endl;
+	//std::cout << "HeadLookAt: " << headLookAt[0] << ", " << headLookAt[1] << ", " << headLookAt[2] << std::endl;
+	//std::cout << "distToCamXZ: " << distToCamXZ[0] << ", " << distToCamXZ[1] << ", " << distToCamXZ[2] << std::endl;
+	//std::cout << "AngleY: " << angleY << std::endl << std::endl;
 
 	if (angleY < -0.00001 || angleY > 0.00001) {
 			mat4 rotY = mat4().makeRotateY(angleY);

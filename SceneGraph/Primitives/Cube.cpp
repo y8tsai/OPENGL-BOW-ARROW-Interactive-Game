@@ -17,7 +17,7 @@ Cube::~Cube() {
 	
 }
 
-void Cube::update() {
+void Cube::update(float t, float dt) {
 	// Not used in cube AFAIK
 }
 
