@@ -4,8 +4,8 @@
 #include "SceneGraph/Primitives/Arrow.h"
 #include <string> // temp for printing
 
-unsigned int PhysicsManager::cid_gen = 0;
-unsigned int PhysicsManager::player_cid = 1;
+unsigned int PhysicsManager::pid_gen = 0;
+unsigned int PhysicsManager::player_pid = 1;
 
 //-------------------- CONSTRUCT/DESTRUCT---------------------
 PhysicsManager::PhysicsManager() {
@@ -62,17 +62,19 @@ void PhysicsManager::Shutdown() {
 // returns a GUUID, this is a physics objects unique identifier
 // Don't lose it.
 unsigned int PhysicsManager::RegisterPBody(PBody *pbody) {
-	pobjects.insert(std::pair<unsigned int, PBody*>(++cid_gen, pbody));
-	return cid_gen;
+	pobjects.insert(std::pair<unsigned int, PBody*>(++pid_gen, pbody));
+	return pid_gen;
 }
 
 void PhysicsManager::DeregisterPBody(unsigned int key) {
 	// should batch erase, this is fine for now
-	pobjects.erase(key);
+	if( key != 0 && pobjects.count(key)) {
+		pobjects.erase(key);
+	}
 }
 
 PBody* PhysicsManager::GetPBody(unsigned int key) {
-	if(pobjects.count(key)) {
+	if( key != 0 && pobjects.count(key)) {
 		return pobjects[key];
 	}
 	return nullptr;
@@ -200,5 +202,5 @@ void PhysicsManager::UpdatePlayer(float t, float dt) {
 	}
 	
 	Globals::camera.eye[1] = newHeight + Globals::camera.height;
-	pobjects[player_cid]->position = Globals::camera.eye;
+	pobjects[player_pid]->position = Globals::camera.eye;
 }

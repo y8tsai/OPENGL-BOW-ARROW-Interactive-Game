@@ -19,9 +19,10 @@ public:
 	
 private:
 	Arrow();
-	Arrow(mat4 m2w, std::string EntityID, unsigned int cid);
+	Arrow(mat4 m2w, std::string EntityID, unsigned int pid);
 	virtual ~Arrow();
 
+	float timeUntilDel;
 	Cube *model;
 };
 

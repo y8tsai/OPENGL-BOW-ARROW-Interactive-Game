@@ -14,7 +14,7 @@ public:
 	void prune();
 
 	std::string EID;	// Entity ID
-	unsigned int CID;	// Collision ID
+	unsigned int PID;	// Physics ID
 };
 
 #endif

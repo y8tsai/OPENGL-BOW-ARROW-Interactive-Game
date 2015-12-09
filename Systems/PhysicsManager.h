@@ -29,8 +29,8 @@ public:
 	} DebugDraw;
 
 private:
-	static unsigned int cid_gen;
-	static unsigned int player_cid; //The only cid PhysicsMgr will manage
+	static unsigned int pid_gen;
+	static unsigned int player_pid; //The only pid PhysicsMgr will manage
 
 	void UpdatePlayer(float t, float dt);
 	std::unordered_map<unsigned int, PBody *> pobjects;

@@ -9,13 +9,13 @@ Cube::Cube() {
    
 }
 
-Cube::Cube(std::string EntityID, unsigned int cid) {
+Cube::Cube(std::string EntityID, unsigned int pid) {
 	EID = EntityID;
-	CID = cid;
+	PID = pid;
 }
 
 Cube::~Cube() {
-	Globals::gPhysicsMgr.DeregisterPBody(CID);
+	Globals::gPhysicsMgr.DeregisterPBody(PID);
 }
 
 void Cube::update(float t, float dt) {
@@ -59,7 +59,7 @@ void Cube::render() {
 
 	// janky but works, will take out bounding boxes from physics objects in a bit
 	if( EID == "Arrow" && Globals::gPhysicsMgr.DebugDraw.__arrows ) {
-		PBody *pb =Globals::gPhysicsMgr.GetPBody(CID);
+		PBody *pb = Globals::gPhysicsMgr.GetPBody(PID);
 		pb->bbox.DrawDebug();
 	}
 }

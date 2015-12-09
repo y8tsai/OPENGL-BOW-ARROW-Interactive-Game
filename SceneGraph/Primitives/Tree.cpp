@@ -4,9 +4,9 @@
 Tree::Tree() {
 }
 
-Tree::Tree(std::string EntityID, unsigned int cid) {
+Tree::Tree(std::string EntityID, unsigned int pid) {
 	EID = EntityID;
-	CID = cid;
+	PID = pid;
 }
 
 Tree::~Tree() {
@@ -16,7 +16,6 @@ Tree::~Tree() {
 void Tree::render() {
 	// (1) Grab data from EntityStore using EID
 	EntityNode *data = Globals::EntityStore->find(EID);
-	
 	
 	if( data != NULL ){
 		// (2)[a] Setup draw calls and draw the object
