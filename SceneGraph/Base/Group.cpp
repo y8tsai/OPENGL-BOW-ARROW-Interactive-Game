@@ -29,6 +29,8 @@ void Group::prune() {
 	std::list<Node*>::iterator it = children.begin();
 	while( it != children.end() ) {
 		(*it)->prune();
+		std::list<Node*>::iterator next = std::next(it, 1);
+		delete (*next);
 	}
 	children.clear();
 }

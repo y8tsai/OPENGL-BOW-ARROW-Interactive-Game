@@ -20,7 +20,7 @@ public:
 private:
 	Arrow();
 	Arrow(mat4 m2w, std::string EntityID, unsigned int cid);
-	~Arrow();
+	virtual ~Arrow();
 
 	Cube *model;
 };

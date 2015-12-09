@@ -34,6 +34,8 @@ void MatrixTransform::update(float t, float dt) {
 		if( (*it)->cleanup ){
 			(*it)->prune();
 			next = std::next(it, 1);
+			Node *temp = *it;
+			delete temp;
 			Group::children.erase(it);
 			it = next;
 		} else {
