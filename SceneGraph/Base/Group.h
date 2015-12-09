@@ -3,7 +3,7 @@
 
 #include "Node.h"
 #include "math3d.h"
-#include <vector>
+#include <list>
 
 class Group : public Node {
 public:
@@ -11,7 +11,8 @@ public:
 		prune();
 	};
 
-	std::vector<Node*> children;
+	std::list<Node*> children;
+
 	void addChild(Node*);
 	void removeChild(Node*);
 	virtual void draw(mat4 C);

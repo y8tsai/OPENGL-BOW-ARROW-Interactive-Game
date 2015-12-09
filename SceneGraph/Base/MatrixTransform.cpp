@@ -16,23 +16,31 @@ MatrixTransform::~MatrixTransform() {
 
 void MatrixTransform::draw(mat4 C) {
 	C = C * M ;
-	for( std::size_t i = 0; i < Group::children.size(); ++i ){
-		Group::children.at(i)->draw(C);
+	std::list<Node*>::iterator it = children.begin();
+	while( it != children.end() ) {
+		if((*it)->visible){
+			(*it)->draw(C);
+		}
+		++it;
 	}
 }
 
 
 void MatrixTransform::update(float t, float dt) {
-	for( std::size_t i = 0; i < Group::children.size(); ++i ){
-		Group::children.at(i)->update(t, dt);
+	
+	std::list<Node*>::iterator it = children.begin();
+	std::list<Node*>::iterator next;
+	while( it != children.end() ) {
+		if( (*it)->cleanup ){
+			(*it)->prune();
+			next = std::next(it, 1);
+			Group::children.erase(it);
+			it = next;
+		} else {
+			(*it)->update(t, dt);
+			++it;
+		}
 	}
-}
-
-void MatrixTransform::prune() {
-	for( std::size_t i = 0; i < Group::children.size(); ++i ){
-		Group::children.at(i)->prune();
-	}
-	children.clear();
 }
 
 mat4 MatrixTransform::getMatrix() {

@@ -96,7 +96,7 @@ void PhysicsManager::Update(float t, float dt) {
 static float charge = 0.0;
 static const float MAXCHARGE = 1.f / 0.01f; //this should be 1 second
 static const float THRESHOLD = 0.6;
-static const float maxv_magnitude = 30.f;
+static const float maxv_magnitude = 25.f;
 
 void PhysicsManager::UpdatePlayer(float t, float dt) {
 	vec3 heading = Globals::camera.eye - Globals::camera.dir;
@@ -122,7 +122,7 @@ void PhysicsManager::UpdatePlayer(float t, float dt) {
 	}
 
 
-	
+	// shift to run
 	if(Globals::EvtMgr.ActionState._run) {
 		velocity = 0.18f;
 	}
@@ -133,10 +133,12 @@ void PhysicsManager::UpdatePlayer(float t, float dt) {
 	float dz = 0.f;
 	float tx = 0.f;
 	float tz = 0.f;
+	//move forward
 	if( Globals::EvtMgr.ActionState._moveforward ) {
 		dx -= velocity * cosf(turn);
 		dz -= velocity * sinf(turn);
 	}
+	//move back
 	if( Globals::EvtMgr.ActionState._movebackward ) {
 		dx += velocity * cosf(turn);
 		dz += velocity * sinf(turn);
