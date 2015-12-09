@@ -26,11 +26,11 @@ public:
 	AABB(vec3 c, float rx, float ry, float rz);
 	AABB(const AABB& b); //copy constructor
 	
-	void DrawDebug(); // Draws bounding volume
+	void DrawDebug(mat4 C = mat4().makeIdentity()); // Draws bounding volume
 	bool hit;
 
 
-	static void Intersect(AABB &a, AABB &b);
+	static void BroadIntersect(AABB &a, AABB &b);
 
 	static vec3 hitColor;
 	static vec3 stdColor;

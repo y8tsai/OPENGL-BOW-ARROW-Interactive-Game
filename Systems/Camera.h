@@ -13,6 +13,8 @@ public:
 	void update();
 	void reset();
 
+	float height;
+
 	vec3 eye; // point of reference
 	vec3 dir; // view direction
 	vec3 up;  // orientation

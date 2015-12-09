@@ -2,6 +2,7 @@
 #define __NODE_H__
 
 #include "math3d.h"
+#include "Physics/Simulation.h"
 
 class Node {
 public:
@@ -12,6 +13,10 @@ public:
 	virtual mat4 getMatrix();
 
 	bool visible;
+	unsigned int CID;
+
+protected:
+	Node();
 };
 
 #endif

@@ -33,6 +33,10 @@ void Scene::draw(mat4 C) {
 	sceneMT->draw(C);
 }
 
+void Scene::update() {
+	sceneMT->update();
+}
+
 
 void Scene::drawBoundingSphere(vec3 C) {
 	//logic to draw bounding sphere

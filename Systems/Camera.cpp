@@ -7,6 +7,7 @@ Camera::Camera() {
 	Globals::EvtMgr.Register("Camera::Orbit", [&](SDL_Event& evt) {
 		this->Orbit(evt.motion.x, evt.motion.y, evt.motion.xrel, evt.motion.yrel);
 	});
+	height = 3.0f;
 }
 
 Camera::~Camera() { }
@@ -36,7 +37,7 @@ void Camera::update() {
 
 void Camera::reset() {
 	eye = vec3(0.0f, 1.0f, 3.0f);
-	dir = vec3(0.0f, 0.0f, 0.0f);
+	dir = vec3(0.0f, 1.0f, 0.0f);
 	up = vec3(0.0f, 1.0f, 0.0f);
 	update();
 }
@@ -53,17 +54,17 @@ void Camera::Orbit(int mX, int mY, int relX, int relY) {
 	vec3 viewvec = Globals::camera.eye - Globals::camera.dir;
 	viewvec.negate();
 
-	ytarget.x = viewvec.v[0];
-	ytarget.y = viewvec.v[1];
-	ytarget.z = viewvec.v[2];
+	ytarget.x = viewvec[0];
+	ytarget.y = viewvec[1];
+	ytarget.z = viewvec[2];
 	ytarget.w = 0.0f;
 
 	// Rotate by quaternion
 	ytarget = yrot * ytarget * yrot.conjugate();
 
-	Globals::camera.dir.v[0] = ytarget.x + Globals::camera.eye.v[0];
-	Globals::camera.dir.v[1] = ytarget.y + Globals::camera.eye.v[1];
-	Globals::camera.dir.v[2] = ytarget.z + Globals::camera.eye.v[2];
+	Globals::camera.dir[0] = ytarget.x + Globals::camera.eye[0];
+	Globals::camera.dir[1] = ytarget.y + Globals::camera.eye[1];
+	Globals::camera.dir[2] = ytarget.z + Globals::camera.eye[2];
 
 	////////////////// Orbit about x-axis, rotating camera up/down //////////////////
 
@@ -79,14 +80,14 @@ void Camera::Orbit(int mX, int mY, int relX, int relY) {
 
 	quat xrot = quat::rotate( relY * DEG2RAD(mouseYSensitivity), axis );
 	quat xtarget;
-	xtarget.x = viewcalc.v[0];
-	xtarget.y = viewcalc.v[1];
-	xtarget.z = viewcalc.v[2];
+	xtarget.x = viewcalc[0];
+	xtarget.y = viewcalc[1];
+	xtarget.z = viewcalc[2];
 	xtarget.w = 0.0f;
 
 	xtarget = xrot * xtarget * xrot.conjugate();
 
-	Globals::camera.dir.v[0] = xtarget.x + Globals::camera.eye.v[0];
-	Globals::camera.dir.v[1] = xtarget.y + Globals::camera.eye.v[1];
-	Globals::camera.dir.v[2] = xtarget.z + Globals::camera.eye.v[2];
+	Globals::camera.dir[0] = xtarget.x + Globals::camera.eye[0];
+	Globals::camera.dir[1] = xtarget.y + Globals::camera.eye[1];
+	Globals::camera.dir[2] = xtarget.z + Globals::camera.eye[2];
 }

@@ -52,6 +52,20 @@ void InputManager::OnEvent(SDL_Event& evt) {
 			if( sym == SDLK_a ) ActionState._moveleft = false;
 			if( sym == SDLK_d ) ActionState._moveright = false;
 			if( sym == SDLK_LSHIFT) ActionState._run = false;
+
+			// Turn on drawing of bounding boxes
+			if( sym == SDLK_F5 ) {
+				Fire("PhysicsManager::DebugAll", evt);
+			} else if( sym == SDLK_F1 ) {
+				Fire("PhysicsManager::DebugPlayer", evt);
+			} else if( sym == SDLK_F2 ) {
+				Fire("PhysicsManager::DebugArrows", evt);
+			} else if( sym == SDLK_F3 ) {
+				Fire("PhysicsManager::DebugEnemies", evt);
+			} else if( sym == SDLK_F4 ) {
+				Fire("PhysicsManager::DebugTrees", evt);
+			}
+
 			break;
 		case SDL_MOUSEMOTION:
 			Fire("Camera::Orbit", evt);

@@ -9,8 +9,9 @@ public:
 	Cube(std::string EntityID);
 	~Cube();
 
+	void render();
     virtual void update();
-	virtual void render();
+	
 };
 
 #endif

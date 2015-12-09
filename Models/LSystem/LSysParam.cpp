@@ -1,7 +1,7 @@
 #include "LSysParam.h"
 
 LSysParam::LSysParam() {
-	iterations = 4;
+	iterations = 5;
 	length = 0.15f;
 	yawMin = 15.0f;
 	yawMax = 30.0f;

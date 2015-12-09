@@ -10,8 +10,8 @@ public:
 	Tree(std::string EntityID);
 	~Tree();
 
-	virtual void render();
-	virtual void update();
+	void render();
+	void update();
 };
 
 #endif

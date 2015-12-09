@@ -18,15 +18,17 @@ void Core::StartUp() {
 	SDL_StartTextInput();
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	
-	float t = 0.f;
-	const float dt = 10.0f; // milliseconds
-	float deltaTime = 0.f;
-	float accumulator = 0.f;
+	// dt set to 100 fps max so physics
+	// sim doesn't explode
+	double t = 0.0;
+	const double dt = 0.0100; // milliseconds
+	double deltaTime = 0.0;
+	double accumulator = 0.0;
 
 	while( running ){
 		Globals::clock.updateInterval();
-		deltaTime = (float)Timer::interval;
-		std::cout << "FPS: " << 1000.f / deltaTime << std::endl;
+		deltaTime = (float)Timer::interval;	//# of ms as integer not floating point
+		double delta = deltaTime / 1000.0;
 
 		// Step 1: Respond to actions and change game state
 		SDL_Event eve;
@@ -34,20 +36,30 @@ void Core::StartUp() {
 			Globals::EvtMgr.OnEvent(eve);
 		}
 
-		if( deltaTime > 0.0f ){
-			accumulator += deltaTime;
 
+		if( delta > dt ){
+			// Variable time stepping so # of physics updates happen
+			// proportionally to (max frame rate - last reported display rate)
+			accumulator += delta;
 			while( accumulator >= dt ){
 				// Step 2: Update Physics based on current game state
 				Globals::gPhysicsMgr.Update(t, dt);
-				accumulator -= dt;
-				t += dt;
-			}
-		}
 
-		// Step 3: Update and Display the game state
-		Globals::SceneGraph->sceneMT->update();
+				// Do collision checking
+				// # # # #
+
+				accumulator -= dt;
+				          t += dt;
+			}
+
+			// Correct all dynamic objects positions
+			Globals::SceneGraph->update();
+		}
+		
+		// Step ???: Display game state
 		Globals::window.display();
+	
+		//Go again!
 	}
 };
 

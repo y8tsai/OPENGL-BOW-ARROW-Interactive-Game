@@ -10,9 +10,7 @@ Cube::Cube() {
 }
 
 Cube::Cube(std::string EntityID) {
-	visible = true;
 	EID = EntityID;
-	debug = false;
 }
 
 Cube::~Cube() {
@@ -20,7 +18,7 @@ Cube::~Cube() {
 }
 
 void Cube::update() {
-
+	// Not used in cube AFAIK
 }
 
 void Cube::render() {
@@ -47,6 +45,9 @@ void Cube::render() {
 		glDrawArrays(data->drawData.type, data->drawData.indexStart, data->drawData.indexCount);
 		glBindVertexArray(0);
 
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, 0);
+		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, 0);
 		glActiveTexture(0);
 		

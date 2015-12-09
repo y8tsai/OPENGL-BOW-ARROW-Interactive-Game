@@ -1,5 +1,5 @@
-#ifndef __CREEPERMDL_H__
-#define __CREEPERMDL_H__
+#ifndef __CREEPERMODEL_H__
+#define __CREEPERMODEL_H__
 
 #include <string>
 #include <GL\glut.h>
@@ -14,30 +14,29 @@ namespace CreeperModel {
 	std::string CreeperFace = "Resources/Textures/creface.png";
 
 	GLfloat Head[] = {
-												//  Hacking this glsl bullshit
-												// 	fucking tired of all the shitty docs
-		-1.0f,-1.0f, 1.0f,   1.0f, 0.0f, 1.0f,  // <-- this last column here
-		 1.0f,-1.0f, 1.0f,   0.0f, 0.0f, 1.0f,  // yeah, that's right fuck you
-		-1.0f, 1.0f, 1.0f,   1.0f, 1.0f, 1.0f,  // glsl. Tired of your inconsistent shit
+										
+		-1.0f,-1.0f, 1.0f,   1.0f, 0.0f, 1.0f,  
+		 1.0f,-1.0f, 1.0f,   0.0f, 0.0f, 1.0f,  
+		-1.0f, 1.0f, 1.0f,   1.0f, 1.0f, 1.0f,
 		 1.0f,-1.0f, 1.0f,   0.0f, 0.0f, 1.0f,
 		 1.0f, 1.0f, 1.0f,   0.0f, 1.0f, 1.0f,
 		-1.0f, 1.0f, 1.0f,   1.0f, 1.0f, 1.0f,
 
 		// bottom
-		-1.0f,-1.0f,-1.0f,0.0f, 0.0f,   0.0f,
-		 1.0f,-1.0f,-1.0f,1.0f, 0.0f,   0.0f,
-		-1.0f,-1.0f, 1.0f, 0.0f, 1.0f,  0.0f,
-		 1.0f,-1.0f,-1.0f,1.0f, 0.0f,   0.0f,
-		 1.0f,-1.0f, 1.0f,1.0f, 1.0f,   0.0f,
-		-1.0f,-1.0f, 1.0f, 0.0f, 1.0f,  0.0f,
+		-1.0f,-1.0f,-1.0f,   0.0f, 0.0f, 0.0f,
+		 1.0f,-1.0f,-1.0f,   1.0f, 0.0f, 0.0f,
+		-1.0f,-1.0f, 1.0f,   0.0f, 1.0f, 0.0f,
+		 1.0f,-1.0f,-1.0f,   1.0f, 0.0f, 0.0f,
+		 1.0f,-1.0f, 1.0f,   1.0f, 1.0f, 0.0f,
+		-1.0f,-1.0f, 1.0f,   0.0f, 1.0f, 0.0f,
 
 		// top
-		-1.0f, 1.0f,-1.0f, 0.0f, 0.0f,0.0f,
-		-1.0f, 1.0f, 1.0f, 0.0f, 1.0f,0.0f,
-		 1.0f, 1.0f,-1.0f,1.0f, 0.0f,0.0f,
-		 1.0f, 1.0f,-1.0f,1.0f, 0.0f,0.0f,
-		-1.0f, 1.0f, 1.0f, 0.0f, 1.0f,0.0f,
-		 1.0f, 1.0f, 1.0f,1.0f, 1.0f,0.0f,
+		-1.0f, 1.0f,-1.0f, 0.0f, 0.0f,  0.0f,
+		-1.0f, 1.0f, 1.0f, 0.0f, 1.0f,  0.0f,
+		 1.0f, 1.0f,-1.0f, 1.0f, 0.0f,  0.0f,
+		 1.0f, 1.0f,-1.0f, 1.0f, 0.0f,  0.0f,
+		-1.0f, 1.0f, 1.0f, 0.0f, 1.0f,  0.0f,
+		 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,  0.0f,
 
 		// back
 		-1.0f,-1.0f,-1.0f,0.0f, 0.0f,0.0f,
@@ -208,7 +207,7 @@ namespace CreeperModel {
 		 1.0f, 0.5f,-0.3f,   0.0f, 0.0f, 0.0f,
 		 1.0f,-0.5f, 0.3f,   1.0f, 1.0f, 0.0f,
 		 1.0f, 0.5f,-0.3f,   0.0f, 0.0f, 0.0f,
-		 1.0f, 0.5f, 0.3f,   0.0f, 1.0f,  0.0f
+		 1.0f, 0.5f, 0.3f,   0.0f, 1.0f, 0.0f
 	};
 };
 

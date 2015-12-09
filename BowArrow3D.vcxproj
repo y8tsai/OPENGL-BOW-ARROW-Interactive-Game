@@ -173,7 +173,8 @@
     <ClCompile Include="Models\Skybox.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="Particles.cpp" />
-    <ClCompile Include="Physics\AABB.cpp" />
+    <ClCompile Include="Physics\BVH\AABB.cpp" />
+    <ClCompile Include="Physics\Simulation.cpp" />
     <ClCompile Include="SceneGraph\Base\Geode.cpp" />
     <ClCompile Include="SceneGraph\Base\Group.cpp" />
     <ClCompile Include="SceneGraph\Base\MatrixTransform.cpp" />
@@ -238,6 +239,7 @@
     <ClInclude Include="Entity\Properties\Texture.h" />
     <ClInclude Include="Entity\Properties\UpdateData.h" />
     <ClInclude Include="Globals.h" />
+    <ClInclude Include="Models\ArrowModel.h" />
     <ClInclude Include="Models\CreeperModel.h" />
     <ClInclude Include="Models\Drawable.h" />
     <ClInclude Include="Models\LSystem\LSysParam.h" />
@@ -246,7 +248,7 @@
     <ClInclude Include="Models\Skybox.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="Particles.h" />
-    <ClInclude Include="Physics\AABB.h" />
+    <ClInclude Include="Physics\BVH\AABB.h" />
     <ClInclude Include="Physics\Simulation.h" />
     <ClInclude Include="SceneGraph\Base\Geode.h" />
     <ClInclude Include="SceneGraph\Base\Group.h" />

@@ -41,8 +41,6 @@ public:
 	static std::string __bodyEID;
 	static std::string __headEID;
 
-	// Used in creating unique ID for collision shapes
-	static int cid;
 	// Reference count keeping track of amount of creepers
 	static int number; 
 	
@@ -65,7 +63,7 @@ private:
 	vec3 headLookAt;
 	vec3 bodyLookAt;
 	int detectionPeriod;
-
+	
 	mat4 ft_legMT;
 	mat4 bk_legMT;
 	mat4 bodyMT;

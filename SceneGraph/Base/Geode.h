@@ -12,7 +12,6 @@ public:
 	virtual void render() = 0;
 
 	std::string EID;	// Entity ID
-	bool debug;			// Draw Bounding Box
 };
 
 #endif

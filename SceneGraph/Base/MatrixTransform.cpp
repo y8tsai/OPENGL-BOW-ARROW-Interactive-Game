@@ -3,12 +3,10 @@
 #include <GL/glut.h>
 
 MatrixTransform::MatrixTransform() {
-	visible = true;
 	M.makeIdentity(); //make identity matrix
 }
 
 MatrixTransform::MatrixTransform(mat4 m2w) {
-	visible = true;
 	M = m2w;
 }
 

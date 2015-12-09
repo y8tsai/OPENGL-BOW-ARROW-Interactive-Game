@@ -57,7 +57,7 @@ void Window::StartUp() {
 
 	skybox = new Skybox(5.0f);
 
-	particles = new Particles(1000, vec3(0, 200, 0) );  //1000 particles at source origin 
+	particles = new Particles(1000, vec3(0, 0, 0) );  //1000 particles at source origin 
 	//light = Light();
 }
 
@@ -123,6 +123,10 @@ void Window::display() {
 	skybox->draw(DrawData());
 	Globals::SceneGraph->draw(mat4().makeIdentity());
 
+	if(Globals::gPhysicsMgr.DebugDraw.__player) {
+		Globals::gPhysicsMgr.GetPBody(1)->bbox.DrawDebug(mat4().translate(Globals::camera.eye));
+	}
+
 	particles->draw(DrawData());
 
 	this->DisplayHUD();
@@ -152,6 +156,9 @@ void DrawCircle(float cx, float cy, float r, int num_segments) {
 }
 
 void Window::DisplayHUD() {
+
+	glDisable(GL_LIGHTING);
+	glDisable(GL_COLOR_MATERIAL);
 	glDepthMask(GL_FALSE);
 	glDisable(GL_DEPTH_TEST);
 	glClear(GL_DEPTH_BUFFER_BIT);
@@ -199,6 +206,9 @@ void Window::DisplayHUD() {
 	//glDisable(GL_LIGHT0);
 	glEnable(GL_DEPTH_TEST);
 	glDepthMask(GL_TRUE);
+
+	glEnable(GL_COLOR_MATERIAL);
+	glEnable(GL_LIGHTING);
 	reshape(Window::WIDTH, Window::HEIGHT);
 }
 

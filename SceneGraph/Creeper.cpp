@@ -8,14 +8,11 @@ std::string Creeper::__backlegEID = "";
 std::string Creeper::__bodyEID = "";
 std::string Creeper::__headEID = "";
 
-int Creeper::cid = 0;
 int Creeper::number = 0;
 
 /* Factory Method
  * ----------------------------------------------- */
 Creeper* Creeper::MakeCreeper(mat4 m2w) {
-	//TODO: put in collision store
-	Creeper::cid++;
 	Creeper::number++;
 
 	// m2w would should be center position of front leg in world coordinates
@@ -29,6 +26,11 @@ Creeper* Creeper::MakeCreeper(mat4 m2w) {
 	// constituents and draw all at once
 	// A bit not standard, this one
 	Creeper *Sapling = new Creeper(m2w, frontLeg, backLeg, body, head);
+
+	// creating a physics body
+	Fizzix::PBody *pb = new Fizzix::PBody(m2w.getTranslate(), vec3(0.f,0.f,0.5f), 1.f);
+	Sapling->CID = Globals::gPhysicsMgr.RegisterPBody(pb);
+
 	return Sapling;
 }
 
@@ -82,6 +84,7 @@ Cube* Creeper::CreateHeadModel() {
 EntityNode* Creeper::CreateEntity(std::string eid, const GLvoid *verts, GLsizeiptr vertsize, Program *prog) {
 	EntityNode *genEN = new EntityNode();
 	genEN->name = eid;
+	genEN->drawData.type = GL_TRIANGLES;
 	genEN->drawData.indexStart = 0;
 	genEN->drawData.indexCount = 2*3*6;
 
@@ -154,12 +157,11 @@ Texture* Creeper::CreateFaceTexture(std::string faceFilename, std::string skinFi
 
 // Creeper Object (MT) Implementation
 Creeper::Creeper(mat4 m2w, Cube* fl, Cube* bl, Cube *bdy, Cube* hd) : MatrixTransform(m2w) {
-	M = m2w;
 	fr_leg = fl;
 	bk_leg = bl;
 	body = bdy;
 	head = hd;
-	
+
 	//for updating the creeper
 	headLookAt = vec3(0.0, 0.0, 1.0); //only used by head
 	bodyLookAt = vec3(0.0, 0.0, 1.0); //shared by body and legs
@@ -169,6 +171,7 @@ Creeper::Creeper(mat4 m2w, Cube* fl, Cube* bl, Cube *bdy, Cube* hd) : MatrixTran
 	bk_legMT = mat4().makeIdentity().setTranslate(vec3(0.f, 0.f, -0.6f));
 	bodyMT = mat4().makeIdentity().setTranslate(vec3(0.f, 1.96f, 0.2f));
 	headMT = mat4().makeIdentity().setTranslate(vec3(0.f, 2.5f, 0.f));
+	
 }
 
 Creeper::~Creeper() {
@@ -224,8 +227,6 @@ void Creeper::update() {
 			ft_legMT = rotY * ft_legMT ;
 			bk_legMT = rotY * bk_legMT ;	
 		}
-
-	
 
 }
         

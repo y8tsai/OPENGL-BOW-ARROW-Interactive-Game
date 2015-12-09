@@ -3,13 +3,11 @@
 
 Tree::Tree() {
 	visible = true; // from Node
-	debug = false;
 }
 
 Tree::Tree(std::string EntityID) {
 	visible = true; // from Node
 	EID = EntityID;
-	debug = false;
 }
 
 Tree::~Tree() {
@@ -36,13 +34,9 @@ void Tree::render() {
 			glEnd();
 		}
 		glBindTexture(GL_TEXTURE_2D, 0);
+		glActiveTexture(0);
+		
 		data->drawData.DisableShader();
-
-		// (2)[b] If debug is set, draw debug too
-		if( debug ){
-			
-		}
-
 		// (3) Unset any GL configs during call
 	}
 }
