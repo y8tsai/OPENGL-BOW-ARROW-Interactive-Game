@@ -226,6 +226,14 @@ vec4 mat4::operator*(const vec4 &b) const {
 	return r;
 }
 
+vec3 mat4::operator*(const vec3 &b) const {
+	vec3 r;
+	r.v[0] = m[0][0] * b.v[0] + m[0][1] * b.v[1] + m[0][2] * b.v[2];
+	r.v[1] = m[1][0] * b.v[0] + m[1][1] * b.v[1] + m[1][2] * b.v[2];
+	r.v[2] = m[2][0] * b.v[0] + m[2][1] * b.v[1] + m[2][2] * b.v[2];
+	return r;
+}
+
 mat4& mat4::operator=(const mat4 &b) {
 	if( this != &b ) {
 		for( int i=0; i<4; ++i ) {

@@ -74,6 +74,8 @@ public:
 	vec4 operator*(const vec4&) const;
 	mat4& operator=(const mat4&);
 
+	vec3 operator*(const vec3&) const;
+
 	mat4& makeIdentity();
 	mat4 makeTranspose();
 	mat4& makeRotateX(float deg);

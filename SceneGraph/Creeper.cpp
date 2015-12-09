@@ -160,6 +160,11 @@ Creeper::Creeper(mat4 m2w, Cube* fl, Cube* bl, Cube *bdy, Cube* hd) : MatrixTran
 	body = bdy;
 	head = hd;
 	
+	//for updating the creeper
+	headLookAt = vec3(0.0, 0.0, 1.0); //only used by head
+	bodyLookAt = vec3(0.0, 0.0, 1.0); //shared by body and legs
+	detectionPeriod = 0; //detections are periodical
+
 	ft_legMT = mat4().makeIdentity().setTranslate(vec3(0.f, 0.f, 1.f ));
 	bk_legMT = mat4().makeIdentity().setTranslate(vec3(0.f, 0.f, -0.6f));
 	bodyMT = mat4().makeIdentity().setTranslate(vec3(0.f, 1.96f, 0.2f));
@@ -189,4 +194,38 @@ void Creeper::draw( mat4 C ) {
 	head->draw(C * headMT);
 }
 
+void Creeper::update() {
+	vec3 camPos = Globals::camera.eye;
+	vec3 crpPos = headMT.getTranslate();
+	float xDist = camPos[0] - crpPos[0];
+	float yDist = camPos[1] - crpPos[1];
+	float zDist = camPos[2] - crpPos[2];
+
+
+	vec3 distToCamXZ = vec3(xDist, 0, zDist).normalize();
+
+	float dotOverLength = headLookAt.dot(distToCamXZ) ;
+	if (dotOverLength > 1)
+		dotOverLength = 0.99999999999f;  //to prevent round off errors causing NaN 
+	else if (dotOverLength < -1)
+		dotOverLength = -0.9999999999f;  //to prevent round off errors causing Nan
+	float angleY = ( acos(dotOverLength)* 180.0 / PI ) / 10;  
+
+	std::cout << "HeadLookAt: " << headLookAt[0] << ", " << headLookAt[1] << ", " << headLookAt[2] << std::endl;
+	std::cout << "distToCamXZ: " << distToCamXZ[0] << ", " << distToCamXZ[1] << ", " << distToCamXZ[2] << std::endl;
+	std::cout << "AngleY: " << angleY << std::endl << std::endl;
+
+	if (angleY < -0.00001 || angleY > 0.00001) {
+			mat4 rotY = mat4().makeRotateY(angleY);
+			headLookAt = (rotY * headLookAt ).normalize() ;
+			bodyLookAt = (rotY * bodyLookAt ).normalize() ;
+			headMT = rotY * headMT;
+			bodyMT = rotY * bodyMT;
+			ft_legMT = rotY * ft_legMT ;
+			bk_legMT = rotY * bk_legMT ;	
+		}
+
+	
+
+}
         

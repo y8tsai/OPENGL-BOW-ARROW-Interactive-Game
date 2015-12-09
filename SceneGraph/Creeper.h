@@ -51,6 +51,7 @@ public:
 	~Creeper();
 	
 	virtual void draw( mat4 C );
+	virtual void update();
 
 private:
 	static Cube* CreateFrontLegModel();
@@ -61,6 +62,9 @@ private:
 	static Texture* CreateTexture(std::string filename);
 	static Texture* CreateFaceTexture(std::string faceFilename, std::string skinFilename);
 
+	vec3 headLookAt;
+	vec3 bodyLookAt;
+	int detectionPeriod;
 
 	mat4 ft_legMT;
 	mat4 bk_legMT;

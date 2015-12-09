@@ -45,7 +45,8 @@ void Core::StartUp() {
 			}
 		}
 
-		// Step 3: Display game state
+		// Step 3: Update and Display the game state
+		Globals::SceneGraph->sceneMT->update();
 		Globals::window.display();
 	}
 };
