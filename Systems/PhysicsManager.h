@@ -4,9 +4,11 @@
 #include <iostream>
 #include <unordered_map>
 
-#include "Physics\Simulation.h"
+#include "Physics/Simulation.h"
+#include "Physics/BVH/NaiveCollision.h"
 
 using namespace Fizzix;
+
 
 class PhysicsManager {
 public:
@@ -28,9 +30,12 @@ public:
 		bool __trees;
 	} DebugDraw;
 
+	NaiveCollision *refCS;
+	static unsigned int player_cid;
 private:
 	static unsigned int pid_gen;
 	static unsigned int player_pid; //The only pid PhysicsMgr will manage
+	
 
 	void UpdatePlayer(float t, float dt);
 	std::unordered_map<unsigned int, PBody *> pobjects;

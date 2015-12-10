@@ -10,7 +10,7 @@
 #include "Systems/Camera.h"
 #include "SceneGraph/Scene.h"
 #include "Entity/EntityBST.h"
-// #include "Physics/BVH.h"
+#include "Physics/BVH/NaiveCollision.h"
 
 
 #define CLAMP(n, lower, upper) std::fmax(lower, std::fmin(n, upper))
@@ -21,12 +21,12 @@ public:
 	static InputManager EvtMgr;
 	static PhysicsManager gPhysicsMgr;
 	static LevelManager gLevelMgr;
-
+	
 	static Timer clock;
 	static Camera camera;
 	static Scene* SceneGraph;
 	static EntityBST* EntityStore;
-	//static BVH* CollisionStore;   //TODO
+	static NaiveCollision *ColStore;
 };
 
 

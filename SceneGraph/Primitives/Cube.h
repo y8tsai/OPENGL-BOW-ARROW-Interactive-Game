@@ -6,7 +6,7 @@
 class Cube : public Geode {
 public:
 	Cube();
-	Cube(std::string EntityID, unsigned int pid);
+	Cube(std::string EntityID, unsigned int pid, unsigned int cid);
 	~Cube();
 
 	void render();

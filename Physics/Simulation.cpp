@@ -4,33 +4,30 @@
 namespace Fizzix {
 
 	PBody::PBody() {
-		// bbox = AABB();		implicit
 		// position = vec3();
 		// velocity = vec3();
-		mass = 0.f;
+		CID = 0;
 		staticBody = false;
-		elasticity = 0.f;
 	}
 
-	PBody::PBody(vec3 initial_pstn, vec3 initial_velocity, float body_mass, bool isStatic, float spring_const) { 
+	PBody::PBody(vec3 initial_pstn, vec3 initial_velocity, unsigned int cid, bool isStatic) { 
 		position = initial_pstn;
 		velocity = initial_velocity;
-		mass = body_mass;
+		CID = cid;
 		staticBody = isStatic;
-		elasticity = spring_const;
 	}
 
 	PBody::~PBody() {
 		//~~~~
 	}
 
-	void PBody::SetAABB(vec3 center, vec3 radius, quat orientation) {
-		bbox = AABB(center, radius);
-	}
-
 	void PBody::UpdateSimulation(float t, float dt) {
 		if( !staticBody ) {
 			Simulation::RK4( *this, t, dt);
+			AABB *cobj = Globals::ColStore->GetAABBInfo(CID);
+			if( cobj != nullptr ) {
+				cobj->position = position;
+			}
 		}
 	}
 

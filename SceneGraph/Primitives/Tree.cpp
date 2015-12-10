@@ -4,13 +4,15 @@
 Tree::Tree() {
 }
 
-Tree::Tree(std::string EntityID, unsigned int pid) {
+Tree::Tree(std::string EntityID, unsigned int pid, unsigned int cid) {
 	EID = EntityID;
 	PID = pid;
+	CID = cid;
 }
 
 Tree::~Tree() {
-
+	Globals::gPhysicsMgr.DeregisterPBody(PID); // most likely be 0, so does nothing
+	Globals::ColStore->RemoveAABBInfo(CID); // this will exist tho but it's a stack object
 }
 
 void Tree::render() {

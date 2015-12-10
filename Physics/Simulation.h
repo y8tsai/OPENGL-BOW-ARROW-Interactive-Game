@@ -4,8 +4,6 @@
 #include <math.h>
 #include "math3d.h"
 
-#include "BVH/AABB.h"
-
 #define GRAVITY -9.8f
 
 // Class::Simulation
@@ -36,20 +34,15 @@ namespace Fizzix {
 		PBody(
 			vec3  initial_pstn, 
 			vec3  initial_velocity,
-			float body_mass, 
-			bool  isStatic = false,
-			float spring_const = 0.f
+			unsigned int cid,
+			bool  isStatic = false
 		);
 		PBody();
 		~PBody();
-		
-		void SetAABB(vec3 center, vec3 radius, quat orientation = quat());
 		void UpdateSimulation(float t, float dt);
 
-		// axis-aligned bounding box used in BVH to do Z-curve spread
-		// and median cut.
-		
-		AABB bbox;	     // Center position held by AABB is in model space
+		unsigned int CID; // axis-aligned bounding box used in BVH to do Z-curve spread
+
 		vec3 position;  // World coordinates
 		vec3 velocity;  // Meters per second ?
 		float mass;		 // Mass in kilograms ?

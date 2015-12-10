@@ -7,7 +7,7 @@
 class Tree: public Geode {
 public:
 	Tree();
-	Tree(std::string EntityID, unsigned int pid);
+	Tree(std::string EntityID, unsigned int pid, unsigned int cid);
 	~Tree();
 
 	void render();

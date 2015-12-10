@@ -15,6 +15,8 @@ public:
 
 	std::string EID;	// Entity ID
 	unsigned int PID;	// Physics ID
+	unsigned int CID;	// Collision ID
+
 };
 
 #endif

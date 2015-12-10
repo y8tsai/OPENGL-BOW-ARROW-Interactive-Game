@@ -124,7 +124,7 @@ void Window::display() {
 	Globals::SceneGraph->draw(mat4().makeIdentity());
 
 	if(Globals::gPhysicsMgr.DebugDraw.__player) {
-		Globals::gPhysicsMgr.GetPBody(1)->bbox.DrawDebug(mat4().translate(Globals::camera.eye));
+		Globals::ColStore->GetAABBInfo(Globals::gPhysicsMgr.player_cid)->DrawDebug(mat4().translate(Globals::camera.eye));
 	}
 
 	particles->draw(DrawData());
@@ -174,14 +174,6 @@ void Window::DisplayHUD() {
 	GLfloat midX = (GLfloat)Window::WIDTH/2.f;
 	GLfloat midY = (GLfloat)Window::HEIGHT/2.f;
 
-	glColor4f(1.f, 1.f, 1.f, 1.0f);
-	GLfloat light_diffuse[] = { 0.6f, 0.6f, 0.6f, 1.0 };
-	GLfloat light_position[] = { 0.0, 0.0, -1.0, 0.0 };
-
-	//glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
-	//glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-	//glEnable(GL_LIGHT0);
-
 	const static float radMin = 8;
 	const static float radMax = 15;
 	const static float radDelta = 0.1f;
@@ -201,7 +193,7 @@ void Window::DisplayHUD() {
 	DrawCircle(midX, midY, radius, 60);
 
 	//update particles
-	particles->update(UpdateData());
+	//particles->update(UpdateData());
 
 	//glDisable(GL_LIGHT0);
 	glEnable(GL_DEPTH_TEST);

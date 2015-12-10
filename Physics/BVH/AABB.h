@@ -1,6 +1,9 @@
 #ifndef __AABB_H__
 #define __AABB_H__
 
+#include <vector>
+#include <iostream>
+
 #include "math3d.h"
 
 // Axis Aligned Bounding Box
@@ -19,23 +22,46 @@
 		+-------+   > is the radius in X direction
  */
 
+ // !explicit prevents compiler from turning this class into another type
+// Can be doubly used for ray casting
+class HitInfo {
+public:
+	explicit HitInfo(float tdist = 0.f, const vec3& hpstn = vec3(), const vec3& norm = vec3()){};
+	float t; // hit distance
+	vec3 p; // hit position
+	vec3 n; // normal
+	bool intersect;
+	unsigned int query_id;
+	unsigned int ref_id;
+};
+
+// these are collision id keys of interactable game objects
+typedef std::pair<unsigned int, HitInfo> HitPair;
+typedef std::vector<HitInfo> HitList;
+
 class AABB {
 public:
 	AABB();
-	AABB(vec3 c, vec3 r);
-	AABB(vec3 c, float rx, float ry, float rz);
+	AABB(vec3 p, vec3 c, vec3 r, quat q);
 	AABB(const AABB& b); //copy constructor
 	
-	void DrawDebug(mat4 C = mat4().makeIdentity()); // Draws bounding volume
+	void DrawDebug(mat4 C = mat4().makeIdentity(), bool collided = false); // Draws bounding volume
 	bool hit;
 
 
-	static void BroadIntersect(AABB &a, AABB &b);
+	static HitInfo BroadIntersect(unsigned int k, AABB &a, unsigned int l, AABB &b);
 
 	static vec3 hitColor;
 	static vec3 stdColor;
+
+	quat rotation;
+	vec3 position;
 	vec3 center;
 	vec3 radius; // half-width extents (rx, ry, rz)
+	
+	//another min max representation
+	vec3 min;
+	vec3 max;
 };
 
 

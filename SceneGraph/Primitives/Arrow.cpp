@@ -13,13 +13,16 @@ Arrow* Arrow::MakeArrow(mat4 m2w, vec3 init_v, quat rot) {
 		EntityNode *ArrowEN = CreateEntity(__ArrowEID, ArrowModel::Shaft, sizeof(ArrowModel::Shaft));
 		Globals::EntityStore->insert(ArrowEN);
 	}
+	
+	AABB *bbox = new AABB(m2w.getTranslate(), ArrowModel::BoundingBox[0], ArrowModel::BoundingBox[1], rot);
+	unsigned int collision_id = Globals::ColStore->RegisterAABB(bbox);
 
 	// Each geode object has it's own physics body unlike Entity used for drawing
 	Fizzix::PBody *pb = new Fizzix::PBody(m2w.getTranslate(), init_v, 1.f);
-	pb->SetAABB(ArrowModel::BoundingBox[0], ArrowModel::BoundingBox[1]); //Mve this out
+	pb->CID = collision_id;
 	unsigned int physics_id = Globals::gPhysicsMgr.RegisterPBody(pb);
 
-	Arrow *projectile = new Arrow(m2w, __ArrowEID, physics_id);
+	Arrow *projectile = new Arrow(m2w, __ArrowEID, physics_id, collision_id);
 
 	return projectile;
 }
@@ -53,8 +56,8 @@ Arrow::Arrow(): MatrixTransform() {
 	model = nullptr;
 }
 
-Arrow::Arrow(mat4 m2w, std::string EntityID, unsigned int pid): MatrixTransform(m2w) {
-	model = new Cube(EntityID, pid);
+Arrow::Arrow(mat4 m2w, std::string EntityID, unsigned int pid, unsigned int cid): MatrixTransform(m2w) {
+	model = new Cube(EntityID, pid, cid);
 	timeUntilDel = 0.f;
 }
 
@@ -68,10 +71,19 @@ Arrow::~Arrow() {
 void Arrow::draw( mat4 C ) {
 	if( visible ) {
 		model->draw(C * M);
+
+		if(Globals::gPhysicsMgr.DebugDraw.__arrows) {
+			AABB* info = Globals::ColStore->GetAABBInfo(model->CID);
+			if(info != nullptr) {
+				info->DrawDebug(C * M);
+			}
+		}
 	}
 }
 
 void Arrow::update(float t, float dt) {
+	//collision id -> AABB will also be fetched here for updating
+
 	Fizzix::PBody *info = Globals::gPhysicsMgr.GetPBody(model->PID);
 	if( !info->staticBody) {
 		vec3 currPstn = info->position;

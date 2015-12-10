@@ -37,14 +37,15 @@ void LevelManager::EventUpdate(float t, float dt) {
 	} else {
 		interval_ms = interval_ms - dt;
 	}
-
 }
 
 void LevelManager::LoadTestLevel() {
 	// Creating player info
-	PBody *player_pbody = new PBody(Globals::camera.eye, vec3(), 1.0f, false);
-	player_pbody->SetAABB(vec3(0.0, 1.5, 0.0), vec3(0.5f, 1.5f, 0.5f)); 
+	PBody *player_pbody = new PBody(Globals::camera.eye, vec3(), 1.0f, false);	
 	Globals::gPhysicsMgr.RegisterPBody(player_pbody);
+
+	AABB *player_bbox = new AABB( Globals::camera.eye, vec3(0.0, 1.5, 0.0), vec3(0.5f, 1.5f, 0.5f), quat());
+	Globals::ColStore->RegisterAABB( player_bbox );
 
 	/*	Getting the Creepers Ready for Battle
 	 ----------------------------------------------------------- */
@@ -54,9 +55,16 @@ void LevelManager::LoadTestLevel() {
 	);
 	refSG->addChild(creepsMT);
 
+
+	theight = refSG->terrain->terrainGetHeight(0, 10);
+	Creeper *BBTest = Creeper::MakeCreeper(
+		mat4().makeIdentity().setTranslate(vec3(0.f, theight+0.4f, 10.f))
+	);
+	refSG->addChild(BBTest);
+
 	/*	Making All the Trees
 	 ----------------------------------------------------------- */
-	//refSG->addChild(LoadTrees(1));
+	refSG->addChild(LoadTrees(1));
 }
 
 MatrixTransform* LevelManager::LoadCreeperRandom() {
@@ -144,10 +152,12 @@ MatrixTransform* LevelManager::LoadTrees(int amount) {
 	for(int i = 0; i < amount; ++i) {
 		treeMT[i] = new MatrixTransform();
 
-		if( i % 4 == 0 ){ tree[i] = new Tree(fernTree, 0);
-		}else if(i % 4 == 1){ tree[i] = new Tree(niceTree, 0);
-		}else if(i % 4 == 2){ tree[i] = new Tree(bushTree, 0);
-		}else{ tree[i] = new Tree(stalkyTree, 0); }
+		if( i % 4 == 0 ){ tree[i] = new Tree(fernTree, 0, 0);
+		}else if(i % 4 == 1){ tree[i] = new Tree(niceTree, 0, 0);
+		}else if(i % 4 == 2){ tree[i] = new Tree(bushTree, 0, 0);
+		}else{ 
+			tree[i] = new Tree(stalkyTree, 0, 0); 
+		}
 		
 		int rx = 0, height = 0, rz = 0;
 		if( refSG->terrain != nullptr ) {

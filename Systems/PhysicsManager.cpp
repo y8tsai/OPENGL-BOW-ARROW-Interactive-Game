@@ -6,6 +6,7 @@
 
 unsigned int PhysicsManager::pid_gen = 0;
 unsigned int PhysicsManager::player_pid = 1;
+unsigned int PhysicsManager::player_cid = 1;
 
 //-------------------- CONSTRUCT/DESTRUCT---------------------
 PhysicsManager::PhysicsManager() {
@@ -21,9 +22,12 @@ PhysicsManager::~PhysicsManager() {
 	
 }
 
-
 //--------------------- PUBLIC FUNCTIONS ---------------------
 void PhysicsManager::StartUp() {
+
+	refCS = new NaiveCollision();
+	Globals::ColStore = refCS;
+
 	//Different granularity for turning on object bounding boxes
 	Globals::EvtMgr.Register("PhysicsManager::DebugPlayer", [&](SDL_Event &){
 		DebugDraw.__player = !DebugDraw.__player;
@@ -56,7 +60,7 @@ void PhysicsManager::StartUp() {
 }
 
 void PhysicsManager::Shutdown() {
-	
+	delete refCS;
 }
 
 // returns a GUUID, this is a physics objects unique identifier
@@ -69,6 +73,8 @@ unsigned int PhysicsManager::RegisterPBody(PBody *pbody) {
 void PhysicsManager::DeregisterPBody(unsigned int key) {
 	// should batch erase, this is fine for now
 	if( key != 0 && pobjects.count(key)) {
+		PBody *todel = pobjects.at(key);
+		delete todel;
 		pobjects.erase(key);
 	}
 }
@@ -82,23 +88,24 @@ PBody* PhysicsManager::GetPBody(unsigned int key) {
 
 void PhysicsManager::Update(float t, float dt) {
 	UpdatePlayer(t, dt);
-	// how should we update items in storage? we're updating pbodies
-	// Guess we start with a for loop and make it better. Fill in those splits
+
 	auto end = pobjects.end();
 	for(auto it = pobjects.begin(); it != end; ++it) {
 		if( !it->second->staticBody ) {
 			it->second->UpdateSimulation(t, dt);
 		}
 	}
+
+	refCS->Update(t, dt);
 }
 
 //-------------------- PRIVATE FUNCTIONS --------------------
 
 // !kludge for charge
-static float charge = 0.0;
+static float charge = 0.f;
 static const float MAXCHARGE = 1.f / 0.01f; //this should be 1 second, 100 dts
 static const float THRESHOLD = 0.6;
-static const float maxv_magnitude = 25.f;
+static const float maxv_magnitude = 50.f;
 
 void PhysicsManager::UpdatePlayer(float t, float dt) {
 	vec3 heading = Globals::camera.eye - Globals::camera.dir;
@@ -117,18 +124,31 @@ void PhysicsManager::UpdatePlayer(float t, float dt) {
 			direcon.normalize();
 			percentage *= maxv_magnitude;
 			direcon = direcon * percentage;
-			Arrow *fired = Arrow::MakeArrow(mat4().translate(Globals::camera.dir), direcon);
+			
+			vec3 camPosXZ = Globals::camera.dir - Globals::camera.eye;
+			vec3 camPosYZ = Globals::camera.dir - Globals::camera.eye;
+			camPosXZ[1] = 0; //don't want the y component for XZ plane
+			float angleY = acos ( camPosXZ.normalize().dot(vec3(0.0, 0.0, -1.0)) );
+			float angleX = PI/2 - acos( camPosYZ.normalize().dot(vec3(0.0, 1.0, 0.0) ) );  //project onto YZ plane
+
+			if (camPosXZ[0] > 0)
+				angleY = angleY  * -1; //turn right
+			if (camPosYZ[1] < 0)
+				angleX = angleX * -0.5;  //turn up
+
+			mat4 rotY = mat4().makeRotateY(angleY * 180.0 / PI);
+			mat4 rotX = mat4().makeRotateX((angleX) * 180.0 / PI);
+
+			Arrow *fired = Arrow::MakeArrow( mat4().translate(Globals::camera.eye) * rotY * rotX, direcon);
 			Globals::SceneGraph->addChild(fired);
 		}
 		charge = 0.0;
 	}
 
-
 	// shift to run
 	if(Globals::EvtMgr.ActionState._run) {
 		velocity = 0.18f;
 	}
-
 	
 	float turn = atan2f(heading[2], heading[0]);
 	float dx = 0.f;
@@ -203,4 +223,7 @@ void PhysicsManager::UpdatePlayer(float t, float dt) {
 	
 	Globals::camera.eye[1] = newHeight + Globals::camera.height;
 	pobjects[player_pid]->position = Globals::camera.eye;
+	// update player position
+	AABB* playerBB = refCS->GetAABBInfo(player_cid);
+	playerBB->position = Globals::camera.eye;
 }

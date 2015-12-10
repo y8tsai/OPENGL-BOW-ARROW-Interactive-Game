@@ -19,7 +19,7 @@ public:
 	
 private:
 	Arrow();
-	Arrow(mat4 m2w, std::string EntityID, unsigned int pid);
+	Arrow(mat4 m2w, std::string EntityID, unsigned int pid, unsigned int cid);
 	virtual ~Arrow();
 
 	float timeUntilDel;

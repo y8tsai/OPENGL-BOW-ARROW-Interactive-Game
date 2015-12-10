@@ -13,6 +13,26 @@ namespace CreeperModel {
 	std::string CreeperSkin = "Resources/Textures/creeper.jpg";
 	std::string CreeperFace = "Resources/Textures/creface.png";
 
+	GLfloat HeadBoundingBox[][3] {
+		{ 0.f, 0.f, 0.f },	// center
+		{ 1.0f, 1.0f, 1.0f } // radius
+	};
+	 
+	GLfloat BodyBoundingBox[][3] {
+		{ 0.f,  0.f,  0.f },
+		{ 1.0f, 1.5f, 0.60f}
+	};
+
+	GLfloat FrontLBoundingBox[][3] {
+		{ 0.f, 0.f, 0.f },
+		{ 1.0f, 0.5f, 0.6 }
+	};
+
+	GLfloat BackLBoundingBox[][3] {
+		{ 0.f,  0.f,  0.f },
+		{1.0f, 0.5f, 0.3f}
+	};
+
 	GLfloat Head[] = {
 										
 		-1.0f,-1.0f, 1.0f,   1.0f, 0.0f, 1.0f,  

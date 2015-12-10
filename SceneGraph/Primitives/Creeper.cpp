@@ -16,10 +16,10 @@ Creeper* Creeper::MakeCreeper(mat4 m2w) {
 	Creeper::number++;
 
 	// m2w would should be center position of front leg in world coordinates
-	Cube *frontLeg = CreateFrontLegModel(), 
-		 *backLeg = CreateBackLegModel(),
-		 *body = CreateBodyModel(),
-		 *head = CreateHeadModel();
+	Cube *frontLeg = CreateFrontLegModel(m2w), 
+		 *backLeg = CreateBackLegModel(m2w),
+		 *body = CreateBodyModel(m2w),
+		 *head = CreateHeadModel(m2w);
 
 	// Creeper's draw call is modified to not traverse tree
 	// Since it's one unit, it will store references to its
@@ -36,7 +36,7 @@ Creeper* Creeper::MakeCreeper(mat4 m2w) {
 
 /* Factory Helper Functions:: Auto-creates Entity
  * ----------------------------------------------- */
-Cube* Creeper::CreateFrontLegModel() {
+Cube* Creeper::CreateFrontLegModel(mat4 m2w) {
 	//If internal EID is empty, use 
 	if( __frontlegEID == "" ){
 		__frontlegEID = "Creeper::FrontLeg";
@@ -44,30 +44,39 @@ Cube* Creeper::CreateFrontLegModel() {
 		frontlegEN->drawData.texture = CreateTexture(CreeperModel::CreeperSkin);
 		Globals::EntityStore->insert(frontlegEN);
 	}
-	return new Cube(__frontlegEID, 0);
+
+	AABB* cfront = new AABB(m2w.getTranslate(), CreeperModel::FrontLBoundingBox[0], CreeperModel::FrontLBoundingBox[1], quat());
+	unsigned int cid = Globals::ColStore->RegisterAABB(cfront);
+	return new Cube(__frontlegEID, 0, cid);
 }
 
-Cube* Creeper::CreateBackLegModel() {
+Cube* Creeper::CreateBackLegModel(mat4 m2w) {
 	if( __backlegEID == "" ){
 		__backlegEID = "Creeper::BackLeg";
 		EntityNode *backlegEN = CreateEntity(__backlegEID, CreeperModel::BackLeg, sizeof(CreeperModel::BackLeg));
 		backlegEN->drawData.texture = CreateTexture(CreeperModel::CreeperSkin);
 		Globals::EntityStore->insert(backlegEN);
 	}
-	return new Cube(__backlegEID,0);
+
+	AABB* cback = new AABB(m2w.getTranslate(), CreeperModel::BackLBoundingBox[0], CreeperModel::BackLBoundingBox[1], quat());
+	unsigned int cid = Globals::ColStore->RegisterAABB(cback);
+	return new Cube(__backlegEID, 0, cid);
 }
 
-Cube* Creeper::CreateBodyModel() {
+Cube* Creeper::CreateBodyModel(mat4 m2w) {
 	if( __bodyEID == "" ){
 		__bodyEID = "Creeper::Body";
 		EntityNode *bodyEN = CreateEntity(__bodyEID, CreeperModel::Body, sizeof(CreeperModel::Body));
 		bodyEN->drawData.texture = CreateTexture(CreeperModel::CreeperSkin);
 		Globals::EntityStore->insert(bodyEN);
 	}
-	return new Cube(__bodyEID,0);
+
+	AABB* cbody = new AABB(m2w.getTranslate(), CreeperModel::BodyBoundingBox[0], CreeperModel::BodyBoundingBox[1], quat());
+	unsigned int cid = Globals::ColStore->RegisterAABB(cbody);
+	return new Cube(__bodyEID, 0, cid);
 }
 
-Cube* Creeper::CreateHeadModel() {
+Cube* Creeper::CreateHeadModel(mat4 m2w) {
 	if( __headEID == "" ){
 		__headEID = "Creeper::Head";
 		Program *shade = Program::LoadShaders("Models/Shaders/CreeperFace.vs", "Models/Shaders/CreeperFace.fs");
@@ -77,7 +86,10 @@ Cube* Creeper::CreateHeadModel() {
 		headEN->drawData.shaders = shade;
 		Globals::EntityStore->insert(headEN);
 	}
-	return new Cube(__headEID, 0);
+
+	AABB* chead = new AABB(m2w.getTranslate(), CreeperModel::HeadBoundingBox[0], CreeperModel::HeadBoundingBox[1], quat());
+	unsigned int cid = Globals::ColStore->RegisterAABB(chead);
+	return new Cube(__headEID, 0, cid);
 }
 
 // Creates an Entity Node and fills in vbo vao
@@ -175,10 +187,11 @@ Creeper::Creeper(mat4 m2w, Cube* fl, Cube* bl, Cube *bdy, Cube* hd) : MatrixTran
 }
 
 Creeper::~Creeper() {
-	delete fr_leg;
-	delete bk_leg;
-	delete body;
-	delete head;
+	
+	if(fr_leg != nullptr) delete fr_leg;
+	if(bk_leg != nullptr) delete bk_leg;
+	if(body != nullptr) delete body;
+	if(head != nullptr) delete head;
 	
 	fr_leg = nullptr;
 	bk_leg = nullptr;
@@ -190,9 +203,23 @@ Creeper::~Creeper() {
 
 void Creeper::draw( mat4 C ) {
     C = C * M;
+	if(Globals::gPhysicsMgr.DebugDraw.__enemies) {
+		AABB* bb = Globals::ColStore->GetAABBInfo(fr_leg->CID);	
+		bb->DrawDebug(C * ft_legMT);
+		bb = Globals::ColStore->GetAABBInfo(bk_leg->CID);	
+		bb->DrawDebug(C * bk_legMT);
+	}
 	fr_leg->draw(C * ft_legMT);
 	bk_leg->draw(C * bk_legMT);
 	C = C * bodyMT;
+
+	if(Globals::gPhysicsMgr.DebugDraw.__enemies) {
+		AABB* bb = Globals::ColStore->GetAABBInfo(body->CID);
+		bb->DrawDebug(C);
+		bb = Globals::ColStore->GetAABBInfo(head->CID);
+		bb->DrawDebug(C * headMT);
+	}
+
 	body->draw(C);
 	head->draw(C * headMT);
 }
@@ -203,7 +230,6 @@ void Creeper::update(float t, float dt) {
 	float xDist = camPos[0] - crpPos[0];
 	float yDist = camPos[1] - crpPos[1];
 	float zDist = camPos[2] - crpPos[2];
-
 
 	vec3 distToCamXZ = vec3(xDist, 0, zDist).normalize();
 

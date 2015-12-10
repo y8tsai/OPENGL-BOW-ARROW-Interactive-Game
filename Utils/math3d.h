@@ -110,6 +110,7 @@ public:
 	quat normalize();
 
 	static vec3 tovec3(quat q);
+	static mat4 tomat4(quat q);
 	static quat rotate(float rad, vec3 axis);
 
 };

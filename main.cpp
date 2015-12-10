@@ -13,13 +13,13 @@ int main(int argc, char* argv[]) {
 	Core core = Core();
 	Globals::window.StartUp();
 	Globals::clock.start();
-	Globals::gLevelMgr.StartUp();
 	Globals::gPhysicsMgr.StartUp();
+	Globals::gLevelMgr.StartUp();
 	core.StartUp();
 
 	core.Shutdown();
-	Globals::gPhysicsMgr.Shutdown();
 	Globals::gLevelMgr.Shutdown();
+	Globals::gPhysicsMgr.Shutdown();
 	Globals::clock.stop();
 	Globals::window.Shutdown();
 	return 0;

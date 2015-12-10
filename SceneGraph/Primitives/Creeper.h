@@ -52,10 +52,10 @@ public:
 	void update(float t, float dt);
 
 private:
-	static Cube* CreateFrontLegModel();
-	static Cube* CreateBackLegModel();
-	static Cube* CreateBodyModel();
-	static Cube* CreateHeadModel();
+	static Cube* CreateFrontLegModel(mat4 m2w);
+	static Cube* CreateBackLegModel(mat4 m2w);
+	static Cube* CreateBodyModel(mat4 m2w);
+	static Cube* CreateHeadModel(mat4 m2w);
 	static EntityNode* CreateEntity(std::string eid, const GLvoid *verts, GLsizeiptr vertsize, Program *prog = nullptr);
 	static Texture* CreateTexture(std::string filename);
 	static Texture* CreateFaceTexture(std::string faceFilename, std::string skinFilename);

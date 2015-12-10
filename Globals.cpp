@@ -14,7 +14,6 @@ PhysicsManager Globals::gPhysicsMgr;  // Updates world (scene, camera) based on 
 
 LevelManager Globals::gLevelMgr; // Populates the scene graph and holds current game state for all other objects
 
-
 /* SUBSYSTEMS
  * ----------------------------------------------------------------------
  * Used in managing game objects and their representation in the world
@@ -27,6 +26,9 @@ Camera Globals::camera; // Projection Matrix for what player sees
 Scene* Globals::SceneGraph = nullptr;
 
 EntityBST* Globals::EntityStore = nullptr;
+
+NaiveCollision* Globals::ColStore = nullptr; // Holds AABB info for interactable objects in the world.
+											  // Automatically checks and stores collision info of registered AABBs at every frame
 
 
 
