@@ -482,7 +482,6 @@ mat4 quat::tomat4(quat q) {
 	float xy = q.x * q.y;
 	float xz = q.x * q.z;
 	float xw = q.x * q.w;
-
 	float yy = q.y * q.y;
 	float yz = q.y * q.z;
 	float yw = q.y * q.w;
