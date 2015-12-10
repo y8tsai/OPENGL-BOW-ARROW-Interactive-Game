@@ -11,7 +11,6 @@ public:
 	virtual void update(float t, float dt) = 0;
 	virtual void prune() = 0; // prune will descend and delete objects
 
-
 	virtual void setMatrix(mat4 C);
 	virtual mat4 getMatrix();
 

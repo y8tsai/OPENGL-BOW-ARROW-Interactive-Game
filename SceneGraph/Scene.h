@@ -6,12 +6,7 @@
 #include "math3d.h"
 
 //objects in our scene
-//#include "Forest.h"
 #include "Terrain.h"
-//#include "FogMT.h"
-//#include "LightMT.h"
-//#include "Player.h"
-//#include "Enemy.h"
 
 class Scene : public MatrixTransform{
 public:
@@ -21,15 +16,9 @@ public:
 	MatrixTransform* sceneMT;
 	Terrain* terrain;
 
-	//FogMT* fog;
-	
-	//LightMT* light;
-	//Player* player;
-	//Enemy* enemy;
 	void addChild(Node *n);
 	virtual void draw(mat4 C); // draw function
 	virtual void update(float t, float dt);
-	virtual void drawBoundingSphere(vec3 C); // draw bounding spheres
 };
 
 #endif

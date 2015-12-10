@@ -73,6 +73,8 @@ void Core::StartUp() {
 				// Correct all dynamic objects positions
 				// and animations on Geodes
 
+				Globals::gLevelMgr.EventUpdate(t, dt);
+
 				accumulator -= dt;
 				          t += dt;
 			}

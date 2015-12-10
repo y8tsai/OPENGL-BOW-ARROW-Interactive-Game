@@ -16,7 +16,7 @@ Arrow* Arrow::MakeArrow(mat4 m2w, vec3 init_v, quat rot) {
 
 	// Each geode object has it's own physics body unlike Entity used for drawing
 	Fizzix::PBody *pb = new Fizzix::PBody(m2w.getTranslate(), init_v, 1.f);
-	pb->SetAABB(ArrowModel::BoundingBox[0], ArrowModel::BoundingBox[1]);
+	pb->SetAABB(ArrowModel::BoundingBox[0], ArrowModel::BoundingBox[1]); //Mve this out
 	unsigned int physics_id = Globals::gPhysicsMgr.RegisterPBody(pb);
 
 	Arrow *projectile = new Arrow(m2w, __ArrowEID, physics_id);
@@ -80,7 +80,8 @@ void Arrow::update(float t, float dt) {
 		float hitFloor = Globals::SceneGraph->terrain->terrainGetHeight((int)currPstn[0], (int)currPstn[2]);
 		if( currPstn[0] > boundaryX || currPstn[0] < -boundaryX || currPstn[2] < -boundaryZ || currPstn[2] > boundaryZ) {
 			visible = false;
-			info->staticBody = true;	
+			info->staticBody = true;
+			cleanup = true;
 		}
 
 		if( currPstn[1] < hitFloor) {

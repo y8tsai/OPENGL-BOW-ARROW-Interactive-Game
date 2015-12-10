@@ -1,7 +1,7 @@
 #include "LevelManager.h"
 #include "Globals.h"
 
-#include "Models/LSystem/LTree.h"
+#include "Entity/EntityNode.h"
 #include "SceneGraph/Primitives/Tree.h"
 #include "SceneGraph/Primitives/Creeper.h"
 #include "SceneGraph/Primitives/Arrow.h"
@@ -27,6 +27,18 @@ void LevelManager::Shutdown() {
 	delete refES;
 }
 
+static float interval_ms = 0.f;
+void LevelManager::EventUpdate(float t, float dt) {
+	// Want to load a creeper every 5 -> 10 seconds
+	if( interval_ms < 0.f ) {
+		interval_ms = (float)((std::rand() % 6) + 5) / dt;
+		std::cout << "Load creeper. Next one in " << interval_ms * dt << " seconds" << std::endl;
+		
+		refSG->addChild(LoadCreeperRandom());
+	} else {
+		interval_ms = interval_ms - dt;
+	}
+}
 
 void LevelManager::LoadTestLevel() {
 	// Creating player info
@@ -40,93 +52,115 @@ void LevelManager::LoadTestLevel() {
 	Creeper *creepsMT = Creeper::MakeCreeper(
 		mat4().makeIdentity().setTranslate(vec3(0.f, theight+0.4f, -10.f))
 	);
-
 	refSG->addChild(creepsMT);
-
-	//Globals::EntityStore->insert(arrowEN);
-	//Arrow *tempA = new Arrow("quick temp arrow");
-	//MatrixTransform *ArrowMT = new MatrixTransform(mat4().makeIdentity().setTranslate(vec3(0.f, theight+30.f, -10.f)));
-	//refSG->addChild(ArrowMT);
-	//ArrowMT->addChild(tempA);
-
-	//Fizzix::PBody *arrowpb = new PBody(vec3(0.f, theight+30.f, -10.f), vec3(0,0,0), 1.0f);
-	//tempA->CID = Globals::gPhysicsMgr.RegisterPBody(arrowpb);
-
 
 	/*	Making All the Trees
 	 ----------------------------------------------------------- */
-	//int NumberOfTrees = 300;
-	//LTree TreeGenerator = LTree(0, LSysParam());
-	//MatrixTransform *forestMT = new MatrixTransform();
-	//refSG->addChild(forestMT);
+	refSG->addChild(LoadTrees(1));
+}
 
-	//std::string fernTree = "Tree::Fern Grammar";
-	//EntityNode *treeSampleNode = TreeGenerator.generate();
-	//treeSampleNode->name = fernTree;
-	//refES->insert(treeSampleNode);
+MatrixTransform* LevelManager::LoadCreeperRandom() {
+	
+	// TODO:: Generate Random Spot for Creeper to load
+	// int x = /* random float here within bounds of terrain */
 
-	//std::string niceTree = "Tree::Nice Grammar";
-	//LSysParam niceTreeProp;
-	//niceTreeProp.iterations = 5;
-	//niceTreeProp.length = 0.12f;
-	//niceTreeProp.rules['X'] = "F[+X]F[-X]+X";
-	//niceTreeProp.rules['F'] = "FF";
-	//niceTreeProp.startRule = 'X';
+	// Bounds for creeper location is:
+	// Camera.eye[0] + 20 < x_maxpos <  + terrain.width/2
+	// Camera.eye[0] - 20 < x_minpos <  - terrain.width/2
+	//
+	// x_finalpos is then whichever's absolute pstn is greater
+	//
+	// Ditto for z using Camera.eye[2] && (terrain.height/2)
 
-	//TreeGenerator.setProperties(niceTreeProp);
-	//EntityNode *niceTreeNode = TreeGenerator.generate();
-	//niceTreeNode->name = niceTree;
-	//refES->insert(niceTreeNode);
+	// int z = /* random float here within bounds of terrain */
+	// int height = /* use terrain get height for this */
 
-	//std::string bushTree = "Tree::Bush Grammar";
-	//LSysParam bushTreeProp;
-	//bushTreeProp.iterations = 3;
-	//bushTreeProp.length = 0.5f;
-	//bushTreeProp.radius = 0.009f;
-	//bushTreeProp.rules['F'] = "FF-[-F+F+F]+[+F-F-F]";
-	//bushTreeProp.startRule = 'F';
+	/* TODO:: make a creeperMT
 
-	//TreeGenerator.setProperties(bushTreeProp);
-	//EntityNode *bushTreeNode = TreeGenerator.generate();
-	//bushTreeNode->name = bushTree;
-	//refES->insert(bushTreeNode);
-
-
-	/*std::string mysteryTree = "Tree::Mystery Grammar";
-	LSysParam mysteryTreeProp;
-	mysteryTreeProp.iterations = 4;
-	mysteryTreeProp.length = 0.3f;
-	mysteryTreeProp.radius = 0.08f;
-	mysteryTreeProp.rules['F'] = "F[+F]F[-F]F";;
-	mysteryTreeProp.startRule = 'F';*/
-
-	/*TreeGenerator.setProperties(mysteryTreeProp);
-	EntityNode *mysteryTreeNode = TreeGenerator.generate();
-	mysteryTreeNode->name = mysteryTree;
-	refES->insert(mysteryTreeNode);
+	Creeper *creepsMT = Creeper::MakeCreeper(
+		// random position, but make sure the height is on terrain 
+		// use mat4.translate(vec3).
+	);
+	
 	*/
+		
+	// return creepsMT; // uncommment this when done
+	return nullptr;
+}
 
-	//MatrixTransform **treeMT = new MatrixTransform*[NumberOfTrees];
-	//Tree **tree = new Tree*[NumberOfTrees];
-	//for(int i = 0; i < NumberOfTrees; ++i) {
-	//	treeMT[i] = new MatrixTransform();
-	//	
-	//	tree[i] = new Tree(fernTree);
-	//	//if( i % 5 == 0) {
-	//		//tree[i] = new Tree(mysteryTree);
-	//	/*} else if( i % 4 == 0 ){
-	//		tree[i] = new Tree(niceTree);
-	//	} else if( i % 3 ) {
-	//		
-	//	} else {
-	//		tree[i] = new Tree(bushTree);
-	//	}*/
-	//	int rx = (rand() % refSG->terrain->terrainGridWidth) - refSG->terrain->terrainGridWidth/2;
-	//	int rz = (rand() % refSG->terrain->terrainGridLength) - refSG->terrain->terrainGridLength/2;
-	//	int height = refSG->terrain->terrainGetHeight(rx,rz);
-	//	treeMT[i]->setMatrix( mat4().makeIdentity().setTranslate( vec3(rx,(float)(height) - 0.3f, rz)) );
-	//	treeMT[i]->addChild(tree[i]);
-	//	forestMT->addChild(treeMT[i]);
-	//}
 
+MatrixTransform* LevelManager::LoadTrees(int amount) {
+	MatrixTransform *forestMT = new MatrixTransform();
+
+	LTree TreeGenerator = LTree(0, LSysParam());
+	treeGrammars = new LSysParam[3];
+	std::string fernTree = "Tree::Fern Grammar";
+	std::string niceTree = "Tree::Nice Grammar";
+	std::string bushTree = "Tree::Bush Grammar";
+	std::string stalkyTree = "Tree::StalkyTree";
+		
+	treeGrammars[0].iterations = 5;
+	treeGrammars[0].length = 0.12f;
+	treeGrammars[0].rules['X'] = "F[+X]F[-X]+X";
+	treeGrammars[0].rules['F'] = "FF";
+	treeGrammars[0].startRule = 'X';
+
+	LSysParam bushTreeProp;
+	treeGrammars[1].iterations = 3;
+	treeGrammars[1].length = 0.5f;
+	treeGrammars[1].radius = 0.009f;
+	treeGrammars[1].rules['F'] = "FF-[-F+F+F]+[+F-F-F]";
+	treeGrammars[1].startRule = 'F';
+
+	treeGrammars[2].iterations = 4;
+	treeGrammars[2].length = 0.3f;
+	treeGrammars[2].radius = 0.08f;
+	treeGrammars[2].rules['F'] = "F[+F]F[-F]F";;
+	treeGrammars[2].startRule = 'F';
+
+	// Default LSysParam is a fern grammar
+	EntityNode *fernTreeNode = TreeGenerator.generate();
+	fernTreeNode->name = fernTree;
+	refES->insert(fernTreeNode);
+	
+	TreeGenerator.setProperties(treeGrammars[0]);
+	EntityNode *niceTreeNode = TreeGenerator.generate();
+	niceTreeNode->name = niceTree;
+	refES->insert(niceTreeNode);
+
+	TreeGenerator.setProperties(treeGrammars[1]);
+	EntityNode *bushTreeNode = TreeGenerator.generate();
+	bushTreeNode->name = bushTree;
+	refES->insert(bushTreeNode);
+
+	TreeGenerator.setProperties(treeGrammars[2]);
+	EntityNode *stalkyTreeNode = TreeGenerator.generate();
+	stalkyTreeNode->name = stalkyTree;
+	refES->insert(stalkyTreeNode);
+
+	int type = 0;
+	MatrixTransform **treeMT = new MatrixTransform*[amount];
+	Tree **tree = new Tree*[amount];
+	for(int i = 0; i < amount; ++i) {
+		treeMT[i] = new MatrixTransform();
+
+		if( i % 4 == 0 ){ tree[i] = new Tree(fernTree, 0);
+		}else if(i % 4 == 1){ tree[i] = new Tree(niceTree, 0);
+		}else if(i % 4 == 2){ tree[i] = new Tree(bushTree, 0);
+		}else{ tree[i] = new Tree(stalkyTree, 0); }
+		
+		int rx = 0, height = 0, rz = 0;
+		if( refSG->terrain != nullptr ) {
+			rx = (rand() % refSG->terrain->terrainGridWidth) - refSG->terrain->terrainGridWidth/2;
+			rz = (rand() % refSG->terrain->terrainGridLength) - refSG->terrain->terrainGridLength/2;
+			height = refSG->terrain->terrainGetHeight(rx,rz);
+		}
+		treeMT[i]->setMatrix( mat4().translate( vec3(rx,(float)(height) - 0.3f, rz)) );
+		treeMT[i]->setMatrix( mat4().translate( vec3(rx,(float)(height) - 0.3f, rz)) );
+
+		treeMT[i]->addChild(tree[i]);
+		forestMT->addChild(treeMT[i]);
+	}
+
+	return forestMT;
 }

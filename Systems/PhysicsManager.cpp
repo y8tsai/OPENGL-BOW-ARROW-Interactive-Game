@@ -96,7 +96,7 @@ void PhysicsManager::Update(float t, float dt) {
 
 // !kludge for charge
 static float charge = 0.0;
-static const float MAXCHARGE = 1.f / 0.01f; //this should be 1 second
+static const float MAXCHARGE = 1.f / 0.01f; //this should be 1 second, 100 dts
 static const float THRESHOLD = 0.6;
 static const float maxv_magnitude = 25.f;
 

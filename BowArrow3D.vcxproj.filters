@@ -50,6 +50,9 @@
     <Filter Include="Physics\BVH">
       <UniqueIdentifier>{828565b0-ea09-42dd-ad4a-e10f972ae31f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Physics\Shapes">
+      <UniqueIdentifier>{3a6d4b69-a80d-47bd-b994-1ce795460125}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -160,6 +163,9 @@
     </ClCompile>
     <ClCompile Include="SceneGraph\Primitives\Creeper.cpp">
       <Filter>SceneGraph\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\BVH\NaiveCheck.cpp">
+      <Filter>Physics\BVH</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -347,6 +353,15 @@
     </ClInclude>
     <ClInclude Include="SceneGraph\Primitives\Creeper.h">
       <Filter>SceneGraph\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\BVH\BVHTree.h">
+      <Filter>Physics\BVH</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\BVH\CollideCheck.h">
+      <Filter>Physics\BVH</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\BVH\NaiveCheck.h">
+      <Filter>Physics\BVH</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
