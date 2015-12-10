@@ -49,11 +49,11 @@ void LevelManager::LoadTestLevel() {
 
 	/*	Getting the Creepers Ready for Battle
 	 ----------------------------------------------------------- */
-/*	float theight = refSG->terrain->terrainGetHeight(0, -10);
+	float theight = refSG->terrain->terrainGetHeight(0, -10);
 	Creeper *creepsMT = Creeper::MakeCreeper(
 		mat4().makeIdentity().setTranslate(vec3(0.f, theight+0.4f, -10.f))
 	);
-	refSG->addChild(creepsMT)*/;
+	refSG->addChild(creepsMT);
 
 
 	//float theight = refSG->terrain->terrainGetHeight(0, 10);

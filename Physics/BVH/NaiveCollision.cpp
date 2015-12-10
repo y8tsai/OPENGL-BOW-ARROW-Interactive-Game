@@ -85,15 +85,3 @@ void NaiveCollision::Update(float t, float dt) {
 		it++;
 	}
 }
-
-void NaiveCollision::RecalculateAABB() {
-	std::unordered_map<unsigned int, AABB*>::iterator it = CID_Store.begin();
-	while( it != CID_Store.end() ) {
-		if( it->first != 1) { //1 is always played
-			AABB temp = *it->second;
-			AABB::UpdateAABB( temp, *it->second ); 
-			std::cout << "" << std::endl;
-		}
-		it++;
-	}
-}

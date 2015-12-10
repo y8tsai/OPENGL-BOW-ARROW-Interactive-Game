@@ -31,8 +31,6 @@ public:
 	static unsigned int player_cid;
 
 private:
-	void RecalculateAABB();
-
 	HitList collisions;
 	std::unordered_map<unsigned int, AABB*> CID_Store;
 	std::queue<unsigned int> free_CID;
