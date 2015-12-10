@@ -227,29 +227,24 @@ void Creeper::draw( mat4 C ) {
 
 void Creeper::update(float t, float dt) {
 	vec3 camPos = Globals::camera.eye;
-	vec3 crpPos = bodyMT.getTranslate() + headMT.getTranslate();
-	float xDist = camPos[0] - crpPos[0];
-	float yDist = camPos[1] - crpPos[1];
-	float zDist = camPos[2] - crpPos[2];
-	vec3 distToCamXZ = vec3(xDist, 0, zDist).normalize();
-
-	float dotOverLength = headLookAt.dot(distToCamXZ) ;
-	if (dotOverLength > 1)
-		dotOverLength = 0.99999999999f;  //to prevent round off errors causing NaN 
-	else if (dotOverLength < -1)
-		dotOverLength = -0.9999999999f;  //to prevent round off errors causing Nan
-	float angleY = ( acos(dotOverLength)* 180.0 / PI );  
-
-	//std::cout << "HeadLookAt: " << headLookAt[0] << ", " << headLookAt[1] << ", " << headLookAt[2] << std::endl;
-	//std::cout << "distToCamXZ: " << distToCamXZ[0] << ", " << distToCamXZ[1] << ", " << distToCamXZ[2] << std::endl;
-	//std::cout << "AngleY: " << angleY << std::endl << std::endl;
+	vec3 crpPos = bodyMT.getTranslate() + headMT.getTranslate() + vec3(0, 0, -10);
+	vec3 disToCamXZ = camPos - crpPos;
+	disToCamXZ[1] = 0; // we dont want y comp for rotation around y
+	disToCamXZ.normalize();
+	float angleY = disToCamXZ.dot(headLookAt) * 180 / PI;  
+	if ( disToCamXZ[0] < 0)
+		angleY = angleY * -1;
+	
 	mat4 rotY = mat4().makeRotateY(angleY);
 
 	if (angleY < -0.00001 || angleY > 0.00001) {
-			headRotation = headRotation * rotY;				 //update rotation matrix
-			bodyRotation = headRotation * rotY;				 //update rotation matrix
-			headLookAt = (rotY * headLookAt ).normalize() ;  //update lookAt vectors
-			bodyLookAt = (rotY * bodyLookAt ).normalize() ;
+		//std::cout << "distToCamXZ: " << distToCamXZ[0] << ", " << distToCamXZ[1] << ", " << distToCamXZ[2] << std::endl;
+		//std::cout << "HeadLookAt: " << headLookAt[0] << ", " << headLookAt[1] << ", " << headLookAt[2] << std::endl;
+		//std::cout << "AngleY: " << angleY << std::endl << std::endl;
+			headRotation = rotY ;				 //update rotation matrix
+			bodyRotation = rotY;				 //update rotation matrix
+			headLookAt = ( headRotation * headLookAt ).normalize() ;  //update lookAt vectors
+			bodyLookAt = ( bodyRotation * bodyLookAt ).normalize() ;
 			headMT = headMT * headRotation;                  //apply transformations to each body part
 			bodyMT = bodyMT * bodyRotation;
 			ft_legMT = ft_legMT * bodyRotation ; 
