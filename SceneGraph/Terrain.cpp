@@ -599,7 +599,7 @@ int Terrain::terrainCreateDL(float xOffset, float yOffset, float zOffset, int li
 	glEndList();
 
 	glPopMatrix();
-	glEnable(GL_COLOR);
+	glDisable(GL_COLOR);
 	return(terrainDL);
 }
 

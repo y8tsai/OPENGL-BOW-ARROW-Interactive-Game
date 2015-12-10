@@ -73,6 +73,10 @@ void Particle::CreateParticle(vec3 sourcePos, float iniVel, float distFromCenter
 	ypos = sourcePos.v[1];
 	zpos = sourcePos.v[2];
 
+	xposC = sourcePos.v[0];
+	yposC = sourcePos.v[1];
+	zposC = sourcePos.v[2];
+
 	int signX, signY, signZ;
 	if (rand() % 2 == 0) //determines the direction of the particle
 			signX = 1;
@@ -109,9 +113,11 @@ void Particle::CreateParticle(vec3 sourcePos, float iniVel, float distFromCenter
 void Particle::EvolveParticle()
 {
 	lifetime-=decay;
-	xpos+= xspeed  ;
-	ypos-= yspeed ;
-	zpos+= zspeed ;
+	if ( abs(xpos) > (xposC + 10) && abs(zpos) > (zposC + 10) )
+		active = false;
+	xpos += xspeed;
+	ypos -= yspeed;
+	zpos += zspeed;
 	yspeed+= abs(yspeed) / 100 ;  //so it always falls
 }
 

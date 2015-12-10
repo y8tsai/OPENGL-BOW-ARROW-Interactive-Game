@@ -15,6 +15,7 @@ private:
 	float decay;                          // decay speed of the particle
 	float r,g,b;                          // color values of the particle
 	float xpos,ypos,zpos;                 // position of the particle
+	float xposC, yposC, zposC;			  // source of the particle
 	float xspeed,yspeed,zspeed;           // speed of the particle
 	bool active;						  // is particle active or not?
 	
