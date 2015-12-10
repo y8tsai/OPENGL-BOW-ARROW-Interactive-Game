@@ -5,6 +5,7 @@
 #include "Particle.h"
 #include "Utils/tga.h"
 #include "math3d.h"
+#include "SceneGraph/Base/MatrixTransform.h""
 
 #define PARTICLES_ERROR_INVALID_PARAM		-5
 #define PARTICLES_ERROR_LOADING_IMAGE		-4
@@ -13,15 +14,17 @@
 #define PARTICLES_ERROR_NOT_INITIALISED		-1
 #define PARTICLES_OK						 0
 
-class Particles : public Drawable
+class Particles : public MatrixTransform
 {
 public:
 	Particles();
-	Particles(int num, vec3 source);
+	Particles(int num, vec3 source);   //specify particle number and focal location in world space
 	~Particles();
 
-	virtual void draw(DrawData&);
-	virtual void update(UpdateData&);
+	void draw(mat4 C);
+	void update(float t, float dt);
+
+	bool markDelete;   
 
 	int particlesLoadFromImage(char *filename); //used to load displacement map
 	int numParticles;							//total number of particles

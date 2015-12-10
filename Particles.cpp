@@ -16,12 +16,15 @@ Particles::Particles(){
 		particles[i].CreateParticle(source);
 	}
 
+	markDelete = false;
+
 }
 
 Particles::Particles(int num, vec3 source) {
 	if (particlesLoadFromImage("Resources/TGA/pnoise.tga") != PARTICLES_OK)
 		std::cerr << ("PARTICLES_OK is FALSE") << std::endl;
 
+	markDelete = false;
 	numParticles = num;
 	particles = new Particle[numParticles];
 
@@ -47,14 +50,14 @@ Particles::~Particles() {
 	delete particles;  //free memory of dynamic particles array
 }
 
-void Particles::draw(DrawData&) {
+void Particles::draw(mat4 C) {
 	for (int i = 0; i < numParticles; i++)
 	{
 		particles[i].DrawObjects(); //render the particles
 	}
 }
 
-void Particles::update(UpdateData&) {
+void Particles::update(float t, float dt) {
 	for (int i = 0; i < numParticles; i++)
 	{
 		particles[i].EvolveParticle(); //update the particles
