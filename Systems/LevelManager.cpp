@@ -31,13 +31,13 @@ static float interval_ms = 0.f;
 void LevelManager::EventUpdate(float t, float dt) {
 	// Want to load a creeper every 5 -> 10 seconds
 	if( interval_ms < 0.f ) {
-		interval_ms = (float)((std::rand() % 6) + 5) / dt;
-		std::cout << "Load creeper. Next one in " << interval_ms * dt << " seconds" << std::endl;
-		
+		interval_ms = (float)((std::rand() % 6) + 5);
+		std::cout << "Load creeper. Next one in " << interval_ms << " seconds" << std::endl;
 		refSG->addChild(LoadCreeperRandom());
 	} else {
 		interval_ms = interval_ms - dt;
 	}
+
 }
 
 void LevelManager::LoadTestLevel() {
@@ -56,7 +56,7 @@ void LevelManager::LoadTestLevel() {
 
 	/*	Making All the Trees
 	 ----------------------------------------------------------- */
-	refSG->addChild(LoadTrees(1));
+	//refSG->addChild(LoadTrees(1));
 }
 
 MatrixTransform* LevelManager::LoadCreeperRandom() {

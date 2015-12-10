@@ -161,6 +161,9 @@
     <ClCompile Include="SceneGraph\Primitives\Creeper.cpp">
       <Filter>SceneGraph\Primitives</Filter>
     </ClCompile>
+    <ClCompile Include="Physics\BVH\BVHTree.cpp">
+      <Filter>Physics\BVH</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
@@ -347,6 +350,12 @@
     </ClInclude>
     <ClInclude Include="SceneGraph\Primitives\Creeper.h">
       <Filter>SceneGraph\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\BVH\BVHTree.h">
+      <Filter>Physics\BVH</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\BVH\CollideCheck.h">
+      <Filter>Physics\BVH</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
