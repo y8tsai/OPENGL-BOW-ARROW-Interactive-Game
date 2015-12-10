@@ -46,7 +46,6 @@ public:
 	AABB(const AABB& b); //copy constructor
 	
 	void DrawDebug(mat4 C = mat4().makeIdentity(), bool collided = false); // Draws bounding volume
-	bool hit;
 	std::string tag;
 
 	static HitInfo BroadIntersect(unsigned int k, AABB &a, unsigned int l, AABB &b);

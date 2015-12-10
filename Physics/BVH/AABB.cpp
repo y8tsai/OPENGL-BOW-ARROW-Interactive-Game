@@ -9,7 +9,6 @@ vec3 AABB::stdColor = vec3(1.f, 1.f, 1.f);
 AABB::AABB() {
 	center = vec3(0.f, 0.f, 0.f);
 	radius = vec3(0.f, 0.f, 0.f);
-	hit = false;
 	tag = "";
 }
 
@@ -18,7 +17,6 @@ AABB::AABB(vec3 p, vec3 c, vec3 r, mat3 rot) {
 	position = p;
 	center = c;
 	radius = r;
-	hit = false;
 	tag = "";
 }
 
@@ -28,7 +26,6 @@ AABB::AABB(const AABB& b) {
 		position = b.position;
 		center = b.center;
 		radius = b.radius;
-		hit = false;
 		tag = b.tag;
 	}
 }

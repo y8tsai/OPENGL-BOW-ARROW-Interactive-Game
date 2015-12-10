@@ -83,10 +83,8 @@ void Arrow::draw( mat4 C ) {
 				HitList hits;
 				Globals::ColStore->Query(model->CID, hits);
 				if( hits.size() ) {
-					std::cout << "draw hit box" << std::endl;
 					info->DrawDebug(C * M, true);
 				} else {
-					std::cout << "draw box" << std::endl;
 					info->DrawDebug(C * M);
 				}
 
