@@ -47,6 +47,7 @@ public:
 	
 	void DrawDebug(mat4 C = mat4().makeIdentity(), bool collided = false); // Draws bounding volume
 	bool hit;
+	unsigned int ignore;
 
 	static HitInfo BroadIntersect(unsigned int k, AABB &a, unsigned int l, AABB &b);
 

@@ -25,7 +25,6 @@ private:
 
 	Scene* refSG;		//reference pointer to Globals::SceneGraph
 	EntityBST* refES;	//reference pointer to Globals::EntityStore
-
 	LSysParam *treeGrammars;
 };
 

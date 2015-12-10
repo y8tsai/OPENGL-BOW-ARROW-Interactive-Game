@@ -24,10 +24,6 @@ namespace Fizzix {
 	void PBody::UpdateSimulation(float t, float dt) {
 		if( !staticBody ) {
 			Simulation::RK4( *this, t, dt);
-			AABB *cobj = Globals::ColStore->GetAABBInfo(CID);
-			if( cobj != nullptr ) {
-				cobj->position = position;
-			}
 		}
 	}
 

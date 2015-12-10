@@ -127,8 +127,6 @@ void Window::display() {
 		Globals::ColStore->GetAABBInfo(Globals::gPhysicsMgr.player_cid)->DrawDebug(mat4().translate(Globals::camera.eye));
 	}
 
-	particles->draw(mat4().makeIdentity());
-
 	this->DisplayHUD();
 
 	SDL_GL_SwapWindow( winHandle );
@@ -191,9 +189,6 @@ void Window::DisplayHUD() {
 
 	glLineWidth(3.0f);
 	DrawCircle(midX, midY, radius, 60);
-
-	//update particles
-	//particles->update(UpdateData());
 
 	//glDisable(GL_LIGHT0);
 	glEnable(GL_DEPTH_TEST);

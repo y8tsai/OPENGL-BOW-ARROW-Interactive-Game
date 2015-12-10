@@ -74,7 +74,8 @@ void NaiveCollision::Update(float t, float dt) {
 	while( it != CID_Store.end() ) {
 		std::unordered_map<unsigned int, AABB*>::iterator ref = CID_Store.begin();
 		while( ref != CID_Store.end() ) {
-			if( it != ref ) {
+
+			if( it->first != ref->first ) {
 				HitInfo ht = AABB::BroadIntersect(it->first, *it->second, ref->first, *ref->second);
 				if( ht.intersect ) {
 					collisions.push_back(ht);

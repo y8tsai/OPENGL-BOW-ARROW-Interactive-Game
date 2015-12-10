@@ -230,4 +230,5 @@ void PhysicsManager::UpdatePlayer(float t, float dt) {
 	// update player position
 	AABB* playerBB = refCS->GetAABBInfo(player_cid);
 	playerBB->position = Globals::camera.eye;
+	Globals::camera.eye.print("eye");
 }

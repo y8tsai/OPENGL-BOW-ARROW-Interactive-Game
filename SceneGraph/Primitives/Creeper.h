@@ -43,7 +43,6 @@ public:
 
 	// Reference count keeping track of amount of creepers
 	static int number; 
-	
 
 	Creeper(mat4 m2w, Cube* fl, Cube* bl, Cube *bdy, Cube* hd);
 	~Creeper();
@@ -52,13 +51,16 @@ public:
 	void update(float t, float dt);
 
 private:
-	static Cube* CreateFrontLegModel(mat4 m2w);
-	static Cube* CreateBackLegModel(mat4 m2w);
-	static Cube* CreateBodyModel(mat4 m2w);
-	static Cube* CreateHeadModel(mat4 m2w);
+	static Cube* CreateFrontLegModel(mat4 m2w, unsigned int cid);
+	static Cube* CreateBackLegModel(mat4 m2w, unsigned int cid);
+	static Cube* CreateBodyModel(mat4 m2w, unsigned int cid);
+	static Cube* CreateHeadModel(mat4 m2w, unsigned int cid);
 	static EntityNode* CreateEntity(std::string eid, const GLvoid *verts, GLsizeiptr vertsize, Program *prog = nullptr);
 	static Texture* CreateTexture(std::string filename);
 	static Texture* CreateFaceTexture(std::string faceFilename, std::string skinFilename);
+
+	bool EXPLODE;
+	float timeUntilDel;
 
 	vec3 headLookAt;
 	vec3 bodyLookAt;

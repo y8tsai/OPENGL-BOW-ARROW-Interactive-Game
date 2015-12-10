@@ -17,6 +17,7 @@ Arrow* Arrow::MakeArrow(mat4 m2w, vec3 init_v) {
 	AABB *bbox = new AABB(m2w.getTranslate(), ArrowModel::BoundingBox[0], ArrowModel::BoundingBox[1], m2w.getRotation());
 	AABB temp = *bbox;
 	AABB::UpdateAABB(temp, *bbox);
+	bbox->ignore = 1;
 	unsigned int collision_id = Globals::ColStore->RegisterAABB(bbox);
 
 	// Each geode object has it's own physics body unlike Entity used for drawing
@@ -76,8 +77,16 @@ void Arrow::draw( mat4 C ) {
 
 		if(Globals::gPhysicsMgr.DebugDraw.__arrows) {
 			AABB* info = Globals::ColStore->GetAABBInfo(model->CID);
+
 			if(info != nullptr) {
-				info->DrawDebug(C * M);
+				HitList hits;
+				Globals::ColStore->Query(model->CID, hits);
+				if( hits.size() ) {
+					info->DrawDebug(C * M, true);
+				} else {
+					info->DrawDebug(C * M);
+				}
+
 			}
 		}
 	}
@@ -86,12 +95,25 @@ void Arrow::draw( mat4 C ) {
 void Arrow::update(float t, float dt) {
 	//collision id -> AABB will also be fetched here for updating
 
+	AABB *bbox =  Globals::ColStore->GetAABBInfo(model->CID);
 	Fizzix::PBody *info = Globals::gPhysicsMgr.GetPBody(model->PID);
 	if( !info->staticBody) {
 		vec3 currPstn = info->position;
 		float boundaryX = (float)Globals::SceneGraph->terrain->terrainGridWidth/2.f;
 		float boundaryZ = (float)Globals::SceneGraph->terrain->terrainGridLength/2.f;
 		float hitFloor = Globals::SceneGraph->terrain->terrainGetHeight((int)currPstn[0], (int)currPstn[2]);
+
+		if(bbox != nullptr) {
+			bbox->position = info->position;
+			HitList hits;
+			Globals::ColStore->Query(model->CID, hits);
+			
+			if(hits.size()) {
+				info->staticBody = true;
+				timeUntilDel = 480.f;
+			}
+		}
+
 		if( currPstn[0] > boundaryX || currPstn[0] < -boundaryX || currPstn[2] < -boundaryZ || currPstn[2] > boundaryZ) {
 			visible = false;
 			info->staticBody = true;

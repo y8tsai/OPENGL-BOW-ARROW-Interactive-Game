@@ -15,11 +15,16 @@ int Creeper::number = 0;
 Creeper* Creeper::MakeCreeper(mat4 m2w) {
 	Creeper::number++;
 
+	vec3 btrans = m2w.getTranslate();
+	btrans[1] += 6.f;
+	AABB* bbox = new AABB(btrans, {0.f, 5.5f, 0.f }, {1.f, 3.0f, 1.f} ,m2w.getRotation());
+	unsigned int cid = Globals::ColStore->RegisterAABB(bbox);
+
 	// m2w would should be center position of front leg in world coordinates
-	Cube *frontLeg = CreateFrontLegModel(m2w), 
-		 *backLeg = CreateBackLegModel(m2w),
-		 *body = CreateBodyModel(m2w),
-		 *head = CreateHeadModel(m2w);
+	Cube *frontLeg = CreateFrontLegModel(m2w, cid), 
+		 *backLeg = CreateBackLegModel(m2w, cid),
+		 *body = CreateBodyModel(m2w, cid),
+		 *head = CreateHeadModel(m2w, cid);
 
 	// Creeper's draw call is modified to not traverse tree
 	// Since it's one unit, it will store references to its
@@ -27,16 +32,19 @@ Creeper* Creeper::MakeCreeper(mat4 m2w) {
 	// A bit not standard, this one
 	Creeper *Sapling = new Creeper(m2w, frontLeg, backLeg, body, head);
 
+	
+
+
 	// creating a physics body
-	//Fizzix::PBody *pb = new Fizzix::PBody(m2w.getTranslate(), vec3(0.f,0.f,0.5f), 1.f);
-	//Sapling->CID = Globals::gPhysicsMgr.RegisterPBody(pb);
+	Fizzix::PBody *pb = new Fizzix::PBody(m2w.getTranslate(), vec3(0.f,0.f,0.5f), 1.f);
+	int PID = Globals::gPhysicsMgr.RegisterPBody(pb);
 
 	return Sapling;
 }
 
 /* Factory Helper Functions:: Auto-creates Entity
  * ----------------------------------------------- */
-Cube* Creeper::CreateFrontLegModel(mat4 m2w) {
+Cube* Creeper::CreateFrontLegModel(mat4 m2w, unsigned int cid) {
 	//If internal EID is empty, use 
 	if( __frontlegEID == "" ){
 		__frontlegEID = "Creeper::FrontLeg";
@@ -45,12 +53,10 @@ Cube* Creeper::CreateFrontLegModel(mat4 m2w) {
 		Globals::EntityStore->insert(frontlegEN);
 	}
 
-	AABB* cfront = new AABB(m2w.getTranslate(), CreeperModel::FrontLBoundingBox[0], CreeperModel::FrontLBoundingBox[1], m2w.getRotation());
-	unsigned int cid = Globals::ColStore->RegisterAABB(cfront);
 	return new Cube(__frontlegEID, 0, cid);
 }
 
-Cube* Creeper::CreateBackLegModel(mat4 m2w) {
+Cube* Creeper::CreateBackLegModel(mat4 m2w, unsigned int cid) {
 	if( __backlegEID == "" ){
 		__backlegEID = "Creeper::BackLeg";
 		EntityNode *backlegEN = CreateEntity(__backlegEID, CreeperModel::BackLeg, sizeof(CreeperModel::BackLeg));
@@ -58,12 +64,10 @@ Cube* Creeper::CreateBackLegModel(mat4 m2w) {
 		Globals::EntityStore->insert(backlegEN);
 	}
 
-	AABB* cback = new AABB(m2w.getTranslate(), CreeperModel::BackLBoundingBox[0], CreeperModel::BackLBoundingBox[1], m2w.getRotation());
-	unsigned int cid = Globals::ColStore->RegisterAABB(cback);
 	return new Cube(__backlegEID, 0, cid);
 }
 
-Cube* Creeper::CreateBodyModel(mat4 m2w) {
+Cube* Creeper::CreateBodyModel(mat4 m2w, unsigned int cid) {
 	if( __bodyEID == "" ){
 		__bodyEID = "Creeper::Body";
 		EntityNode *bodyEN = CreateEntity(__bodyEID, CreeperModel::Body, sizeof(CreeperModel::Body));
@@ -71,12 +75,10 @@ Cube* Creeper::CreateBodyModel(mat4 m2w) {
 		Globals::EntityStore->insert(bodyEN);
 	}
 
-	AABB* cbody = new AABB(m2w.getTranslate(), CreeperModel::BodyBoundingBox[0], CreeperModel::BodyBoundingBox[1], m2w.getRotation());
-	unsigned int cid = Globals::ColStore->RegisterAABB(cbody);
 	return new Cube(__bodyEID, 0, cid);
 }
 
-Cube* Creeper::CreateHeadModel(mat4 m2w) {
+Cube* Creeper::CreateHeadModel(mat4 m2w, unsigned int cid) {
 	if( __headEID == "" ){
 		__headEID = "Creeper::Head";
 		Program *shade = Program::LoadShaders("Models/Shaders/CreeperFace.vs", "Models/Shaders/CreeperFace.fs");
@@ -87,8 +89,6 @@ Cube* Creeper::CreateHeadModel(mat4 m2w) {
 		Globals::EntityStore->insert(headEN);
 	}
 
-	AABB* chead = new AABB(m2w.getTranslate(), CreeperModel::HeadBoundingBox[0], CreeperModel::HeadBoundingBox[1], m2w.getRotation());
-	unsigned int cid = Globals::ColStore->RegisterAABB(chead);
 	return new Cube(__headEID, 0, cid);
 }
 
@@ -184,7 +184,8 @@ Creeper::Creeper(mat4 m2w, Cube* fl, Cube* bl, Cube *bdy, Cube* hd) : MatrixTran
 	bk_legMT = mat4().makeIdentity().setTranslate(vec3(0.f, 0.f, -0.6f));
 	bodyMT = mat4().makeIdentity().setTranslate(vec3(0.f, 1.96f, 0.2f));
 	headMT = mat4().makeIdentity().setTranslate(vec3(0.f, 2.5f, 0.f));
-	
+	EXPLODE = false;
+	timeUntilDel = 0.f;
 }
 
 Creeper::~Creeper() {
@@ -204,52 +205,70 @@ Creeper::~Creeper() {
 
 void Creeper::draw( mat4 C ) {
     C = C * M;
-	if(Globals::gPhysicsMgr.DebugDraw.__enemies) {
-		AABB* bb = Globals::ColStore->GetAABBInfo(fr_leg->CID);	
-		bb->DrawDebug(C * ft_legMT);
-		bb = Globals::ColStore->GetAABBInfo(bk_leg->CID);	
-		bb->DrawDebug(C * bk_legMT);
-	}
+
 	fr_leg->draw(C * ft_legMT);
 	bk_leg->draw(C * bk_legMT);
 	C = C * bodyMT;
-
 	if(Globals::gPhysicsMgr.DebugDraw.__enemies) {
-		AABB* bb = Globals::ColStore->GetAABBInfo(body->CID);
-		bb->DrawDebug(C);
-		bb = Globals::ColStore->GetAABBInfo(head->CID);
-		bb->DrawDebug(C * headMT);
-	}
+		AABB* bb = Globals::ColStore->GetAABBInfo(body->CID);	
 
+		HitList hits;
+		Globals::ColStore->Query(body->CID, hits);
+		if(hits.size()) {
+			bb->DrawDebug(C, true);
+		} else {
+			bb->DrawDebug(C);
+		}
+	}
 	body->draw(C);
 	head->draw(C * headMT);
 }
 
+static float lifetime = 0.15f; // 0.2 second after collision, EXPLODE
 void Creeper::update(float t, float dt) {
-	vec3 camPos = Globals::camera.eye;
-	vec3 crpPos = bodyMT.getTranslate() + headMT.getTranslate() + vec3(0, 0, -10);
-	vec3 disToCamXZ = camPos - crpPos;
-	disToCamXZ[1] = 0; // we dont want y comp for rotation around y
-	disToCamXZ.normalize();
-	float angleY = disToCamXZ.dot(headLookAt) * 180 / PI;  
-	if ( disToCamXZ[0] < 0)
-		angleY = angleY * -1;
 	
-	mat4 rotY = mat4().makeRotateY(angleY);
-
-	if (angleY < -0.00001 || angleY > 0.00001) {
-		//std::cout << "distToCamXZ: " << distToCamXZ[0] << ", " << distToCamXZ[1] << ", " << distToCamXZ[2] << std::endl;
-		//std::cout << "HeadLookAt: " << headLookAt[0] << ", " << headLookAt[1] << ", " << headLookAt[2] << std::endl;
-		//std::cout << "AngleY: " << angleY << std::endl << std::endl;
-			headRotation = rotY ;				 //update rotation matrix
-			bodyRotation = rotY;				 //update rotation matrix
-			headLookAt = ( headRotation * headLookAt ).normalize() ;  //update lookAt vectors
-			bodyLookAt = ( bodyRotation * bodyLookAt ).normalize() ;
-			headMT = headMT * headRotation;                  //apply transformations to each body part
-			bodyMT = bodyMT * bodyRotation;
-			ft_legMT = ft_legMT * bodyRotation ; 
-			bk_legMT = bk_legMT * bodyRotation ;	
+	if( !EXPLODE ) {
+		// Animation in only this block
+		vec3 camPos = Globals::camera.eye;
+		vec3 crpPos = bodyMT.getTranslate() + headMT.getTranslate() + vec3(0, 0, -10);
+		vec3 disToCamXZ = camPos - crpPos;
+		disToCamXZ[1] = 0; // we dont want y comp for rotation around y
+		disToCamXZ.normalize();
+		float angleY = disToCamXZ.dot(headLookAt) * 180 / PI;  
+		if ( disToCamXZ[0] < 0)
+			angleY = angleY * -1;
+	
+		mat4 rotY = mat4().makeRotateY(angleY);
+		HitList hits;
+		Globals::ColStore->Query(body->CID, hits);
+		if(hits.size()) {
+			EXPLODE = true;
+			Globals::ColStore->RemoveAABBInfo(body->CID);
+			body->CID = 0;
 		}
+
+		if (angleY < -0.00001 || angleY > 0.00001) {
+			//std::cout << "distToCamXZ: " << distToCamXZ[0] << ", " << distToCamXZ[1] << ", " << distToCamXZ[2] << std::endl;
+			//std::cout << "HeadLookAt: " << headLookAt[0] << ", " << headLookAt[1] << ", " << headLookAt[2] << std::endl;
+			//std::cout << "AngleY: " << angleY << std::endl << std::endl;
+				headRotation = rotY ;				 //update rotation matrix
+				bodyRotation = rotY;				 //update rotation matrix
+				headLookAt = ( headRotation * headLookAt ).normalize() ;  //update lookAt vectors
+				bodyLookAt = ( bodyRotation * bodyLookAt ).normalize() ;
+				headMT = headMT * headRotation;                  //apply transformations to each body part
+				bodyMT = bodyMT * bodyRotation;
+				ft_legMT = ft_legMT * bodyRotation ; 
+				bk_legMT = bk_legMT * bodyRotation ;	
+		}
+	} else {
+		if( timeUntilDel >= lifetime ) {
+			//Globals::SceneGraph->addChild(new Particles()); 
+			
+			cleanup = true;	
+		} else {
+			timeUntilDel += dt;
+		}
+	}
 
 }
         
