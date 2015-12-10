@@ -42,26 +42,23 @@ typedef std::vector<HitInfo> HitList;
 class AABB {
 public:
 	AABB();
-	AABB(vec3 p, vec3 c, vec3 r, quat q);
+	AABB(vec3 p, vec3 c, vec3 r, mat3 rot);
 	AABB(const AABB& b); //copy constructor
 	
 	void DrawDebug(mat4 C = mat4().makeIdentity(), bool collided = false); // Draws bounding volume
 	bool hit;
 
-
 	static HitInfo BroadIntersect(unsigned int k, AABB &a, unsigned int l, AABB &b);
+
+	static void UpdateAABB(AABB rotated, AABB &res);
 
 	static vec3 hitColor;
 	static vec3 stdColor;
 
-	quat rotation;
+	mat3 rotation;
 	vec3 position;
 	vec3 center;
 	vec3 radius; // half-width extents (rx, ry, rz)
-	
-	//another min max representation
-	vec3 min;
-	vec3 max;
 };
 
 

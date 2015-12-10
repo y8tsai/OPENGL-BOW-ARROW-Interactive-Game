@@ -7,14 +7,16 @@ std::string Arrow::__ArrowEID = "";
 const float Arrow::lifetime = 500.f;
 
 // Static Factory Method
-Arrow* Arrow::MakeArrow(mat4 m2w, vec3 init_v, quat rot) {
+Arrow* Arrow::MakeArrow(mat4 m2w, vec3 init_v) {
 	if( __ArrowEID == "" ) {
 		__ArrowEID = "Arrow";
 		EntityNode *ArrowEN = CreateEntity(__ArrowEID, ArrowModel::Shaft, sizeof(ArrowModel::Shaft));
 		Globals::EntityStore->insert(ArrowEN);
 	}
 	
-	AABB *bbox = new AABB(m2w.getTranslate(), ArrowModel::BoundingBox[0], ArrowModel::BoundingBox[1], rot);
+	AABB *bbox = new AABB(m2w.getTranslate(), ArrowModel::BoundingBox[0], ArrowModel::BoundingBox[1], m2w.getRotation());
+	AABB temp = *bbox;
+	AABB::UpdateAABB(temp, *bbox);
 	unsigned int collision_id = Globals::ColStore->RegisterAABB(bbox);
 
 	// Each geode object has it's own physics body unlike Entity used for drawing

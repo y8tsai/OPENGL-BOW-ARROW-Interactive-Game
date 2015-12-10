@@ -177,6 +177,44 @@ void vec4::print(std::string comment) {
 }
 
 /**
+ *                                      Matrix 3x3 No operations only storage
+ * ======================================================================================
+ */
+
+mat3::mat3() {
+	for( int i = 0; i < 3; ++i ) {
+		for( int j = 0; j < 3; ++j ) {
+			m[i][j] = 0.0f;
+		}
+	}
+}
+
+mat3::mat3(const mat3& b) {
+	for( int i=0; i<3; ++i ) {
+		for( int j=0; j<3; ++j ) {
+			m[i][j] = b.m[i][j];
+		}
+	}
+}
+
+mat3::mat3(float m00, float m01, float m02, float m10, float m11, float m12, float m20, float m21, float m22) {
+	m[0][0] = m00; m[0][1] = m01; m[0][2] = m02;
+	m[1][0] = m10; m[1][1] = m11; m[1][2] = m12;
+	m[2][0] = m20; m[2][1] = m21; m[2][2] = m22;
+}
+
+mat3& mat3::operator=(const mat3& b) {
+	if( this != &b ) {
+		for( int i=0; i<3; ++i ) {
+			for( int j=0; j<3; ++j ) {
+				m[i][j] = b.m[i][j];
+			}
+		}
+	}
+	return *this;
+}
+
+/**
  *                                      Matrix 4x4
  * ======================================================================================
  */
@@ -198,8 +236,8 @@ mat4::mat4(const float (&el)[4][4]) {
 }
 
 mat4::mat4(float m00, float m01, float m02, float m03, float m10, float m11, float m12, float m13, float m20, float m21, float m22, float m23, float m30, float m31, float m32, float m33) {
-	m[0][0] = m00; m[0][1] = m01; m[0][2] = m02; m[0][3] = m03;
-	m[1][0] = m10; m[1][1] = m11; m[1][2] = m12; m[1][3] = m13;
+	m[0][0] = m00; m[0][1] = m01; m[0][2] = m02;
+	m[1][0] = m10; m[1][1] = m11; m[1][2] = m12;
 	m[2][0] = m20; m[2][1] = m21; m[2][2] = m22; m[2][3] = m23;
 	m[3][0] = m30; m[3][1] = m31; m[3][2] = m32; m[3][3] = m33;
 }
@@ -323,6 +361,16 @@ mat4& mat4::makeRotate(float deg, vec3 &axis) {
     m[2][2] = 1 + (az * az - 1) * (1 - cs);
 
 	return *this;
+}
+
+mat3 mat4::getRotation() {
+	mat3 res;
+	for( int i=0; i<3; ++i ) {
+		for( int j=0; j<3; ++j ) {
+			res.m[i][j] = m[i][j];
+		}
+	}
+	return res;
 }
 
 mat4 mat4::rigidInverse() {

@@ -45,7 +45,7 @@ Cube* Creeper::CreateFrontLegModel(mat4 m2w) {
 		Globals::EntityStore->insert(frontlegEN);
 	}
 
-	AABB* cfront = new AABB(m2w.getTranslate(), CreeperModel::FrontLBoundingBox[0], CreeperModel::FrontLBoundingBox[1], quat());
+	AABB* cfront = new AABB(m2w.getTranslate(), CreeperModel::FrontLBoundingBox[0], CreeperModel::FrontLBoundingBox[1], m2w.getRotation());
 	unsigned int cid = Globals::ColStore->RegisterAABB(cfront);
 	return new Cube(__frontlegEID, 0, cid);
 }
@@ -58,7 +58,7 @@ Cube* Creeper::CreateBackLegModel(mat4 m2w) {
 		Globals::EntityStore->insert(backlegEN);
 	}
 
-	AABB* cback = new AABB(m2w.getTranslate(), CreeperModel::BackLBoundingBox[0], CreeperModel::BackLBoundingBox[1], quat());
+	AABB* cback = new AABB(m2w.getTranslate(), CreeperModel::BackLBoundingBox[0], CreeperModel::BackLBoundingBox[1], m2w.getRotation());
 	unsigned int cid = Globals::ColStore->RegisterAABB(cback);
 	return new Cube(__backlegEID, 0, cid);
 }
@@ -71,7 +71,7 @@ Cube* Creeper::CreateBodyModel(mat4 m2w) {
 		Globals::EntityStore->insert(bodyEN);
 	}
 
-	AABB* cbody = new AABB(m2w.getTranslate(), CreeperModel::BodyBoundingBox[0], CreeperModel::BodyBoundingBox[1], quat());
+	AABB* cbody = new AABB(m2w.getTranslate(), CreeperModel::BodyBoundingBox[0], CreeperModel::BodyBoundingBox[1], m2w.getRotation());
 	unsigned int cid = Globals::ColStore->RegisterAABB(cbody);
 	return new Cube(__bodyEID, 0, cid);
 }
@@ -87,7 +87,7 @@ Cube* Creeper::CreateHeadModel(mat4 m2w) {
 		Globals::EntityStore->insert(headEN);
 	}
 
-	AABB* chead = new AABB(m2w.getTranslate(), CreeperModel::HeadBoundingBox[0], CreeperModel::HeadBoundingBox[1], quat());
+	AABB* chead = new AABB(m2w.getTranslate(), CreeperModel::HeadBoundingBox[0], CreeperModel::HeadBoundingBox[1], m2w.getRotation());
 	unsigned int cid = Globals::ColStore->RegisterAABB(chead);
 	return new Cube(__headEID, 0, cid);
 }

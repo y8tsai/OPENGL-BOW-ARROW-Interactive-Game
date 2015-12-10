@@ -140,7 +140,9 @@ void PhysicsManager::UpdatePlayer(float t, float dt) {
 			mat4 rotY = mat4().makeRotateY(angleY * 180.0 / PI);
 			mat4 rotX = mat4().makeRotateX((angleX) * 180.0 / PI);
 
-			Arrow *fired = Arrow::MakeArrow( mat4().translate(Globals::camera.eye) * rotY * rotX, direcon);
+			mat4 rot = rotY * rotX;
+
+			Arrow *fired = Arrow::MakeArrow( rot.translate(Globals::camera.eye) * rotY * rotX, direcon);
 
 			Globals::SceneGraph->addChild(fired);
 		}

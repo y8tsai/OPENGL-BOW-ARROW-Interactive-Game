@@ -44,27 +44,27 @@ void LevelManager::LoadTestLevel() {
 	PBody *player_pbody = new PBody(Globals::camera.eye, vec3(), 1.0f, false);	
 	Globals::gPhysicsMgr.RegisterPBody(player_pbody);
 
-	AABB *player_bbox = new AABB( Globals::camera.eye, vec3(0.0, 1.5, 0.0), vec3(0.5f, 1.5f, 0.5f), quat());
+	AABB *player_bbox = new AABB( Globals::camera.eye, vec3(0.0, 1.5, 0.0), vec3(0.5f, 1.5f, 0.5f), mat3());
 	Globals::ColStore->RegisterAABB( player_bbox );
 
 	/*	Getting the Creepers Ready for Battle
 	 ----------------------------------------------------------- */
-	float theight = refSG->terrain->terrainGetHeight(0, -10);
+/*	float theight = refSG->terrain->terrainGetHeight(0, -10);
 	Creeper *creepsMT = Creeper::MakeCreeper(
 		mat4().makeIdentity().setTranslate(vec3(0.f, theight+0.4f, -10.f))
 	);
-	refSG->addChild(creepsMT);
+	refSG->addChild(creepsMT)*/;
 
 
-	theight = refSG->terrain->terrainGetHeight(0, 10);
-	Creeper *BBTest = Creeper::MakeCreeper(
-		mat4().makeIdentity().setTranslate(vec3(0.f, theight+0.4f, 10.f))
-	);
-	refSG->addChild(BBTest);
+	//float theight = refSG->terrain->terrainGetHeight(0, 10);
+	//Creeper *BBTest = Creeper::MakeCreeper(
+	//	mat4().makeIdentity().setTranslate(vec3(0.f, theight+0.4f, 10.f))
+	//);
+	//refSG->addChild(BBTest);
 
 	/*	Making All the Trees
 	 ----------------------------------------------------------- */
-	refSG->addChild(LoadTrees(1));
+	//refSG->addChild(LoadTrees(1));
 }
 
 MatrixTransform* LevelManager::LoadCreeperRandom() {

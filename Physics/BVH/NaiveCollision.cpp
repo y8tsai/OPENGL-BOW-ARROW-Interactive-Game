@@ -70,7 +70,6 @@ void NaiveCollision::Query(unsigned int cid, HitList &out) {
 
 void NaiveCollision::Update(float t, float dt) {
 	collisions.clear();
-
 	std::unordered_map<unsigned int, AABB*>::iterator it = CID_Store.begin();
 	while( it != CID_Store.end() ) {
 		std::unordered_map<unsigned int, AABB*>::iterator ref = CID_Store.begin();
@@ -82,6 +81,18 @@ void NaiveCollision::Update(float t, float dt) {
 				}
 			}
 			ref++;
+		}
+		it++;
+	}
+}
+
+void NaiveCollision::RecalculateAABB() {
+	std::unordered_map<unsigned int, AABB*>::iterator it = CID_Store.begin();
+	while( it != CID_Store.end() ) {
+		if( it->first != 1) { //1 is always played
+			AABB temp = *it->second;
+			AABB::UpdateAABB( temp, *it->second ); 
+			std::cout << "" << std::endl;
 		}
 		it++;
 	}

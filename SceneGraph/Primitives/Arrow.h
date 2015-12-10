@@ -8,7 +8,7 @@
 class Arrow : public MatrixTransform {
 public:
 	static std::string __ArrowEID;
-	static Arrow* MakeArrow(mat4 m2w, vec3 init_v, quat rot = quat());
+	static Arrow* MakeArrow(mat4 m2w, vec3 init_v);
 	static EntityNode* CreateEntity(std::string eid, const GLvoid *verts, GLsizeiptr vertsize);
 	static const float lifetime;
 

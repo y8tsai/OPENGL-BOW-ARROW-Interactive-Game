@@ -61,6 +61,19 @@ public:
 	float v[4];
 };
 
+class mat3 {
+public:
+	mat3();
+	mat3(const mat3&);
+	mat3(float, float, float,
+         float, float, float,
+         float, float, float);
+
+	mat3& operator=(const mat3&);
+
+	float m[3][3];
+};
+
 class mat4 {
 public:
 	mat4();
@@ -82,6 +95,7 @@ public:
 	mat4& makeRotateY(float deg);
 	mat4& makeRotateZ(float deg);
 	mat4& makeRotate(float deg, vec3 &axis);
+	mat3 getRotation();
 	mat4 rigidInverse();
 
 	mat4& scale(float x, float y, float z);
@@ -114,89 +128,4 @@ public:
 	static quat rotate(float rad, vec3 axis);
 
 };
-
-
-// This SIMD math for parallel computations. Compiler will complain if you
-// mix this with the math constructs we made for class.
-// ** All SIMD math constructs will be prefixed with `ss`
-
-__declspec(align(16)) class ssvec3 {
-public:
-    ssvec3();
-    ssvec3(__m128 v);
-    ssvec3(float x, float y, float z);
-    ssvec3 operator+(const ssvec3 &) const;
-    ssvec3 operator-(const ssvec3 &) const;
-    ssvec3 operator-() const;
-    
-    ssvec3 operator*(float) const;
-    float dot(const ssvec3 &) const;
-    ssvec3 cross(const ssvec3 &) const;
-    
-    void scale(float);
-    void scale(float, float, float);
-    float* ptr();
-
-    float length() const;
-    ssvec3 normalize() const;
-    float angle(const ssvec3 &) const;
-    void print();
-
-    __m128 v;
-    
-};
-
-
-__declspec(align(16)) class ssvec4 {
-public:
-    ssvec4();
-    ssvec4(__m128 v);
-    ssvec4(float x, float y, float z, float w);
-    ssvec4 operator+(const ssvec4&) const;
-    ssvec4 operator-(const ssvec4&) const;
-    ssvec4 operator-() const;
-    
-    ssvec4 operator*(const ssvec4&) const;
-    ssvec4 operator*(const float&) const;
-    void dehomogenize();
-    
-    float* ptr();
-    void print();
-    
-    __m128 v;
-    
-};
-
-
-__declspec(align(16)) class ssmat4 {
-public:
-    ssmat4();
-    ssmat4(__m128[4]);
-    ssmat4(const float (&el)[4][4]);
-    ssmat4(float, float, float, float,
-         float, float, float, float,
-         float, float, float, float,
-         float, float, float, float);
-
-    void set(float, float, float, float,
-             float, float, float, float,
-             float, float, float, float,
-             float, float, float, float);
-    
-    ssmat4 operator*(const ssmat4&) const;
-    ssvec4 operator*(const ssvec4&) const;
-    ssmat4& operator=(const ssmat4&);
-    
-	static ssmat4 transpose(const ssmat4&);
-	static ssmat4 identity();
-    void makeIdentity();
-    void makeTranspose();
-    
-    float* ptr();
-    void print();
-    
-    __m128 m[4]; // row-major
-};
-
-
 #endif

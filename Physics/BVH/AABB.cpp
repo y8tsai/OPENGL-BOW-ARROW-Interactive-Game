@@ -12,8 +12,8 @@ AABB::AABB() {
 	hit = false;
 }
 
-AABB::AABB(vec3 p, vec3 c, vec3 r, quat q) {
-	rotation = q;
+AABB::AABB(vec3 p, vec3 c, vec3 r, mat3 rot) {
+	rotation = rot;
 	position = p;
 	center = c;
 	radius = r;
@@ -22,8 +22,11 @@ AABB::AABB(vec3 p, vec3 c, vec3 r, quat q) {
 
 AABB::AABB(const AABB& b) {
 	if( this != &b ) {
+		rotation = b.rotation;
+		position = b.position;
 		center = b.center;
 		radius = b.radius;
+		hit = false;
 	}
 }
 
@@ -44,6 +47,16 @@ HitInfo AABB::BroadIntersect(unsigned int k, AABB &a, unsigned int l, AABB &b) {
 	return result;
 }
 
+void AABB::UpdateAABB(AABB rotated, AABB &res) {
+	for (int i = 0; i < 3; i++) {
+		res.center[i] = rotated.position[i];
+		res.radius[i] = 0.0f;
+		for (int j = 0; j < 3; j++) {
+			res.center[i] += rotated.rotation.m[i][j] * rotated.center[j];
+			res.radius[i] += abs(rotated.rotation.m[i][j]) * rotated.radius[j];
+		}
+	}
+}
 
 void AABB::DrawDebug(mat4 C, bool collided) {
 
@@ -55,9 +68,9 @@ void AABB::DrawDebug(mat4 C, bool collided) {
 		glDisable(GL_COLOR_MATERIAL);
 		glBegin(GL_LINES);
 		if( collided ) 
-			glColor3fv(AABB::stdColor.ptr());
-		else 
 			glColor3fv(AABB::hitColor.ptr());
+		else 
+			glColor3fv(AABB::stdColor.ptr());
 		glVertex3f(-radius.v[0], radius.v[1], -radius.v[2]);
 		glVertex3f(-radius.v[0], -radius.v[1], -radius.v[2]);
 			glVertex3f(-radius.v[0], radius.v[1], -radius.v[2]);
