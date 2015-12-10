@@ -7,6 +7,7 @@
 #include "SceneGraph/Primitives/Arrow.h"
 
 LevelManager::LevelManager() {
+	srand(time(NULL));
 }
 
 LevelManager::~LevelManager() {
@@ -72,7 +73,14 @@ MatrixTransform* LevelManager::LoadCreeperRandom() {
 	
 	// TODO:: Generate Random Spot for Creeper to load
 	// int x = /* random float here within bounds of terrain */
-
+	int x = rand() % Globals::SceneGraph->terrain->terrainGridWidth / 2 ; 
+	if (x < Globals::camera.eye[0] + 20) {
+		if (x < 0)
+			x -= 20;
+		else
+			x += 20;
+	}
+	
 	// Bounds for creeper location is:
 	// Camera.eye[0] + 20 < x_maxpos <  + terrain.width/2
 	// Camera.eye[0] - 20 < x_minpos <  - terrain.width/2
@@ -80,20 +88,19 @@ MatrixTransform* LevelManager::LoadCreeperRandom() {
 	// x_finalpos is then whichever's absolute pstn is greater
 	//
 	// Ditto for z using Camera.eye[2] && (terrain.height/2)
-
 	// int z = /* random float here within bounds of terrain */
 	// int height = /* use terrain get height for this */
+	int z = rand() % Globals::SceneGraph->terrain->terrainGridWidth / 2;
+	if (abs(z) < Globals::camera.eye[2] + 20) {
+		if (z < 0)
+			z -= 20;
+		else
+			z += 20;
+	}
 
-	/* TODO:: make a creeperMT
-
-	Creeper *creepsMT = Creeper::MakeCreeper(
-		// random position, but make sure the height is on terrain 
-		// use mat4.translate(vec3).
-	);
-	
-	*/
-		
-	// return creepsMT; // uncommment this when done
+	float height = Globals::SceneGraph->terrain->terrainGetHeight(x, z);
+	Creeper* creepsMT = Creeper::MakeCreeper(mat4().translate(vec3(x, height, z)));
+	return creepsMT; // uncommment this when done
 	return nullptr;
 }
 
