@@ -62,8 +62,9 @@ private:
 
 	vec3 headLookAt;
 	vec3 bodyLookAt;
-	int detectionPeriod;
-	
+	mat4 headRotation;
+	mat4 bodyRotation;
+
 	mat4 ft_legMT;
 	mat4 bk_legMT;
 	mat4 bodyMT;

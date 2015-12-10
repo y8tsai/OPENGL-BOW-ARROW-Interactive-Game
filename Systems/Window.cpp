@@ -127,7 +127,7 @@ void Window::display() {
 		Globals::ColStore->GetAABBInfo(Globals::gPhysicsMgr.player_cid)->DrawDebug(mat4().translate(Globals::camera.eye));
 	}
 
-	particles->draw(DrawData());
+	particles->draw(mat4().makeIdentity());
 
 	this->DisplayHUD();
 
