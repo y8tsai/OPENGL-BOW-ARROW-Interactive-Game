@@ -23,6 +23,7 @@ public:
 	void draw(mat4 C);
 	void update(float t, float dt);
 
+	int lifetime;
 	bool markDelete;   
 
 	int particlesLoadFromImage(char *filename); //used to load displacement map

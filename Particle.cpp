@@ -63,7 +63,7 @@ void Particle::CreateParticle(vec3 sourcePos)
 void Particle::CreateParticle(vec3 sourcePos, float iniVel, float distFromCenter)
 {
 	
-	lifetime = 1000; //live 10000 frames
+	lifetime = 500; //live 500 frames
 	decay = 1;
 	r = 0.7;
 	g = 0.7;
@@ -131,10 +131,10 @@ void Particle::DrawObjects()
 	{
 		glColor3f(r,g,b);
 		glBegin(GL_TRIANGLE_STRIP);
-		glTexCoord2f(0.0,1.0); glVertex3f(xpos+1, ypos+1,zpos);     // top    right
-		glTexCoord2f(0.0,1.0); glVertex3f(xpos-1, ypos+1,zpos);     // top    left
-		glTexCoord2f(0.0,1.0); glVertex3f(xpos+1, ypos-1,zpos);     // bottom right
-		glTexCoord2f(0.0,1.0); glVertex3f(xpos-1, ypos-1,zpos);     // bottom left
+		glTexCoord2f(0.0,1.0); glVertex3f(xpos+0.5, ypos+0.5,zpos);     // top    right
+		glTexCoord2f(0.0,1.0); glVertex3f(xpos-0.5, ypos+0.5,zpos);     // top    left
+		glTexCoord2f(0.0,1.0); glVertex3f(xpos+0.5, ypos-0.5,zpos);     // bottom right
+		glTexCoord2f(0.0,1.0); glVertex3f(xpos-0.5, ypos-0.5,zpos);     // bottom left
 		glEnd();
 	} 
 	glEnable(GL_CULL_FACE);
