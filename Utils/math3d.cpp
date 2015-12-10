@@ -477,6 +477,28 @@ vec3 quat::tovec3(quat q) {
 	return v;
 }
 
+mat4 quat::tomat4(quat q) {
+	mat4 m;
+	float xx = q.x * q.x;
+	float xy = q.x * q.y;
+	float xz = q.x * q.z;
+	float xw = q.x * q.w;
+
+	float yy = q.y * q.y;
+	float yz = q.y * q.z;
+	float yw = q.y * q.w;
+	
+	float zz = q.z * q.z;
+	float zw = q.z * q.w;
+
+	m.m[0][0] = 1 - 2 * (yy + zz); m.m[0][1] = 2 * (xy - zw);       m.m[0][2] = 2 * (xz + yw);     m.m[0][3] = 0;
+	m.m[1][0] = 2 * (xy + zw);     m.m[1][1] = 1 - 2 * ( xx + zz);  m.m[1][2] = 2 * (yz -xw);      m.m[1][3] = 0;
+	m.m[2][0] = 2 * (xz -yw);	   m.m[2][1] = 2 * (yz +xw);        m.m[2][2] = 1 - 2 * (xx + yy); m.m[2][3] = 0;
+	m.m[3][0] = 0;                 m.m[3][1] = 0;                   m.m[3][2] = 0;                 m.m[3][3] = 1;
+
+	return m;
+}
+
 /**
  *                                      SSE Vector3
  * ======================================================================================

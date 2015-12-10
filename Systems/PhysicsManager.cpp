@@ -117,7 +117,22 @@ void PhysicsManager::UpdatePlayer(float t, float dt) {
 			direcon.normalize();
 			percentage *= maxv_magnitude;
 			direcon = direcon * percentage;
-			Arrow *fired = Arrow::MakeArrow(mat4().translate(Globals::camera.dir), direcon);
+
+			vec3 camPosXZ = Globals::camera.dir - Globals::camera.eye;
+			vec3 camPosYZ = Globals::camera.dir - Globals::camera.eye;
+			camPosXZ[1] = 0; //don't want the y component for XZ plane
+			float angleY = acos ( camPosXZ.normalize().dot(vec3(0.0, 0.0, -1.0)) );
+			float angleX = PI/2 - acos( camPosYZ.normalize().dot(vec3(0.0, 1.0, 0.0) ) );  //project onto YZ plane
+
+			if (camPosXZ[0] > 0)
+				angleY = angleY  * -1; //turn right
+			if (camPosYZ[1] < 0)
+				angleX = angleX * -1;  //turn up
+
+			mat4 rotY = mat4().makeRotateY(angleY * 180.0 / PI);
+			mat4 rotX = mat4().makeRotateX(angleX * 180.0 / PI);
+
+			Arrow *fired = Arrow::MakeArrow( mat4().translate(Globals::camera.dir) * rotY * rotX, direcon);
 			Globals::SceneGraph->addChild(fired);
 		}
 		charge = 0.0;
