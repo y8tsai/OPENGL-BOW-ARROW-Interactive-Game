@@ -77,13 +77,16 @@ void Arrow::draw( mat4 C ) {
 
 		if(Globals::gPhysicsMgr.DebugDraw.__arrows) {
 			AABB* info = Globals::ColStore->GetAABBInfo(model->CID);
+			Fizzix::PBody *body = Globals::gPhysicsMgr.GetPBody(model->PID);
 
-			if(info != nullptr) {
+			if(!body->staticBody && info != nullptr) {
 				HitList hits;
 				Globals::ColStore->Query(model->CID, hits);
 				if( hits.size() ) {
+					std::cout << "draw hit box" << std::endl;
 					info->DrawDebug(C * M, true);
 				} else {
+					std::cout << "draw box" << std::endl;
 					info->DrawDebug(C * M);
 				}
 
@@ -116,15 +119,18 @@ void Arrow::update(float t, float dt) {
 
 		if( currPstn[0] > boundaryX || currPstn[0] < -boundaryX || currPstn[2] < -boundaryZ || currPstn[2] > boundaryZ) {
 			visible = false;
+			Globals::ColStore->RemoveAABBInfo(model->CID);
+			model->CID = 0;
 			info->staticBody = true;
 			cleanup = true;
 		}
 
 		if( currPstn[1] < hitFloor) {
+			Globals::ColStore->RemoveAABBInfo(model->CID);
+			model->CID = 0;
 			info->position[1] = hitFloor;
 			info->staticBody = true;
 			info->velocity = vec3(); //loses all momentum
-			
 		}
 		M.setTranslate( info->position );
 	} else {

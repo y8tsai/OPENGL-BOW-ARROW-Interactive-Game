@@ -41,7 +41,6 @@ HitInfo AABB::BroadIntersect(unsigned int k, AABB &a, unsigned int l, AABB &b) {
 		result.intersect = false;
 		return result;
 	}
-	
 	result.intersect = true;
 	
 	for(int i = 0; i < 3; ++i) {

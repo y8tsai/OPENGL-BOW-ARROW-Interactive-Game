@@ -212,12 +212,14 @@ void Creeper::draw( mat4 C ) {
 	if(Globals::gPhysicsMgr.DebugDraw.__enemies) {
 		AABB* bb = Globals::ColStore->GetAABBInfo(body->CID);	
 
-		HitList hits;
-		Globals::ColStore->Query(body->CID, hits);
-		if(hits.size()) {
-			bb->DrawDebug(C, true);
-		} else {
-			bb->DrawDebug(C);
+		if( bb != nullptr ){
+			HitList hits;
+			Globals::ColStore->Query(body->CID, hits);
+			if(hits.size()) {
+				bb->DrawDebug(C, true);
+			} else {
+				bb->DrawDebug(C);
+			}
 		}
 	}
 	body->draw(C);
