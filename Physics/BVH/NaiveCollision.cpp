@@ -9,15 +9,8 @@ NaiveCollision::~NaiveCollision() {
 }
 
 unsigned int NaiveCollision::RegisterAABB(AABB *bbox) {
-	if( free_CID.empty() ) {
-		CID_Store.insert(std::pair<unsigned int, AABB*>(++cid_keygen, bbox));
-		return cid_keygen;
-	} else {
-		unsigned int recycled = free_CID.front();
-		free_CID.pop();
-		CID_Store.insert(std::pair<unsigned int, AABB*>(recycled, bbox));
-		return recycled;
-	}
+	CID_Store.insert(std::pair<unsigned int, AABB*>(++cid_keygen, bbox));
+	return cid_keygen;
 }
 
 AABB* NaiveCollision::GetAABBInfo(unsigned int cid) {
@@ -34,12 +27,6 @@ unsigned int NaiveCollision::ReplaceAABB(unsigned int cid, AABB* re) {
 		if( todel != nullptr )
 			delete todel;
 		CID_Store.erase(cid);
-
-		if( !free_CID.empty() && cid < free_CID.front()) {
-			free_CID.push(cid);	// push the old
-			cid = free_CID.front(); // get the smaller key
-			free_CID.pop(); // removed the reused key
-		}
 		CID_Store.insert(std::pair<unsigned int, AABB*>(cid, re));
 
 		return cid;
@@ -49,11 +36,11 @@ unsigned int NaiveCollision::ReplaceAABB(unsigned int cid, AABB* re) {
 
 void NaiveCollision::RemoveAABBInfo(unsigned int cid) {
 	if( cid != 0 && CID_Store.count(cid) ) {
+		AABB* todel = CID_Store[cid];
+		if( todel != nullptr )
+			delete todel;
 		CID_Store.erase(cid);
 	}
-	// To make finding keys faster. Recycle the key so that 
-	// objects are laid out as contiguous as possible
-	free_CID.push(cid);
 }
 
 
