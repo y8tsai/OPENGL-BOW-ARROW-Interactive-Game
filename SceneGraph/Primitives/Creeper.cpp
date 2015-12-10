@@ -236,8 +236,13 @@ void Creeper::update(float t, float dt) {
 		vec3 disToCamXZ = camPos - crpPos;
 		disToCamXZ[1] = 0; // we dont want y comp for rotation around y
 		disToCamXZ.normalize();
-		float angleY = disToCamXZ.dot(headLookAt) * 180 / PI;  
-		if ( disToCamXZ[0] < 0)
+		float dotProd = disToCamXZ.dot(headLookAt);
+		if (dotProd > 1.0f)
+			dotProd = 0.999f;
+		else if (dotProd < -1.0f)
+			dotProd = -0.999f;
+		float angleY = acos(dotProd) * 180 / PI;
+		if (disToCamXZ[0] < 0)
 			angleY = angleY * -1;
 	
 		mat4 rotY = mat4().makeRotateY(angleY);
@@ -249,22 +254,23 @@ void Creeper::update(float t, float dt) {
 			body->CID = 0;
 		}
 
-		if (angleY < -0.00001 || angleY > 0.00001) {
+		if (angleY < -0.5 || angleY > 0.5) {
+			//std::cout << "dotProd is: " << dotProd << std::endl;
 			//std::cout << "distToCamXZ: " << distToCamXZ[0] << ", " << distToCamXZ[1] << ", " << distToCamXZ[2] << std::endl;
 			//std::cout << "HeadLookAt: " << headLookAt[0] << ", " << headLookAt[1] << ", " << headLookAt[2] << std::endl;
 			//std::cout << "AngleY: " << angleY << std::endl << std::endl;
-				headRotation = rotY ;				 //update rotation matrix
-				bodyRotation = rotY;				 //update rotation matrix
-				headLookAt = ( headRotation * headLookAt ).normalize() ;  //update lookAt vectors
-				bodyLookAt = ( bodyRotation * bodyLookAt ).normalize() ;
-				headMT = headMT * headRotation;                  //apply transformations to each body part
-				bodyMT = bodyMT * bodyRotation;
-				ft_legMT = ft_legMT * bodyRotation ; 
-				bk_legMT = bk_legMT * bodyRotation ;	
+			headRotation = rotY;										//update rotation matrix
+			bodyRotation = rotY;										//update rotation matrix
+			headLookAt = headRotation * headLookAt;					//update lookAt vectors
+			bodyLookAt = bodyRotation * bodyLookAt;
+			headMT = headMT * headRotation;								//apply transformations to each body part
+			bodyMT = bodyMT * bodyRotation;
+			ft_legMT = ft_legMT * bodyRotation;
+			bk_legMT = bk_legMT * bodyRotation;
 		}
 	} else {
 		if( timeUntilDel >= lifetime ) {
-			//Globals::SceneGraph->addChild(new Particles()); 
+			Globals::SceneGraph->addChild(new Particles(1000, M.getTranslate() )); 
 			
 			cleanup = true;	
 		} else {

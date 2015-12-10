@@ -17,7 +17,7 @@ Particles::Particles(){
 	}
 
 	markDelete = false;
-
+	lifetime = 500; //lifetime of the particles
 }
 
 Particles::Particles(int num, vec3 source) {
@@ -61,7 +61,11 @@ void Particles::update(float t, float dt) {
 	for (int i = 0; i < numParticles; i++)
 	{
 		particles[i].EvolveParticle(); //update the particles
+		lifetime--;
 	}
+
+	if (lifetime < 0)
+		markDelete = true;
 }
 
 int Particles::particlesLoadFromImage(char *filename) {
