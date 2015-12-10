@@ -4,6 +4,7 @@
 #include "SceneGraph/Scene.h"
 #include "Entity/EntityBST.h"
 #include "Models/LSystem/LTree.h"
+#include <ctime>
 
 /* LevelManager is responsible for loading up a level and 
  * intializing its scenegraph
