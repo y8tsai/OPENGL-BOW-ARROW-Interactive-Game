@@ -18,6 +18,7 @@ Creeper* Creeper::MakeCreeper(mat4 m2w) {
 	vec3 btrans = m2w.getTranslate();
 	btrans[1] += 6.f;
 	AABB* bbox = new AABB(btrans, {0.f, 5.5f, 0.f }, {1.f, 3.0f, 1.f} ,m2w.getRotation());
+	bbox->tag = "Creeper";
 	unsigned int cid = Globals::ColStore->RegisterAABB(bbox);
 
 	// m2w would should be center position of front leg in world coordinates

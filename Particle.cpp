@@ -143,6 +143,7 @@ void Particle::DrawObjects()
 		glTexCoord2f(0.0,1.0); glVertex3f(xpos-0.5, ypos-0.5,zpos);     // bottom left
 		glEnd();
 	} 
+	glColor3f(1.0,1.0,1.0);
 	glEnable(GL_CULL_FACE);
 	glDisable(GL_COLOR);
 	glPopMatrix();

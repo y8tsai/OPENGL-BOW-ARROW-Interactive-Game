@@ -8,7 +8,7 @@
 
 
 Particles::Particles(){
-	numParticles = 1000;
+	numParticles = 300;
 	vec3 source(0, 0, 0);
 	particles = new Particle[numParticles];
 	for (int i = 0; i < numParticles; i++)

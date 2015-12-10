@@ -27,6 +27,8 @@ public:
 
 	void Update(float t, float dt);
 
+	void Cleanup();
+
 	static unsigned int cid_keygen;
 	static unsigned int player_cid;
 

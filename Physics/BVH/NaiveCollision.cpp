@@ -86,3 +86,7 @@ void NaiveCollision::Update(float t, float dt) {
 		it++;
 	}
 }
+
+void NaiveCollision::Cleanup() {
+
+}

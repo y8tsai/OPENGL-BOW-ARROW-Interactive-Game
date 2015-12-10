@@ -45,6 +45,7 @@ void LevelManager::LoadTestLevel() {
 	Globals::gPhysicsMgr.RegisterPBody(player_pbody);
 
 	AABB *player_bbox = new AABB( Globals::camera.eye, vec3(0.0, 1.5, 0.0), vec3(0.5f, 1.5f, 0.5f), mat3());
+	player_bbox->tag = "Player";
 	Globals::ColStore->RegisterAABB( player_bbox );
 
 	/*	Getting the Creepers Ready for Battle

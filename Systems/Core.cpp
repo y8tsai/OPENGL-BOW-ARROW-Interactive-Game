@@ -78,7 +78,7 @@ void Core::StartUp() {
 		
 		// Step ???: Display game state
 		Globals::window.display();
-	
+		
 		//Go again!
 	}
 };

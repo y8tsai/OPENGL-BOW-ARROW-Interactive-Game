@@ -17,7 +17,7 @@ Arrow* Arrow::MakeArrow(mat4 m2w, vec3 init_v) {
 	AABB *bbox = new AABB(m2w.getTranslate(), ArrowModel::BoundingBox[0], ArrowModel::BoundingBox[1], m2w.getRotation());
 	AABB temp = *bbox;
 	AABB::UpdateAABB(temp, *bbox);
-	bbox->ignore = 1;
+	bbox->tag = "Arrow";
 	unsigned int collision_id = Globals::ColStore->RegisterAABB(bbox);
 
 	// Each geode object has it's own physics body unlike Entity used for drawing

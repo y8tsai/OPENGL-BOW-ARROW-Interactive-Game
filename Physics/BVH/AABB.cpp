@@ -10,7 +10,7 @@ AABB::AABB() {
 	center = vec3(0.f, 0.f, 0.f);
 	radius = vec3(0.f, 0.f, 0.f);
 	hit = false;
-	ignore = 0;
+	tag = "";
 }
 
 AABB::AABB(vec3 p, vec3 c, vec3 r, mat3 rot) {
@@ -19,7 +19,7 @@ AABB::AABB(vec3 p, vec3 c, vec3 r, mat3 rot) {
 	center = c;
 	radius = r;
 	hit = false;
-	ignore = 0;
+	tag = "";
 }
 
 AABB::AABB(const AABB& b) {
@@ -29,7 +29,7 @@ AABB::AABB(const AABB& b) {
 		center = b.center;
 		radius = b.radius;
 		hit = false;
-		ignore = b.ignore;
+		tag = b.tag;
 	}
 }
 
@@ -37,7 +37,9 @@ AABB::AABB(const AABB& b) {
 // Otherwise, set hit false
 HitInfo AABB::BroadIntersect(unsigned int k, AABB &a, unsigned int l, AABB &b) {
 	HitInfo result;
-	if( a.ignore != 0 && a.ignore == l) {
+	if( a.tag == "Player" && b.tag == "Arrow" || a.tag == "Arrow" && b.tag == "Player" || 
+		a.tag == "Creeper" && b.tag == "Creeper"
+	) {
 		result.intersect = false;
 		return result;
 	}
