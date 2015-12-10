@@ -174,7 +174,6 @@
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="Particles.cpp" />
     <ClCompile Include="Physics\BVH\AABB.cpp" />
-    <ClCompile Include="Physics\BVH\NaiveCheck.cpp" />
     <ClCompile Include="Physics\Simulation.cpp" />
     <ClCompile Include="SceneGraph\Base\Geode.cpp" />
     <ClCompile Include="SceneGraph\Base\Group.cpp" />
@@ -246,9 +245,6 @@
     <ClInclude Include="Particle.h" />
     <ClInclude Include="Particles.h" />
     <ClInclude Include="Physics\BVH\AABB.h" />
-    <ClInclude Include="Physics\BVH\BVHTree.h" />
-    <ClInclude Include="Physics\BVH\CollideCheck.h" />
-    <ClInclude Include="Physics\BVH\NaiveCheck.h" />
     <ClInclude Include="Physics\Simulation.h" />
     <ClInclude Include="SceneGraph\Base\Geode.h" />
     <ClInclude Include="SceneGraph\Base\Group.h" />
