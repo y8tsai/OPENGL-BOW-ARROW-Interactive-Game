@@ -46,4 +46,5 @@ The project is self-contained with libraries.
 Use Microsoft Visual Studio 2015 to compile and run application.
 
 A video of sample of the application in action:
-[![OPENGL: Bow&Arrow Interactive Game Application](https://www.youtube.com/watch?v=K-nrwxQCZKA&feature=youtu.be/0.jpg)](https://www.youtube.com/watch?v=K-nrwxQCZKA&feature=youtu.be)
+
+[!][OPENGL: Bow&Arrow Interactive Game Application](https://www.youtube.com/watch?v=K-nrwxQCZKA&feature=youtu.be/0.jpg)](https://www.youtube.com/watch?v=K-nrwxQCZKA&feature=youtu.be)
