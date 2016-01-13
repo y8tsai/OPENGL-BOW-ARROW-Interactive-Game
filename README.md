@@ -40,3 +40,10 @@ VC++ Directories
 Linker  
     Additional Dependencies -> Add `glew32.lib`  
   
+------------------------------------------------------------------------------------------------------------------------------
+Final Updated 1/12/2016
+The project is self-contained with libraries.
+Use Microsoft Visual Studio 2015 to compile and run application.
+
+A video of sample of the application in action:
+https://www.youtube.com/watch?v=K-nrwxQCZKA&feature=youtu.be
